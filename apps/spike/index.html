@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ggwave spike</title>
+  </head>
+  <body>
+    <h1>ggwave spike</h1>
+    <p>Sample rate: <span id="rate">-</span></p>
+    <input id="text" value="hello" />
+    <button id="send">Send</button>
+    <button id="listen">Listen</button>
+    <p>Level: <meter id="level" min="0" max="1" value="0"></meter></p>
+    <p id="status"></p>
+    <ul id="log"></ul>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

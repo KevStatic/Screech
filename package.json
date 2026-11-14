@@ -5,7 +5,8 @@
   "description": "pnpm monorepo for Screech",
   "scripts": {
     "build": "pnpm -r run build",
-    "test": "pnpm -r run test"
+    "test": "pnpm -r run test",
+    "dev:spike": "pnpm --filter @screech/spike dev"
   },
   "engines": {
     "node": ">=20",

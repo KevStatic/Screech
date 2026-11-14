@@ -1,0 +1,17 @@
+{
+  "name": "@screech/spike",
+  "version": "0.0.0",
+  "private": true,
+  "description": "ggwave audio spike",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build"
+  },
+  "dependencies": {
+    "ggwave": "0.4.0"
+  },
+  "devDependencies": {
+    "typescript": "5.6.3",
+    "vite": "5.4.11"
+  }
+}
