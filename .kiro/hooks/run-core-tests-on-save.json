@@ -1,0 +1,17 @@
+{
+  "version": "v1",
+  "hooks": [
+    {
+      "name": "Run core tests on save",
+      "trigger": "PostFileSave",
+      "action": {
+        "type": "command",
+        "command": "pnpm --filter @screech/core test"
+      },
+      "description": "When a TypeScript file in packages/core is saved, run the core test suite,\nincluding the property-based tests, so protocol, compression and crypto\nchanges are checked immediately.",
+      "matcher": "packages/core/(src|tests)/.*\\.ts$",
+      "timeout": 30,
+      "enabled": true
+    }
+  ]
+}

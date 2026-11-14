@@ -1,0 +1,60 @@
+{
+  "pbtResults": {},
+  "executionHistory": {
+    "1.1 Create the foundation modules in `packages/core/src`": [
+      {
+        "executionId": "20f355f2-6c74-4945-ae19-9bff8edcb12d",
+        "chatSessionId": "sess_621aa690-03bb-4bc6-a7fd-6572c642351e",
+        "timestamp": 1794662513317
+      },
+      {
+        "executionId": "20f355f2-6c74-4945-ae19-9bff8edcb12d",
+        "chatSessionId": "sess_621aa690-03bb-4bc6-a7fd-6572c642351e",
+        "timestamp": 1794662568437
+      }
+    ],
+    "1.2 Create `tests/helpers.ts` with `NUM_RUNS = 100` and independent reference implementations": [
+      {
+        "executionId": "20f355f2-6c74-4945-ae19-9bff8edcb12d",
+        "chatSessionId": "sess_621aa690-03bb-4bc6-a7fd-6572c642351e",
+        "timestamp": 1794662574849
+      },
+      {
+        "executionId": "20f355f2-6c74-4945-ae19-9bff8edcb12d",
+        "chatSessionId": "sess_621aa690-03bb-4bc6-a7fd-6572c642351e",
+        "timestamp": 1794662689717
+      }
+    ],
+    "1.3 Create `tests/arbitraries.ts` with shared generators": [
+      {
+        "executionId": "20f355f2-6c74-4945-ae19-9bff8edcb12d",
+        "chatSessionId": "sess_621aa690-03bb-4bc6-a7fd-6572c642351e",
+        "timestamp": 1794662574913
+      },
+      {
+        "executionId": "20f355f2-6c74-4945-ae19-9bff8edcb12d",
+        "chatSessionId": "sess_621aa690-03bb-4bc6-a7fd-6572c642351e",
+        "timestamp": 1794662689918
+      }
+    ],
+    "1.4 Write unit tests and a property test for guards and results in `tests/guards.test.ts`": [
+      {
+        "executionId": "20f355f2-6c74-4945-ae19-9bff8edcb12d",
+        "chatSessionId": "sess_621aa690-03bb-4bc6-a7fd-6572c642351e",
+        "timestamp": 1794662692906
+      },
+      {
+        "executionId": "20f355f2-6c74-4945-ae19-9bff8edcb12d",
+        "chatSessionId": "sess_621aa690-03bb-4bc6-a7fd-6572c642351e",
+        "timestamp": 1794662735897
+      }
+    ],
+    "1. Constants, types, results, guards and shared test support": [
+      {
+        "executionId": "20f355f2-6c74-4945-ae19-9bff8edcb12d",
+        "chatSessionId": "sess_621aa690-03bb-4bc6-a7fd-6572c642351e",
+        "timestamp": 1794662735971
+      }
+    ]
+  }
+}
