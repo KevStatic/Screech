@@ -1,0 +1,14 @@
+{
+  "name": "screech",
+  "private": true,
+  "version": "0.0.0",
+  "description": "pnpm monorepo for Screech",
+  "scripts": {
+    "build": "pnpm -r run build",
+    "test": "pnpm -r run test"
+  },
+  "engines": {
+    "node": ">=20",
+    "pnpm": ">=9"
+  }
+}
