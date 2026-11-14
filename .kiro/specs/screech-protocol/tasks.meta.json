@@ -1,5 +1,58 @@
 {
-  "pbtResults": {},
+  "pbtResults": {
+    "3.2 Write property test for frame round trip in `tests/frame.property.test.ts`": {
+      "status": "passed",
+      "lastRunTimestamp": 1794663447510
+    },
+    "4.3 Write property test for the Prefix_Table in `tests/prefix-table.property.test.ts`": {
+      "status": "passed",
+      "lastRunTimestamp": 1794663962124
+    },
+    "4.2 Write property test for URL canonical form in `tests/url-body.property.test.ts`": {
+      "status": "passed",
+      "lastRunTimestamp": 1794663965445
+    },
+    "4.4 Write property test for invalid URLs in `tests/url-body-invalid.property.test.ts`": {
+      "status": "passed",
+      "lastRunTimestamp": 1794663968957
+    },
+    "5.2 Write property test for text-like bodies in `tests/text-body.property.test.ts`": {
+      "status": "passed",
+      "lastRunTimestamp": 1794665199274
+    },
+    "6.2 Write property test for Wi-Fi encoding rules in `tests/wifi-body.property.test.ts`": {
+      "status": "passed",
+      "lastRunTimestamp": 1794665403377
+    },
+    "6.3 Write property test for malformed Wi-Fi bodies in `tests/wifi-body-invalid.property.test.ts`": {
+      "status": "passed",
+      "lastRunTimestamp": 1794665411213
+    },
+    "8.2 Write property test for the unsealed round trip in `tests/codec-roundtrip.property.test.ts`": {
+      "status": "passed",
+      "lastRunTimestamp": 1794665908777
+    },
+    "8.3 Write property test for header validation in `tests/codec-header.property.test.ts`": {
+      "status": "passed",
+      "lastRunTimestamp": 1794665918293
+    },
+    "8.4 Write property test for invalid payloads in `tests/codec-invalid-payload.property.test.ts`": {
+      "status": "passed",
+      "lastRunTimestamp": 1794665942844
+    },
+    "8.5 Write property tests for size cap and determinism in `tests/codec-size.property.test.ts`": {
+      "status": "passed",
+      "lastRunTimestamp": 1794665946723
+    },
+    "8.6 Write property tests for totality and input safety in `tests/codec-totality.property.test.ts`": {
+      "status": "passed",
+      "lastRunTimestamp": 1794665951697
+    },
+    "8.7 Write property test for multipart passthrough in `tests/codec-multipart.property.test.ts`": {
+      "status": "passed",
+      "lastRunTimestamp": 1794666014062
+    }
+  },
   "executionHistory": {
     "1.1 Create the foundation modules in `packages/core/src`": [
       {
@@ -54,6 +107,391 @@
         "executionId": "20f355f2-6c74-4945-ae19-9bff8edcb12d",
         "chatSessionId": "sess_621aa690-03bb-4bc6-a7fd-6572c642351e",
         "timestamp": 1794662735971
+      }
+    ],
+    "2.1 Implement `src/utf8.ts`": [
+      {
+        "executionId": "550989c3-3df0-4413-b48f-d5148a010f1e",
+        "chatSessionId": "sess_df5301df-f347-40f0-809f-91cf7769be33",
+        "timestamp": 1794662889511
+      },
+      {
+        "executionId": "550989c3-3df0-4413-b48f-d5148a010f1e",
+        "chatSessionId": "sess_df5301df-f347-40f0-809f-91cf7769be33",
+        "timestamp": 1794662929960
+      }
+    ],
+    "2.2 Write unit and property tests in `tests/utf8.test.ts`": [
+      {
+        "executionId": "550989c3-3df0-4413-b48f-d5148a010f1e",
+        "chatSessionId": "sess_df5301df-f347-40f0-809f-91cf7769be33",
+        "timestamp": 1794662930306
+      },
+      {
+        "executionId": "550989c3-3df0-4413-b48f-d5148a010f1e",
+        "chatSessionId": "sess_df5301df-f347-40f0-809f-91cf7769be33",
+        "timestamp": 1794663006873
+      }
+    ],
+    "2. UTF-8 helpers": [
+      {
+        "executionId": "550989c3-3df0-4413-b48f-d5148a010f1e",
+        "chatSessionId": "sess_df5301df-f347-40f0-809f-91cf7769be33",
+        "timestamp": 1794663006940
+      }
+    ],
+    "3.1 Implement `src/frame.ts`": [
+      {
+        "executionId": "f4768e0a-3186-4226-8993-32188745b9dd",
+        "chatSessionId": "sess_5388c4f2-0e99-4094-b865-e42c9bacafa3",
+        "timestamp": 1794663366912
+      },
+      {
+        "executionId": "f4768e0a-3186-4226-8993-32188745b9dd",
+        "chatSessionId": "sess_5388c4f2-0e99-4094-b865-e42c9bacafa3",
+        "timestamp": 1794663407999
+      }
+    ],
+    "3.2 Write property test for frame round trip in `tests/frame.property.test.ts`": [
+      {
+        "executionId": "f4768e0a-3186-4226-8993-32188745b9dd",
+        "chatSessionId": "sess_5388c4f2-0e99-4094-b865-e42c9bacafa3",
+        "timestamp": 1794663409035
+      },
+      {
+        "executionId": "f4768e0a-3186-4226-8993-32188745b9dd",
+        "chatSessionId": "sess_5388c4f2-0e99-4094-b865-e42c9bacafa3",
+        "timestamp": 1794663455924
+      }
+    ],
+    "3.3 Write unit tests in `tests/frame.test.ts`": [
+      {
+        "executionId": "f4768e0a-3186-4226-8993-32188745b9dd",
+        "chatSessionId": "sess_5388c4f2-0e99-4094-b865-e42c9bacafa3",
+        "timestamp": 1794663409233
+      },
+      {
+        "executionId": "f4768e0a-3186-4226-8993-32188745b9dd",
+        "chatSessionId": "sess_5388c4f2-0e99-4094-b865-e42c9bacafa3",
+        "timestamp": 1794663456427
+      }
+    ],
+    "3. Frame": [
+      {
+        "executionId": "f4768e0a-3186-4226-8993-32188745b9dd",
+        "chatSessionId": "sess_5388c4f2-0e99-4094-b865-e42c9bacafa3",
+        "timestamp": 1794663456500
+      }
+    ],
+    "4.1 Implement `src/prefix-table.ts` and `src/url-body.ts`": [
+      {
+        "executionId": "e58a12a8-05e2-49d8-b56d-9010ba8ce4dc",
+        "chatSessionId": "sess_87e69fbc-0989-4c75-b47b-026b6bce20e6",
+        "timestamp": 1794663868519
+      },
+      {
+        "executionId": "e58a12a8-05e2-49d8-b56d-9010ba8ce4dc",
+        "chatSessionId": "sess_87e69fbc-0989-4c75-b47b-026b6bce20e6",
+        "timestamp": 1794663919412
+      }
+    ],
+    "4.2 Write property test for URL canonical form in `tests/url-body.property.test.ts`": [
+      {
+        "executionId": "e58a12a8-05e2-49d8-b56d-9010ba8ce4dc",
+        "chatSessionId": "sess_87e69fbc-0989-4c75-b47b-026b6bce20e6",
+        "timestamp": 1794663932708
+      },
+      {
+        "executionId": "e58a12a8-05e2-49d8-b56d-9010ba8ce4dc",
+        "chatSessionId": "sess_87e69fbc-0989-4c75-b47b-026b6bce20e6",
+        "timestamp": 1794663985671
+      }
+    ],
+    "4.3 Write property test for the Prefix_Table in `tests/prefix-table.property.test.ts`": [
+      {
+        "executionId": "e58a12a8-05e2-49d8-b56d-9010ba8ce4dc",
+        "chatSessionId": "sess_87e69fbc-0989-4c75-b47b-026b6bce20e6",
+        "timestamp": 1794663932951
+      },
+      {
+        "executionId": "e58a12a8-05e2-49d8-b56d-9010ba8ce4dc",
+        "chatSessionId": "sess_87e69fbc-0989-4c75-b47b-026b6bce20e6",
+        "timestamp": 1794663986454
+      }
+    ],
+    "4.4 Write property test for invalid URLs in `tests/url-body-invalid.property.test.ts`": [
+      {
+        "executionId": "e58a12a8-05e2-49d8-b56d-9010ba8ce4dc",
+        "chatSessionId": "sess_87e69fbc-0989-4c75-b47b-026b6bce20e6",
+        "timestamp": 1794663933774
+      },
+      {
+        "executionId": "e58a12a8-05e2-49d8-b56d-9010ba8ce4dc",
+        "chatSessionId": "sess_87e69fbc-0989-4c75-b47b-026b6bce20e6",
+        "timestamp": 1794663987250
+      }
+    ],
+    "4.5 Write unit tests in `tests/url-body.test.ts`": [
+      {
+        "executionId": "e58a12a8-05e2-49d8-b56d-9010ba8ce4dc",
+        "chatSessionId": "sess_87e69fbc-0989-4c75-b47b-026b6bce20e6",
+        "timestamp": 1794663934390
+      },
+      {
+        "executionId": "e58a12a8-05e2-49d8-b56d-9010ba8ce4dc",
+        "chatSessionId": "sess_87e69fbc-0989-4c75-b47b-026b6bce20e6",
+        "timestamp": 1794663987823
+      }
+    ],
+    "4. URL compression and Prefix_Table": [
+      {
+        "executionId": "e58a12a8-05e2-49d8-b56d-9010ba8ce4dc",
+        "chatSessionId": "sess_87e69fbc-0989-4c75-b47b-026b6bce20e6",
+        "timestamp": 1794663987902
+      }
+    ],
+    "5.1 Implement `src/text-body.ts`": [
+      {
+        "executionId": "8fd246de-0e01-41c9-9150-578d119c10cb",
+        "chatSessionId": "sess_28939c2b-6c7c-4d6a-94ab-b3e388678aaf",
+        "timestamp": 1794665111568
+      },
+      {
+        "executionId": "8fd246de-0e01-41c9-9150-578d119c10cb",
+        "chatSessionId": "sess_28939c2b-6c7c-4d6a-94ab-b3e388678aaf",
+        "timestamp": 1794665156117
+      }
+    ],
+    "5.2 Write property test for text-like bodies in `tests/text-body.property.test.ts`": [
+      {
+        "executionId": "8fd246de-0e01-41c9-9150-578d119c10cb",
+        "chatSessionId": "sess_28939c2b-6c7c-4d6a-94ab-b3e388678aaf",
+        "timestamp": 1794665159496
+      },
+      {
+        "executionId": "8fd246de-0e01-41c9-9150-578d119c10cb",
+        "chatSessionId": "sess_28939c2b-6c7c-4d6a-94ab-b3e388678aaf",
+        "timestamp": 1794665208263
+      }
+    ],
+    "5.3 Write unit tests in `tests/text-body.test.ts`": [
+      {
+        "executionId": "8fd246de-0e01-41c9-9150-578d119c10cb",
+        "chatSessionId": "sess_28939c2b-6c7c-4d6a-94ab-b3e388678aaf",
+        "timestamp": 1794665160389
+      },
+      {
+        "executionId": "8fd246de-0e01-41c9-9150-578d119c10cb",
+        "chatSessionId": "sess_28939c2b-6c7c-4d6a-94ab-b3e388678aaf",
+        "timestamp": 1794665207779
+      }
+    ],
+    "5. Text-like bodies": [
+      {
+        "executionId": "8fd246de-0e01-41c9-9150-578d119c10cb",
+        "chatSessionId": "sess_28939c2b-6c7c-4d6a-94ab-b3e388678aaf",
+        "timestamp": 1794665208344
+      }
+    ],
+    "6.1 Implement `src/wifi-body.ts`": [
+      {
+        "executionId": "93f279ea-78af-4b1f-a219-7b5e148c09bc",
+        "chatSessionId": "sess_69883b6e-e6fb-44d5-bf87-42659a2b2f48",
+        "timestamp": 1794665328322
+      },
+      {
+        "executionId": "93f279ea-78af-4b1f-a219-7b5e148c09bc",
+        "chatSessionId": "sess_69883b6e-e6fb-44d5-bf87-42659a2b2f48",
+        "timestamp": 1794665366957
+      }
+    ],
+    "6.2 Write property test for Wi-Fi encoding rules in `tests/wifi-body.property.test.ts`": [
+      {
+        "executionId": "93f279ea-78af-4b1f-a219-7b5e148c09bc",
+        "chatSessionId": "sess_69883b6e-e6fb-44d5-bf87-42659a2b2f48",
+        "timestamp": 1794665367758
+      },
+      {
+        "executionId": "93f279ea-78af-4b1f-a219-7b5e148c09bc",
+        "chatSessionId": "sess_69883b6e-e6fb-44d5-bf87-42659a2b2f48",
+        "timestamp": 1794665421432
+      }
+    ],
+    "6.3 Write property test for malformed Wi-Fi bodies in `tests/wifi-body-invalid.property.test.ts`": [
+      {
+        "executionId": "93f279ea-78af-4b1f-a219-7b5e148c09bc",
+        "chatSessionId": "sess_69883b6e-e6fb-44d5-bf87-42659a2b2f48",
+        "timestamp": 1794665368585
+      },
+      {
+        "executionId": "93f279ea-78af-4b1f-a219-7b5e148c09bc",
+        "chatSessionId": "sess_69883b6e-e6fb-44d5-bf87-42659a2b2f48",
+        "timestamp": 1794665419935
+      }
+    ],
+    "6.4 Write unit tests in `tests/wifi-body.test.ts`": [
+      {
+        "executionId": "93f279ea-78af-4b1f-a219-7b5e148c09bc",
+        "chatSessionId": "sess_69883b6e-e6fb-44d5-bf87-42659a2b2f48",
+        "timestamp": 1794665369236
+      },
+      {
+        "executionId": "93f279ea-78af-4b1f-a219-7b5e148c09bc",
+        "chatSessionId": "sess_69883b6e-e6fb-44d5-bf87-42659a2b2f48",
+        "timestamp": 1794665420679
+      }
+    ],
+    "6. Wi-Fi body": [
+      {
+        "executionId": "93f279ea-78af-4b1f-a219-7b5e148c09bc",
+        "chatSessionId": "sess_69883b6e-e6fb-44d5-bf87-42659a2b2f48",
+        "timestamp": 1794665421492
+      }
+    ],
+    "7.1 Implement `src/body.ts`": [
+      {
+        "executionId": "9ca65dd2-c872-49c6-8bdb-3c6d1fc20ca0",
+        "chatSessionId": "sess_7b2b4c6c-55ba-4ea9-bbac-03376f21c79a",
+        "timestamp": 1794665654474
+      },
+      {
+        "executionId": "9ca65dd2-c872-49c6-8bdb-3c6d1fc20ca0",
+        "chatSessionId": "sess_7b2b4c6c-55ba-4ea9-bbac-03376f21c79a",
+        "timestamp": 1794665695401
+      }
+    ],
+    "7.2 Write unit tests in `tests/body.test.ts`": [
+      {
+        "executionId": "9ca65dd2-c872-49c6-8bdb-3c6d1fc20ca0",
+        "chatSessionId": "sess_7b2b4c6c-55ba-4ea9-bbac-03376f21c79a",
+        "timestamp": 1794665695609
+      },
+      {
+        "executionId": "9ca65dd2-c872-49c6-8bdb-3c6d1fc20ca0",
+        "chatSessionId": "sess_7b2b4c6c-55ba-4ea9-bbac-03376f21c79a",
+        "timestamp": 1794665736732
+      }
+    ],
+    "7. Body dispatcher": [
+      {
+        "executionId": "9ca65dd2-c872-49c6-8bdb-3c6d1fc20ca0",
+        "chatSessionId": "sess_7b2b4c6c-55ba-4ea9-bbac-03376f21c79a",
+        "timestamp": 1794665736795
+      }
+    ],
+    "8.1 Implement `src/codec.ts`": [
+      {
+        "executionId": "724a4930-3d8e-490b-84d3-cac1598f45d6",
+        "chatSessionId": "sess_302b98db-dedb-427d-9425-bfa5fd5c9b99",
+        "timestamp": 1794665825095
+      },
+      {
+        "executionId": "724a4930-3d8e-490b-84d3-cac1598f45d6",
+        "chatSessionId": "sess_302b98db-dedb-427d-9425-bfa5fd5c9b99",
+        "timestamp": 1794665865937
+      }
+    ],
+    "8.2 Write property test for the unsealed round trip in `tests/codec-roundtrip.property.test.ts`": [
+      {
+        "executionId": "724a4930-3d8e-490b-84d3-cac1598f45d6",
+        "chatSessionId": "sess_302b98db-dedb-427d-9425-bfa5fd5c9b99",
+        "timestamp": 1794665875764
+      },
+      {
+        "executionId": "724a4930-3d8e-490b-84d3-cac1598f45d6",
+        "chatSessionId": "sess_302b98db-dedb-427d-9425-bfa5fd5c9b99",
+        "timestamp": 1794665962424
+      }
+    ],
+    "8.3 Write property test for header validation in `tests/codec-header.property.test.ts`": [
+      {
+        "executionId": "724a4930-3d8e-490b-84d3-cac1598f45d6",
+        "chatSessionId": "sess_302b98db-dedb-427d-9425-bfa5fd5c9b99",
+        "timestamp": 1794665875978
+      },
+      {
+        "executionId": "724a4930-3d8e-490b-84d3-cac1598f45d6",
+        "chatSessionId": "sess_302b98db-dedb-427d-9425-bfa5fd5c9b99",
+        "timestamp": 1794665962864
+      }
+    ],
+    "8.4 Write property test for invalid payloads in `tests/codec-invalid-payload.property.test.ts`": [
+      {
+        "executionId": "724a4930-3d8e-490b-84d3-cac1598f45d6",
+        "chatSessionId": "sess_302b98db-dedb-427d-9425-bfa5fd5c9b99",
+        "timestamp": 1794665876172
+      },
+      {
+        "executionId": "724a4930-3d8e-490b-84d3-cac1598f45d6",
+        "chatSessionId": "sess_302b98db-dedb-427d-9425-bfa5fd5c9b99",
+        "timestamp": 1794665964010
+      }
+    ],
+    "8.5 Write property tests for size cap and determinism in `tests/codec-size.property.test.ts`": [
+      {
+        "executionId": "724a4930-3d8e-490b-84d3-cac1598f45d6",
+        "chatSessionId": "sess_302b98db-dedb-427d-9425-bfa5fd5c9b99",
+        "timestamp": 1794665877151
+      },
+      {
+        "executionId": "724a4930-3d8e-490b-84d3-cac1598f45d6",
+        "chatSessionId": "sess_302b98db-dedb-427d-9425-bfa5fd5c9b99",
+        "timestamp": 1794665964722
+      }
+    ],
+    "8.6 Write property tests for totality and input safety in `tests/codec-totality.property.test.ts`": [
+      {
+        "executionId": "724a4930-3d8e-490b-84d3-cac1598f45d6",
+        "chatSessionId": "sess_302b98db-dedb-427d-9425-bfa5fd5c9b99",
+        "timestamp": 1794665877834
+      },
+      {
+        "executionId": "724a4930-3d8e-490b-84d3-cac1598f45d6",
+        "chatSessionId": "sess_302b98db-dedb-427d-9425-bfa5fd5c9b99",
+        "timestamp": 1794665965239
+      }
+    ],
+    "8.7 Write property test for multipart passthrough in `tests/codec-multipart.property.test.ts`": [
+      {
+        "executionId": "724a4930-3d8e-490b-84d3-cac1598f45d6",
+        "chatSessionId": "sess_302b98db-dedb-427d-9425-bfa5fd5c9b99",
+        "timestamp": 1794665966266
+      },
+      {
+        "executionId": "724a4930-3d8e-490b-84d3-cac1598f45d6",
+        "chatSessionId": "sess_302b98db-dedb-427d-9425-bfa5fd5c9b99",
+        "timestamp": 1794666024770
+      }
+    ],
+    "8.8 Write unit tests in `tests/codec.test.ts`": [
+      {
+        "executionId": "724a4930-3d8e-490b-84d3-cac1598f45d6",
+        "chatSessionId": "sess_302b98db-dedb-427d-9425-bfa5fd5c9b99",
+        "timestamp": 1794665966783
+      },
+      {
+        "executionId": "724a4930-3d8e-490b-84d3-cac1598f45d6",
+        "chatSessionId": "sess_302b98db-dedb-427d-9425-bfa5fd5c9b99",
+        "timestamp": 1794666025513
+      }
+    ],
+    "8. Synchronous codec (`encode`, `decode`)": [
+      {
+        "executionId": "724a4930-3d8e-490b-84d3-cac1598f45d6",
+        "chatSessionId": "sess_302b98db-dedb-427d-9425-bfa5fd5c9b99",
+        "timestamp": 1794666025572
+      }
+    ],
+    "9. Checkpoint - Ensure all tests pass": [
+      {
+        "executionId": "cac42fc7-cfe0-4139-b6cb-1b80455c5dfa",
+        "chatSessionId": "sess_b0d7a96e-a521-4bdf-bb65-68539d186e3c",
+        "timestamp": 1794666869688
+      },
+      {
+        "executionId": "cac42fc7-cfe0-4139-b6cb-1b80455c5dfa",
+        "chatSessionId": "sess_b0d7a96e-a521-4bdf-bb65-68539d186e3c",
+        "timestamp": 1794666890936
       }
     ]
   }

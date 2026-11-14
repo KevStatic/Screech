@@ -31,139 +31,139 @@ Each module's unit tests and property tests are sub-tasks of the task that imple
     - Property: guards never throw for any value from `anythingArb` (supports Property 20)
     - _Requirements: 8.9, 8.12, 8.13, 10.7_
 
-- [ ] 2. UTF-8 helpers
-  - [ ] 2.1 Implement `src/utf8.ts`
+- [x] 2. UTF-8 helpers
+  - [x] 2.1 Implement `src/utf8.ts`
     - `encodeUtf8Strict` (rejects lone surrogates), `decodeUtf8Strict` (`TextDecoder` with `fatal: true` and `ignoreBOM: true`), `hasLoneSurrogate`
     - _Requirements: 4.1, 4.2, 4.3, 7.1, 7.2, 7.3_
 
-  - [ ] 2.2 Write unit and property tests in `tests/utf8.test.ts`
+  - [x] 2.2 Write unit and property tests in `tests/utf8.test.ts`
     - Unit tests: U+FEFF kept, U+0000 kept, lone surrogate rejected, invalid byte sequences rejected
     - Property: strict encode then strict decode returns the original string for strings without lone surrogates
     - Supports **Property 3: Unsealed round trip** and **Property 10: Text-like bodies must be valid UTF-8**
     - _Requirements: 4.2, 4.3, 7.3, 7.5_
 
-- [ ] 3. Frame
-  - [ ] 3.1 Implement `src/frame.ts`
+- [x] 3. Frame
+  - [x] 3.1 Implement `src/frame.ts`
     - `buildFrame` writes 0xC1, the type value and the flags byte, then copies the body
     - `parseFrame` runs the header checks in the design order and returns copies of the body bytes
     - _Requirements: 1.1, 1.2, 1.3, 1.4, 1.5, 2.1, 2.2, 2.3, 2.4, 2.6, 10.5_
 
-  - [ ] 3.2 Write property test for frame round trip in `tests/frame.property.test.ts`
+  - [x] 3.2 Write property test for frame round trip in `tests/frame.property.test.ts`
     - **Property 1: Frame round trip**
     - **Validates: Requirements 1.1, 1.5, 2.1, 2.3, 2.6**
 
-  - [ ] 3.3 Write unit tests in `tests/frame.test.ts`
+  - [x] 3.3 Write unit tests in `tests/frame.test.ts`
     - Fixed bytes for each type and each flag combination
     - Empty input, 1 and 2 bytes give `truncated` before any other check; each of `bad-magic`, `unsupported-version`, `unknown-type`, `reserved-flags` with fixed bytes
     - _Requirements: 1.2, 1.3, 1.4, 2.2, 2.4_
 
-- [ ] 4. URL compression and Prefix_Table
-  - [ ] 4.1 Implement `src/prefix-table.ts` and `src/url-body.ts`
+- [x] 4. URL compression and Prefix_Table
+  - [x] 4.1 Implement `src/prefix-table.ts` and `src/url-body.ts`
     - `PREFIX_TABLE` as a single `as const` definition with codes 0x01 to 0x10; `compressUrl` and `expandUrl` both read from it
     - URL body encode (scheme removed, longest case-sensitive prefix replaced, scheme byte, compressed flag always set) and decode (including the literal form with the compressed flag clear)
     - _Requirements: 5.1, 5.2, 5.3, 5.4, 5.5, 5.6, 5.7, 5.8, 5.9_
 
-  - [ ] 4.2 Write property test for URL canonical form in `tests/url-body.property.test.ts`
+  - [x] 4.2 Write property test for URL canonical form in `tests/url-body.property.test.ts`
     - **Property 4: URL compression canonical form**
     - Compare against the reference compressor in `tests/helpers.ts`
     - **Validates: Requirements 5.1, 5.2, 5.3**
 
-  - [ ] 4.3 Write property test for the Prefix_Table in `tests/prefix-table.property.test.ts`
+  - [x] 4.3 Write property test for the Prefix_Table in `tests/prefix-table.property.test.ts`
     - **Property 5: Prefix_Table is a bijection**
     - **Validates: Requirements 5.8**
 
-  - [ ] 4.4 Write property test for invalid URLs in `tests/url-body-invalid.property.test.ts`
+  - [x] 4.4 Write property test for invalid URLs in `tests/url-body-invalid.property.test.ts`
     - **Property 6: Invalid URL payloads and bodies are rejected**
     - **Validates: Requirements 5.5, 5.6, 5.7**
 
-  - [ ] 4.5 Write unit tests in `tests/url-body.test.ts`
+  - [x] 4.5 Write unit tests in `tests/url-body.test.ts`
     - Fixed bytes for a `https://github.com/...` URL using code 0x02, an `http://` URL with no prefix, mixed-case scheme normalized to lowercase, and an uppercase host left uncompressed
     - Literal URL with the compressed flag clear, accepted and rejected (no scheme) cases; undefined code 0x11 and empty body give `invalid-body`
     - _Requirements: 5.1, 5.2, 5.3, 5.4, 5.5, 5.6, 5.7, 5.9_
 
-- [ ] 5. Text-like bodies
-  - [ ] 5.1 Implement `src/text-body.ts`
+- [x] 5. Text-like bodies
+  - [x] 5.1 Implement `src/text-body.ts`
     - Encode and decode for text, contact, checkin and hunt-clue: strict UTF-8, compressed flag clear
     - Decoder rejects the compressed flag and invalid UTF-8 with `invalid-body`; encoder rejects empty text and lone surrogates with `invalid-payload` and `field: 'text'`
     - _Requirements: 4.1, 4.2, 4.3, 4.4, 4.6, 7.1, 7.2, 7.3, 7.4, 7.5, 7.6_
 
-  - [ ] 5.2 Write property test for text-like bodies in `tests/text-body.property.test.ts`
+  - [x] 5.2 Write property test for text-like bodies in `tests/text-body.property.test.ts`
     - **Property 10: Text-like bodies must be valid UTF-8**
     - **Validates: Requirements 4.3, 7.3**
 
-  - [ ] 5.3 Write unit tests in `tests/text-body.test.ts`
+  - [x] 5.3 Write unit tests in `tests/text-body.test.ts`
     - Fixed bytes for each of the four types, multi-byte characters, empty text, compressed flag set, invalid UTF-8 body
     - _Requirements: 4.1, 4.2, 4.3, 4.4, 4.6, 7.1, 7.3, 7.4, 7.6_
 
-- [ ] 6. Wi-Fi body
-  - [ ] 6.1 Implement `src/wifi-body.ts`
+- [x] 6. Wi-Fi body
+  - [x] 6.1 Implement `src/wifi-body.ts`
     - Encode with the check order from the design (`invalid-payload` and `invalid-wifi`), compressed flag always set; decode with the strict mirror checks (`invalid-body`)
     - _Requirements: 6.1, 6.2, 6.3, 6.4, 6.5, 6.6, 6.7, 6.8, 6.9, 6.10, 6.11_
 
-  - [ ] 6.2 Write property test for Wi-Fi encoding rules in `tests/wifi-body.property.test.ts`
+  - [x] 6.2 Write property test for Wi-Fi encoding rules in `tests/wifi-body.property.test.ts`
     - **Property 7: Wi-Fi encoding rules**
     - Compare accepted bodies against the reference builder in `tests/helpers.ts`
     - **Validates: Requirements 6.1, 6.2, 6.3, 6.6, 6.7, 6.8**
 
-  - [ ] 6.3 Write property test for malformed Wi-Fi bodies in `tests/wifi-body-invalid.property.test.ts`
+  - [x] 6.3 Write property test for malformed Wi-Fi bodies in `tests/wifi-body-invalid.property.test.ts`
     - **Property 8: Malformed Wi-Fi bodies are rejected**
     - **Validates: Requirements 6.5**
 
-  - [ ] 6.4 Write unit tests in `tests/wifi-body.test.ts`
+  - [x] 6.4 Write unit tests in `tests/wifi-body.test.ts`
     - Fixed bytes for open, WPA and WEP; open with a password gives `invalid-wifi`; SSID of 0 and 33 bytes; password of 64 bytes; WPA with an empty password
     - Decoder: compressed flag clear, undefined security byte, length past the body, leftover bytes, invalid UTF-8 in SSID and password
     - _Requirements: 6.1, 6.2, 6.3, 6.4, 6.5, 6.6, 6.7, 6.8, 6.10, 6.11_
 
-- [ ] 7. Body dispatcher
-  - [ ] 7.1 Implement `src/body.ts`
+- [x] 7. Body dispatcher
+  - [x] 7.1 Implement `src/body.ts`
     - `encodeBody(payload)` returns type, compressed flag and body; `decodeBody(type, compressed, body)` dispatches to the per-type modules
     - Unknown payload shapes return `invalid-payload` with the offending field
     - _Requirements: 3.3, 4.1, 5.3, 6.1, 7.1, 10.6, 10.7_
 
-  - [ ] 7.2 Write unit tests in `tests/body.test.ts`
+  - [x] 7.2 Write unit tests in `tests/body.test.ts`
     - Dispatch for each of the six types; non-object payload, unknown `type` value and non-string fields give `invalid-payload` with the field named
     - _Requirements: 3.3, 10.7_
 
-- [ ] 8. Synchronous codec (`encode`, `decode`)
-  - [ ] 8.1 Implement `src/codec.ts`
+- [x] 8. Synchronous codec (`encode`, `decode`)
+  - [x] 8.1 Implement `src/codec.ts`
     - `encode`: encode body, compute `3 + body.length`, return `too-large` with the length when above 140, otherwise `buildFrame`; never sets the sealed or multipart bit
     - `decode`: `parseFrame`, sealed flag gives `key-required`, multipart flag returns the raw body copy, otherwise `decodeBody`; non-`Uint8Array` input gives `invalid-payload` with `field: 'packet'`; wrap in `try/catch` so nothing throws
     - _Requirements: 1.1 to 1.5, 2.1 to 2.6, 3.1, 3.2, 3.4, 4.5, 8.17, 10.1, 10.6, 10.7, 10.11_
 
-  - [ ] 8.2 Write property test for the unsealed round trip in `tests/codec-roundtrip.property.test.ts`
+  - [x] 8.2 Write property test for the unsealed round trip in `tests/codec-roundtrip.property.test.ts`
     - **Property 3: Unsealed round trip**
     - **Validates: Requirements 4.1, 4.2, 5.4, 6.1, 6.4, 6.9, 7.1, 7.2, 7.5, 11.1**
 
-  - [ ] 8.3 Write property test for header validation in `tests/codec-header.property.test.ts`
+  - [x] 8.3 Write property test for header validation in `tests/codec-header.property.test.ts`
     - **Property 2: Header validation matches the reference model** (the `decode` half; the `open` half is in task 11.6)
     - **Validates: Requirements 1.2, 1.3, 1.4, 2.2, 2.4**
 
-  - [ ] 8.4 Write property test for invalid payloads in `tests/codec-invalid-payload.property.test.ts`
+  - [x] 8.4 Write property test for invalid payloads in `tests/codec-invalid-payload.property.test.ts`
     - **Property 9: Invalid payloads are rejected without a packet**
     - Includes a check that the input Payload is unchanged
     - **Validates: Requirements 3.3, 4.4, 7.4**
 
-  - [ ] 8.5 Write property tests for size cap and determinism in `tests/codec-size.property.test.ts`
+  - [x] 8.5 Write property tests for size cap and determinism in `tests/codec-size.property.test.ts`
     - **Property 11: Size cap is never exceeded** (the `encode` half; `seal` half is in task 10.4)
     - **Property 14: Determinism** (the `encode` half; `seal` half is in task 10.4)
     - **Validates: Requirements 3.1, 3.2, 3.4, 4.5, 10.3, 11.3, 12.3**
 
-  - [ ] 8.6 Write property tests for totality and input safety in `tests/codec-totality.property.test.ts`
+  - [x] 8.6 Write property tests for totality and input safety in `tests/codec-totality.property.test.ts`
     - **Property 20: Totality** (`encode` and `decode` with arbitrary values and 0 to 300 byte arrays)
     - **Property 21: Inputs are not modified or retained** (the `decode` half)
     - **Validates: Requirements 10.5, 10.6, 10.7, 10.11, 12.4**
 
-  - [ ] 8.7 Write property test for multipart passthrough in `tests/codec-multipart.property.test.ts`
+  - [x] 8.7 Write property test for multipart passthrough in `tests/codec-multipart.property.test.ts`
     - **Property 22: Multipart passthrough** (unsealed half; sealed half is in task 11.7)
     - **Validates: Requirements 2.5**
 
-  - [ ] 8.8 Write unit tests in `tests/codec.test.ts`
+  - [x] 8.8 Write unit tests in `tests/codec.test.ts`
     - Fixed example bytes for each of the six types, including the 0xC1 header, a compressed URL with code 0x02, and Wi-Fi for each security type
     - Size boundaries: an unsealed packet of exactly 140 bytes (137-byte body) is produced and decoded; a payload that would be 141 bytes gives `too-large` with `length: 141`
     - Sealed-flag packet to `decode` gives `key-required`; `encode` and `decode` results are not thenable; `decode(null)` gives `invalid-payload` with `field: 'packet'`
     - _Requirements: 2.6, 3.1, 3.2, 8.17, 10.1, 10.11, 12.7, 12.8_
 
-- [ ] 9. Checkpoint - Ensure all tests pass
+- [x] 9. Checkpoint - Ensure all tests pass
   - Ensure all tests pass, ask the user if questions arise.
 
 - [ ] 10. Sealer (`deriveNonce`, `seal`) and cryptographic test helpers
