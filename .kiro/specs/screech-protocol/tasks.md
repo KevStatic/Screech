@@ -166,126 +166,126 @@ Each module's unit tests and property tests are sub-tasks of the task that imple
 - [x] 9. Checkpoint - Ensure all tests pass
   - Ensure all tests pass, ask the user if questions arise.
 
-- [ ] 10. Sealer (`deriveNonce`, `seal`) and cryptographic test helpers
-  - [ ] 10.1 Implement `deriveNonce` and `seal` in `src/seal.ts`
+- [x] 10. Sealer (`deriveNonce`, `seal`) and cryptographic test helpers
+  - [x] 10.1 Implement `deriveNonce` and `seal` in `src/seal.ts`
     - `deriveNonce`: Sender_ID, Counter big-endian, six zero bytes
     - `seal`: validate in the design order (key, Sender_ID, Counter, payload, size), AAD is the first three bytes, `importKey` with a copy of the key, `encrypt` with `tagLength: 64`, output `aad || senderId || counter || ciphertext || tag`
     - Uses only `crypto.subtle`; missing or failing SubtleCrypto gives `crypto-unavailable`; every `await` inside `try/catch` so the Promise never rejects
     - _Requirements: 8.1, 8.2, 8.3, 8.4, 8.9, 8.11, 8.12, 8.13, 8.14, 8.15, 10.2, 10.8, 10.9_
 
-  - [ ] 10.2 Extend `tests/helpers.ts` with independent crypto references
+  - [x] 10.2 Extend `tests/helpers.ts` with independent crypto references
     - Known-answer builder using Node.js `node:crypto` (`createCipheriv('aes-128-gcm', key, nonce, { authTagLength: 8 })`, `setAAD` with the first three bytes) that builds the nonce and packet layout itself, with no import of `deriveNonce` or `buildFrame` from `src/`
     - Direct `SubtleCrypto` decrypt helper (`tagLength: 64`, AAD of the first three bytes) for the sealed round-trip property
     - _Requirements: 8.2, 8.3, 8.4, 12.14_
 
-  - [ ] 10.3 Write property test for nonce derivation in `tests/nonce.property.test.ts`
+  - [x] 10.3 Write property test for nonce derivation in `tests/nonce.property.test.ts`
     - **Property 13: Nonce derivation**
     - **Validates: Requirements 8.3, 12.6**
 
-  - [ ] 10.4 Write property tests for sealer size, determinism and argument validation in `tests/seal.property.test.ts`
+  - [x] 10.4 Write property tests for sealer size, determinism and argument validation in `tests/seal.property.test.ts`
     - **Property 11: Size cap is never exceeded** (the `seal` half; `too-large.length` equals `17 + body length`)
     - **Property 14: Determinism** (the `seal` half)
     - **Property 18: Sealer and Opener argument validation** (the `seal` half: `invalid-key`, `invalid-sender-id`, `invalid-counter`)
     - **Validates: Requirements 8.9, 8.12, 8.13, 8.14, 8.15, 10.3, 11.3, 12.3**
 
-  - [ ] 10.5 Write property tests for invalid payloads when sealing in `tests/seal-invalid-payload.property.test.ts`
+  - [x] 10.5 Write property tests for invalid payloads when sealing in `tests/seal-invalid-payload.property.test.ts`
     - **Property 7: Wi-Fi encoding rules** (`seal` returns `invalid-wifi` for open with a password)
     - **Property 9: Invalid payloads are rejected without a packet** (the `seal` half)
     - **Validates: Requirements 3.3, 6.8, 12.1**
 
-  - [ ] 10.6 Write unit tests in `tests/seal.test.ts`
+  - [x] 10.6 Write unit tests in `tests/seal.test.ts`
     - Known-answer test: fixed Room_Key, Sender_ID, Counter and Payload; expected bytes computed only by the `node:crypto` helper from 10.2, never taken from `seal()`
     - A payload with a 123-byte body gives a 140-byte sealed packet; a 124-byte body gives `too-large`
     - `seal` resolves to `crypto-unavailable` when `globalThis.crypto.subtle` is stubbed to `undefined`; `seal` result is thenable
     - _Requirements: 8.1, 8.2, 8.14, 8.15, 10.2, 10.9, 12.7, 12.8, 12.14_
 
-- [ ] 11. Opener (`open`)
-  - [ ] 11.1 Implement `open` in `src/seal.ts`
+- [x] 11. Opener (`open`)
+  - [x] 11.1 Implement `open` in `src/seal.ts`
     - Header checks, then `not-sealed`, then `truncated` for under 17 bytes, then `key-required` and `invalid-key`, then decrypt with the first three bytes as AAD
     - Tag mismatch gives `auth-failed`; other crypto failures give `crypto-unavailable`; after decrypt, clear the sealed bit and follow the same multipart or `decodeBody` path as `decode`
     - _Requirements: 1.2 to 1.5, 2.2, 2.4, 2.5, 8.5 to 8.10, 8.16, 10.8, 10.9, 10.11_
 
-  - [ ] 11.2 Write property test for sealed round trip and layout in `tests/open-roundtrip.property.test.ts`
+  - [x] 11.2 Write property test for sealed round trip and layout in `tests/open-roundtrip.property.test.ts`
     - **Property 12: Sealed round trip and layout**
     - Uses the independent `SubtleCrypto` decrypt helper from 10.2
     - **Validates: Requirements 8.1, 8.2, 8.3, 8.4, 8.5, 11.2**
 
-  - [ ] 11.3 Write property test for tampering in `tests/open-tamper.property.test.ts`
+  - [x] 11.3 Write property test for tampering in `tests/open-tamper.property.test.ts`
     - **Property 15: Tampering is detected** (flip any single bit; any Codec_Error code is accepted)
     - **Validates: Requirements 8.6, 12.2**
 
-  - [ ] 11.4 Write property test for wrong keys in `tests/open-wrong-key.property.test.ts`
+  - [x] 11.4 Write property test for wrong keys in `tests/open-wrong-key.property.test.ts`
     - **Property 16: Wrong key fails authentication**
     - **Validates: Requirements 8.6, 11.4**
 
-  - [ ] 11.5 Write property test for sealed-flag routing in `tests/open-routing.property.test.ts`
+  - [x] 11.5 Write property test for sealed-flag routing in `tests/open-routing.property.test.ts`
     - **Property 17: Sealed-flag routing**
     - **Validates: Requirements 8.8, 8.10, 8.16, 8.17**
 
-  - [ ] 11.6 Write property tests for Opener validation and totality in `tests/open-totality.property.test.ts`
+  - [x] 11.6 Write property tests for Opener validation and totality in `tests/open-totality.property.test.ts`
     - **Property 2: Header validation matches the reference model** (the `open` half; `auth-failed` is never returned for a header failure)
     - **Property 18: Sealer and Opener argument validation** (the `open` half: `invalid-key`)
     - **Property 20: Totality** (the Promise from `open` always resolves for 0 to 300 byte arrays and arbitrary values)
     - **Validates: Requirements 1.2, 1.3, 1.4, 2.2, 2.4, 8.7, 8.9, 10.8, 10.11, 12.5**
 
-  - [ ] 11.7 Write property tests for input safety and sealed multipart in `tests/open-inputs.property.test.ts`
+  - [x] 11.7 Write property tests for input safety and sealed multipart in `tests/open-inputs.property.test.ts`
     - **Property 21: Inputs are not modified or retained** (`seal` key and Sender_ID, `open` packet and key)
     - **Property 22: Multipart passthrough** (sealed half: `open` returns the decrypted body unchanged)
     - **Validates: Requirements 2.5, 10.5**
 
-  - [ ] 11.8 Write unit tests in `tests/open.test.ts`
+  - [x] 11.8 Write unit tests in `tests/open.test.ts`
     - A 16-byte sealed-flag packet gives `truncated`; a 17-byte one does not
     - A 140-byte sealed packet (123-byte body) is produced and opened; a 141-byte one is rejected by `seal` with `too-large`
     - `auth-failed` for a wrong key; `key-required` for a missing key; `invalid-key` for a 15-byte key; `not-sealed` for an unsealed packet
     - `open` resolves to `crypto-unavailable` when `globalThis.crypto.subtle` is stubbed to `undefined`; `open` result is thenable
     - _Requirements: 8.5, 8.6, 8.8, 8.9, 8.10, 8.15, 8.16, 10.2, 10.9, 12.7, 12.8_
 
-- [ ] 12. Sender state rotation
-  - [ ] 12.1 Implement `src/sender-state.ts`
+- [x] 12. Sender state rotation
+  - [x] 12.1 Implement `src/sender-state.ts`
     - `nextSenderState(previous?, fill?)` with injectable `RandomFill`, default `crypto.getRandomValues`; this is the only file that calls `getRandomValues`
     - Validation order: Sender_ID then Counter; at Counter 65535 draw a fresh ID and XOR byte 0 with 0x01 if it equals the old one; returned arrays are fresh copies
     - `getRandomValues` missing or throwing gives `crypto-unavailable`
     - _Requirements: 9.1, 9.2, 9.3, 9.5, 9.6, 9.7, 10.10_
 
-  - [ ] 12.2 Write property tests for rotation in `tests/sender-state.property.test.ts`
+  - [x] 12.2 Write property tests for rotation in `tests/sender-state.property.test.ts`
     - **Property 19: Sender state rotation** (increment below 65535; rollover to a different ID at 65535 even when the random source returns the old ID; initial state; invalid inputs)
     - **Validates: Requirements 9.1, 9.2, 9.3, 9.5, 9.6, 12.6**
 
-  - [ ] 12.3 Write property tests for totality and input safety in `tests/sender-state-totality.property.test.ts`
+  - [x] 12.3 Write property tests for totality and input safety in `tests/sender-state-totality.property.test.ts`
     - **Property 20: Totality** (`nextSenderState` with arbitrary values never throws)
     - **Property 21: Inputs are not modified or retained** (the Sender_ID passed in is unchanged and not retained)
     - **Validates: Requirements 9.5, 9.6, 10.5, 10.7**
 
-  - [ ] 12.4 Write unit tests in `tests/sender-state.test.ts`
+  - [x] 12.4 Write unit tests in `tests/sender-state.test.ts`
     - Fixed examples: initial state, Counter increment, rollover at 65535 with Counter reset to 0, `invalid-counter`, `invalid-sender-id`
     - `crypto-unavailable` when `getRandomValues` is stubbed to throw or removed
     - Result is synchronous (not thenable)
     - _Requirements: 9.1, 9.2, 9.3, 9.5, 9.6, 9.7, 10.10, 12.9_
 
-  - [ ] 12.5 Write the deterministic no-repeat test in `tests/sender-state-norepeat.test.ts`
+  - [x] 12.5 Write the deterministic no-repeat test in `tests/sender-state-norepeat.test.ts`
     - One plain unit test, not a fast-check property: call `nextSenderState` 70,000 consecutive times from no state with an injected `fill` that writes a 32-bit counter big-endian (never repeats an ID)
     - Record each `(senderId, counter)` pair in a `Set` of strings and fail on a repeat
     - _Requirements: 9.4, 12.13_
 
-- [ ] 13. Public API, error-code coverage and static scans
-  - [ ] 13.1 Wire the public API in `src/index.ts`
+- [x] 13. Public API, error-code coverage and static scans
+  - [x] 13.1 Wire the public API in `src/index.ts`
     - Replace the placeholder export; re-export `encode`, `decode`, `seal`, `open`, `deriveNonce`, `nextSenderState`, `buildFrame`, `parseFrame`, the types, `CodecErrorCode`, `PREFIX_TABLE` and the constants needed by apps
     - Update or remove the placeholder `tests/index.test.ts` so it matches the new exports
     - _Requirements: 3.4, 10.1, 10.2_
 
-  - [ ] 13.2 Write the source scan test in `tests/static-scan.test.ts`
+  - [x] 13.2 Write the source scan test in `tests/static-scan.test.ts`
     - Read only the files in `packages/core/src` (never `tests/`) and fail if any contains `node:`, `require(`, `Buffer` or `process.`
     - Fail if `getRandomValues` appears outside `sender-state.ts`, or `crypto.subtle` outside `seal.ts`
     - Fail if the word `any` is used as a type annotation (for example `: any`, `as any`, `<any>`)
     - _Requirements: 8.11, 9.7, 10.4_
 
-  - [ ] 13.3 Write the error-code coverage test in `tests/errors.test.ts`
+  - [x] 13.3 Write the error-code coverage test in `tests/errors.test.ts`
     - One fixed-input example for each of the 16 codes: `bad-magic`, `unsupported-version`, `truncated`, `unknown-type`, `reserved-flags`, `too-large`, `invalid-payload`, `invalid-wifi`, `invalid-body`, `auth-failed`, `key-required`, `invalid-key`, `invalid-counter`, `invalid-sender-id`, `not-sealed`, `crypto-unavailable`
     - Imports only from `src/index.ts`, so it also checks the public API
     - _Requirements: 12.7_
 
-- [ ] 14. Final checkpoint - Verify the full suite and time budget
-  - [ ] 14.1 Run `pnpm test` from the repository root and confirm the result
+- [x] 14. Final checkpoint - Verify the full suite and time budget
+  - [x] 14.1 Run `pnpm test` from the repository root and confirm the result
     - Confirm 0 failed tests and exit code 0, and that the `packages/core` suite finishes in under 20 seconds
     - If over budget, reduce generator sizes; do not lower any property below `NUM_RUNS = 100`
     - Confirm a failing property prints its seed and counterexample (default fast-check reporting is not suppressed)

@@ -32,3 +32,17 @@
 - Kiro features used: spec (task execution), property tests.
 - 8:04 PM - Passed spec task 9, the checkpoint after the synchronous codec. `pnpm test` from the root runs 22 test files and 183 tests in `packages/core`, all passing. Ticked off in `tasks.md`.
 - Kiro features used: spec (task execution), property tests.
+- 8:42 PM - Finished spec task 10: `packages/core/src/seal.ts` has `deriveNonce` and `seal` (AES-GCM through `crypto.subtle`, 8-byte tag, header bytes as AAD, `crypto-unavailable` instead of a rejected Promise). Extended `tests/helpers.ts` with independent crypto references (a known-answer builder on `node:crypto` and a direct SubtleCrypto decrypt). Added property tests for nonce derivation, sealer size, determinism and argument validation, and invalid payloads, plus unit tests in `tests/seal.test.ts`. Ticked off in `tasks.md`.
+- 8:39 PM - Updated the structure steering file to describe the `packages/core` modules, `apps/spike` and the `.kiro/` folders (steering, specs, hooks).
+- Kiro features used: spec (task execution), property tests, steering.
+- 8:49 PM - Finished spec task 11: added `open` to `packages/core/src/seal.ts`, the counterpart of `seal`. Added six property-test files (sealed round trip and layout, tampering, wrong keys, sealed-flag routing, validation and totality, input safety and sealed multipart) and unit tests in `tests/open.test.ts`. Ticked off in `tasks.md`.
+- Kiro features used: spec (task execution), property tests.
+- 9:12 PM - Finished spec task 12: `packages/core/src/sender-state.ts` has `nextSenderState`, which increments the counter and picks a fresh Sender_ID at rollover (65535), forcing it to differ from the old one even if the random source returns the same ID. The random source can be injected, and a missing or failing `getRandomValues` gives `crypto-unavailable`. Added property tests for rotation, totality and input safety, unit tests, and a deterministic test that calls it 70,000 times without repeating an ID. Ticked off in `tasks.md`.
+- Kiro features used: spec (task execution), property tests.
+- 9:15 PM - Finished spec task 13: replaced the placeholder in `packages/core/src/index.ts` with the public API (`encode`, `decode`, `seal`, `open`, `deriveNonce`, `nextSenderState`, `buildFrame`, `parseFrame`, `PREFIX_TABLE`, the types and the constants apps need) and updated `tests/index.test.ts`. Added `tests/static-scan.test.ts`, which fails if the source uses Node-only APIs, `getRandomValues` outside `sender-state.ts`, `crypto.subtle` outside `seal.ts`, or `any` as a type. Added `tests/errors.test.ts` with one fixed example for each of the 16 error codes, using only the public API. Ticked off in `tasks.md`.
+- Kiro features used: spec (task execution).
+- 9:29 PM - Finished spec task 14, the final checkpoint, which completes the screech-protocol spec. `pnpm test` from the root passes: 39 test files and 275 tests, with the `packages/core` suite finishing in 6.27 seconds against the 20 second budget. Ticked off in `tasks.md`.
+- Still open: the spec lists a manual check of a seal and open round trip on iOS Safari and Android Chrome over HTTPS, to confirm `tagLength: 64` works there.
+- Kiro features used: spec (task execution), property tests.
+- 9:32 PM - Edited `packages/core/tests/open-totality.property.test.ts` after the final checkpoint. Its four property tests still pass when run on their own. This was the only file changed since the last entry.
+- Kiro features used: chat, property tests.

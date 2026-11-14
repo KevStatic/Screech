@@ -51,6 +51,38 @@
     "8.7 Write property test for multipart passthrough in `tests/codec-multipart.property.test.ts`": {
       "status": "passed",
       "lastRunTimestamp": 1794666014062
+    },
+    "10.3 Write property test for nonce derivation in `tests/nonce.property.test.ts`": {
+      "status": "passed",
+      "lastRunTimestamp": 1794669171955
+    },
+    "10.4 Write property tests for sealer size, determinism and argument validation in `tests/seal.property.test.ts`": {
+      "status": "passed",
+      "lastRunTimestamp": 1794669172980
+    },
+    "10.5 Write property tests for invalid payloads when sealing in `tests/seal-invalid-payload.property.test.ts`": {
+      "status": "passed",
+      "lastRunTimestamp": 1794669192215
+    },
+    "11.3 Write property test for tampering in `tests/open-tamper.property.test.ts`": {
+      "status": "passed",
+      "lastRunTimestamp": 1794669415638
+    },
+    "11.4 Write property test for wrong keys in `tests/open-wrong-key.property.test.ts`": {
+      "status": "passed",
+      "lastRunTimestamp": 1794669476351
+    },
+    "11.6 Write property tests for Opener validation and totality in `tests/open-totality.property.test.ts`": {
+      "status": "passed",
+      "lastRunTimestamp": 1794669514041
+    },
+    "12.3 Write property tests for totality and input safety in `tests/sender-state-totality.property.test.ts`": {
+      "status": "passed",
+      "lastRunTimestamp": 1794670938724
+    },
+    "12.2 Write property tests for rotation in `tests/sender-state.property.test.ts`": {
+      "status": "passed",
+      "lastRunTimestamp": 1794670952857
     }
   },
   "executionHistory": {
@@ -492,6 +524,317 @@
         "executionId": "cac42fc7-cfe0-4139-b6cb-1b80455c5dfa",
         "chatSessionId": "sess_b0d7a96e-a521-4bdf-bb65-68539d186e3c",
         "timestamp": 1794666890936
+      }
+    ],
+    "10.1 Implement `deriveNonce` and `seal` in `src/seal.ts`": [
+      {
+        "executionId": "753595a1-635e-4c27-9f5b-e70cdf8bb6ef",
+        "chatSessionId": "sess_6b5ff0d6-24de-494e-a0d6-d0449c878a05",
+        "timestamp": 1794669055540
+      },
+      {
+        "executionId": "753595a1-635e-4c27-9f5b-e70cdf8bb6ef",
+        "chatSessionId": "sess_6b5ff0d6-24de-494e-a0d6-d0449c878a05",
+        "timestamp": 1794669114811
+      }
+    ],
+    "10.2 Extend `tests/helpers.ts` with independent crypto references": [
+      {
+        "executionId": "753595a1-635e-4c27-9f5b-e70cdf8bb6ef",
+        "chatSessionId": "sess_6b5ff0d6-24de-494e-a0d6-d0449c878a05",
+        "timestamp": 1794669055739
+      },
+      {
+        "executionId": "753595a1-635e-4c27-9f5b-e70cdf8bb6ef",
+        "chatSessionId": "sess_6b5ff0d6-24de-494e-a0d6-d0449c878a05",
+        "timestamp": 1794669115481
+      }
+    ],
+    "10.3 Write property test for nonce derivation in `tests/nonce.property.test.ts`": [
+      {
+        "executionId": "753595a1-635e-4c27-9f5b-e70cdf8bb6ef",
+        "chatSessionId": "sess_6b5ff0d6-24de-494e-a0d6-d0449c878a05",
+        "timestamp": 1794669118869
+      },
+      {
+        "executionId": "753595a1-635e-4c27-9f5b-e70cdf8bb6ef",
+        "chatSessionId": "sess_6b5ff0d6-24de-494e-a0d6-d0449c878a05",
+        "timestamp": 1794669200510
+      }
+    ],
+    "10.4 Write property tests for sealer size, determinism and argument validation in `tests/seal.property.test.ts`": [
+      {
+        "executionId": "753595a1-635e-4c27-9f5b-e70cdf8bb6ef",
+        "chatSessionId": "sess_6b5ff0d6-24de-494e-a0d6-d0449c878a05",
+        "timestamp": 1794669119659
+      },
+      {
+        "executionId": "753595a1-635e-4c27-9f5b-e70cdf8bb6ef",
+        "chatSessionId": "sess_6b5ff0d6-24de-494e-a0d6-d0449c878a05",
+        "timestamp": 1794669201298
+      }
+    ],
+    "10.5 Write property tests for invalid payloads when sealing in `tests/seal-invalid-payload.property.test.ts`": [
+      {
+        "executionId": "753595a1-635e-4c27-9f5b-e70cdf8bb6ef",
+        "chatSessionId": "sess_6b5ff0d6-24de-494e-a0d6-d0449c878a05",
+        "timestamp": 1794669120538
+      },
+      {
+        "executionId": "753595a1-635e-4c27-9f5b-e70cdf8bb6ef",
+        "chatSessionId": "sess_6b5ff0d6-24de-494e-a0d6-d0449c878a05",
+        "timestamp": 1794669202055
+      }
+    ],
+    "10.6 Write unit tests in `tests/seal.test.ts`": [
+      {
+        "executionId": "753595a1-635e-4c27-9f5b-e70cdf8bb6ef",
+        "chatSessionId": "sess_6b5ff0d6-24de-494e-a0d6-d0449c878a05",
+        "timestamp": 1794669121164
+      },
+      {
+        "executionId": "753595a1-635e-4c27-9f5b-e70cdf8bb6ef",
+        "chatSessionId": "sess_6b5ff0d6-24de-494e-a0d6-d0449c878a05",
+        "timestamp": 1794669202830
+      }
+    ],
+    "10. Sealer (`deriveNonce`, `seal`) and cryptographic test helpers": [
+      {
+        "executionId": "753595a1-635e-4c27-9f5b-e70cdf8bb6ef",
+        "chatSessionId": "sess_6b5ff0d6-24de-494e-a0d6-d0449c878a05",
+        "timestamp": 1794669202934
+      }
+    ],
+    "11.1 Implement `open` in `src/seal.ts`": [
+      {
+        "executionId": "64f146cf-be6c-4936-83c2-ac758665b03c",
+        "chatSessionId": "sess_e3aff373-312e-452a-8209-cf975fd94846",
+        "timestamp": 1794669265896
+      },
+      {
+        "executionId": "64f146cf-be6c-4936-83c2-ac758665b03c",
+        "chatSessionId": "sess_e3aff373-312e-452a-8209-cf975fd94846",
+        "timestamp": 1794669344435
+      }
+    ],
+    "11.2 Write property test for sealed round trip and layout in `tests/open-roundtrip.property.test.ts`": [
+      {
+        "executionId": "64f146cf-be6c-4936-83c2-ac758665b03c",
+        "chatSessionId": "sess_e3aff373-312e-452a-8209-cf975fd94846",
+        "timestamp": 1794669361449
+      },
+      {
+        "executionId": "64f146cf-be6c-4936-83c2-ac758665b03c",
+        "chatSessionId": "sess_e3aff373-312e-452a-8209-cf975fd94846",
+        "timestamp": 1794669523623
+      }
+    ],
+    "11.3 Write property test for tampering in `tests/open-tamper.property.test.ts`": [
+      {
+        "executionId": "64f146cf-be6c-4936-83c2-ac758665b03c",
+        "chatSessionId": "sess_e3aff373-312e-452a-8209-cf975fd94846",
+        "timestamp": 1794669361628
+      },
+      {
+        "executionId": "64f146cf-be6c-4936-83c2-ac758665b03c",
+        "chatSessionId": "sess_e3aff373-312e-452a-8209-cf975fd94846",
+        "timestamp": 1794669523775
+      }
+    ],
+    "11.4 Write property test for wrong keys in `tests/open-wrong-key.property.test.ts`": [
+      {
+        "executionId": "64f146cf-be6c-4936-83c2-ac758665b03c",
+        "chatSessionId": "sess_e3aff373-312e-452a-8209-cf975fd94846",
+        "timestamp": 1794669361738
+      },
+      {
+        "executionId": "64f146cf-be6c-4936-83c2-ac758665b03c",
+        "chatSessionId": "sess_e3aff373-312e-452a-8209-cf975fd94846",
+        "timestamp": 1794669524122
+      }
+    ],
+    "11.5 Write property test for sealed-flag routing in `tests/open-routing.property.test.ts`": [
+      {
+        "executionId": "64f146cf-be6c-4936-83c2-ac758665b03c",
+        "chatSessionId": "sess_e3aff373-312e-452a-8209-cf975fd94846",
+        "timestamp": 1794669362390
+      },
+      {
+        "executionId": "64f146cf-be6c-4936-83c2-ac758665b03c",
+        "chatSessionId": "sess_e3aff373-312e-452a-8209-cf975fd94846",
+        "timestamp": 1794669524889
+      }
+    ],
+    "11.6 Write property tests for Opener validation and totality in `tests/open-totality.property.test.ts`": [
+      {
+        "executionId": "64f146cf-be6c-4936-83c2-ac758665b03c",
+        "chatSessionId": "sess_e3aff373-312e-452a-8209-cf975fd94846",
+        "timestamp": 1794669363474
+      },
+      {
+        "executionId": "64f146cf-be6c-4936-83c2-ac758665b03c",
+        "chatSessionId": "sess_e3aff373-312e-452a-8209-cf975fd94846",
+        "timestamp": 1794669525439
+      }
+    ],
+    "11.7 Write property tests for input safety and sealed multipart in `tests/open-inputs.property.test.ts`": [
+      {
+        "executionId": "64f146cf-be6c-4936-83c2-ac758665b03c",
+        "chatSessionId": "sess_e3aff373-312e-452a-8209-cf975fd94846",
+        "timestamp": 1794669526217
+      },
+      {
+        "executionId": "64f146cf-be6c-4936-83c2-ac758665b03c",
+        "chatSessionId": "sess_e3aff373-312e-452a-8209-cf975fd94846",
+        "timestamp": 1794669586537
+      }
+    ],
+    "11.8 Write unit tests in `tests/open.test.ts`": [
+      {
+        "executionId": "64f146cf-be6c-4936-83c2-ac758665b03c",
+        "chatSessionId": "sess_e3aff373-312e-452a-8209-cf975fd94846",
+        "timestamp": 1794669526774
+      },
+      {
+        "executionId": "64f146cf-be6c-4936-83c2-ac758665b03c",
+        "chatSessionId": "sess_e3aff373-312e-452a-8209-cf975fd94846",
+        "timestamp": 1794669586931
+      }
+    ],
+    "11. Opener (`open`)": [
+      {
+        "executionId": "64f146cf-be6c-4936-83c2-ac758665b03c",
+        "chatSessionId": "sess_e3aff373-312e-452a-8209-cf975fd94846",
+        "timestamp": 1794669587028
+      }
+    ],
+    "12.1 Implement `src/sender-state.ts`": [
+      {
+        "executionId": "4eb58bf9-dc15-4e4e-b731-ef6b5d487f77",
+        "chatSessionId": "sess_3ef8e8b7-5d44-4218-a17f-8244da33b75c",
+        "timestamp": 1794670841706
+      },
+      {
+        "executionId": "4eb58bf9-dc15-4e4e-b731-ef6b5d487f77",
+        "chatSessionId": "sess_3ef8e8b7-5d44-4218-a17f-8244da33b75c",
+        "timestamp": 1794670888275
+      }
+    ],
+    "12.2 Write property tests for rotation in `tests/sender-state.property.test.ts`": [
+      {
+        "executionId": "4eb58bf9-dc15-4e4e-b731-ef6b5d487f77",
+        "chatSessionId": "sess_3ef8e8b7-5d44-4218-a17f-8244da33b75c",
+        "timestamp": 1794670891377
+      },
+      {
+        "executionId": "4eb58bf9-dc15-4e4e-b731-ef6b5d487f77",
+        "chatSessionId": "sess_3ef8e8b7-5d44-4218-a17f-8244da33b75c",
+        "timestamp": 1794670964244
+      }
+    ],
+    "12.3 Write property tests for totality and input safety in `tests/sender-state-totality.property.test.ts`": [
+      {
+        "executionId": "4eb58bf9-dc15-4e4e-b731-ef6b5d487f77",
+        "chatSessionId": "sess_3ef8e8b7-5d44-4218-a17f-8244da33b75c",
+        "timestamp": 1794670892222
+      },
+      {
+        "executionId": "4eb58bf9-dc15-4e4e-b731-ef6b5d487f77",
+        "chatSessionId": "sess_3ef8e8b7-5d44-4218-a17f-8244da33b75c",
+        "timestamp": 1794670965077
+      }
+    ],
+    "12.4 Write unit tests in `tests/sender-state.test.ts`": [
+      {
+        "executionId": "4eb58bf9-dc15-4e4e-b731-ef6b5d487f77",
+        "chatSessionId": "sess_3ef8e8b7-5d44-4218-a17f-8244da33b75c",
+        "timestamp": 1794670893003
+      },
+      {
+        "executionId": "4eb58bf9-dc15-4e4e-b731-ef6b5d487f77",
+        "chatSessionId": "sess_3ef8e8b7-5d44-4218-a17f-8244da33b75c",
+        "timestamp": 1794670965759
+      }
+    ],
+    "12.5 Write the deterministic no-repeat test in `tests/sender-state-norepeat.test.ts`": [
+      {
+        "executionId": "4eb58bf9-dc15-4e4e-b731-ef6b5d487f77",
+        "chatSessionId": "sess_3ef8e8b7-5d44-4218-a17f-8244da33b75c",
+        "timestamp": 1794670893558
+      },
+      {
+        "executionId": "4eb58bf9-dc15-4e4e-b731-ef6b5d487f77",
+        "chatSessionId": "sess_3ef8e8b7-5d44-4218-a17f-8244da33b75c",
+        "timestamp": 1794670966341
+      }
+    ],
+    "12. Sender state rotation": [
+      {
+        "executionId": "4eb58bf9-dc15-4e4e-b731-ef6b5d487f77",
+        "chatSessionId": "sess_3ef8e8b7-5d44-4218-a17f-8244da33b75c",
+        "timestamp": 1794670966427
+      }
+    ],
+    "13.1 Wire the public API in `src/index.ts`": [
+      {
+        "executionId": "b55f8a03-adb1-4702-a70a-7a2ea81eefb1",
+        "chatSessionId": "sess_abf8dc2e-1efa-4502-bedb-eec61cbb3be2",
+        "timestamp": 1794671045356
+      },
+      {
+        "executionId": "b55f8a03-adb1-4702-a70a-7a2ea81eefb1",
+        "chatSessionId": "sess_abf8dc2e-1efa-4502-bedb-eec61cbb3be2",
+        "timestamp": 1794671103269
+      }
+    ],
+    "13.2 Write the source scan test in `tests/static-scan.test.ts`": [
+      {
+        "executionId": "b55f8a03-adb1-4702-a70a-7a2ea81eefb1",
+        "chatSessionId": "sess_abf8dc2e-1efa-4502-bedb-eec61cbb3be2",
+        "timestamp": 1794671104050
+      },
+      {
+        "executionId": "b55f8a03-adb1-4702-a70a-7a2ea81eefb1",
+        "chatSessionId": "sess_abf8dc2e-1efa-4502-bedb-eec61cbb3be2",
+        "timestamp": 1794671154622
+      }
+    ],
+    "13.3 Write the error-code coverage test in `tests/errors.test.ts`": [
+      {
+        "executionId": "b55f8a03-adb1-4702-a70a-7a2ea81eefb1",
+        "chatSessionId": "sess_abf8dc2e-1efa-4502-bedb-eec61cbb3be2",
+        "timestamp": 1794671104455
+      },
+      {
+        "executionId": "b55f8a03-adb1-4702-a70a-7a2ea81eefb1",
+        "chatSessionId": "sess_abf8dc2e-1efa-4502-bedb-eec61cbb3be2",
+        "timestamp": 1794671154950
+      }
+    ],
+    "13. Public API, error-code coverage and static scans": [
+      {
+        "executionId": "b55f8a03-adb1-4702-a70a-7a2ea81eefb1",
+        "chatSessionId": "sess_abf8dc2e-1efa-4502-bedb-eec61cbb3be2",
+        "timestamp": 1794671155031
+      }
+    ],
+    "14.1 Run `pnpm test` from the repository root and confirm the result": [
+      {
+        "executionId": "c2beac04-01b0-4b4b-8ef8-85a11c6c66a3",
+        "chatSessionId": "sess_4444f902-86b0-4e88-b900-8d19402e3b63",
+        "timestamp": 1794671907440
+      },
+      {
+        "executionId": "c2beac04-01b0-4b4b-8ef8-85a11c6c66a3",
+        "chatSessionId": "sess_4444f902-86b0-4e88-b900-8d19402e3b63",
+        "timestamp": 1794671950433
+      }
+    ],
+    "14. Final checkpoint - Verify the full suite and time budget": [
+      {
+        "executionId": "c2beac04-01b0-4b4b-8ef8-85a11c6c66a3",
+        "chatSessionId": "sess_4444f902-86b0-4e88-b900-8d19402e3b63",
+        "timestamp": 1794671950502
       }
     ]
   }
