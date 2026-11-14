@@ -46,3 +46,5 @@
 - Kiro features used: spec (task execution), property tests.
 - 9:32 PM - Edited `packages/core/tests/open-totality.property.test.ts` after the final checkpoint. Its four property tests still pass when run on their own. This was the only file changed since the last entry.
 - Kiro features used: chat, property tests.
+- 9:36 PM - Added a crypto self-test button to the `apps/spike` page so the sealed mode can be checked on a real phone, which is the manual iOS Safari and Android Chrome check still open from the spec. `apps/spike/src/selftest.ts` seals and opens a message with `@screech/core` (now a workspace dependency of the spike) and also compares one sealed packet against a known answer generated with `node:crypto`. Results are listed as PASS or FAIL on the page. It has not been run on a phone yet.
+- Kiro features used: chat.

@@ -1,5 +1,6 @@
 import factory from 'ggwave';
 import type { GGWaveModule } from 'ggwave';
+import { runSelfTest } from './selftest';
 
 const CHUNK = 4096;
 
@@ -115,5 +116,20 @@ listenBtn.addEventListener('click', () => {
     listenBtn.disabled = false;
     listening = false;
     report(e);
+  });
+});
+
+const selfTestBtn = $<HTMLButtonElement>('selftest');
+const selfTestOut = $<HTMLUListElement>('selftest-results');
+selfTestBtn.addEventListener('click', () => {
+  selfTestBtn.disabled = true;
+  selfTestOut.textContent = '';
+  void runSelfTest().then((results) => {
+    for (const r of results) {
+      const li = document.createElement('li');
+      li.textContent = `${r.pass ? 'PASS' : 'FAIL'} ${r.name}: ${r.detail}`;
+      selfTestOut.append(li);
+    }
+    selfTestBtn.disabled = false;
   });
 });
