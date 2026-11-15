@@ -610,6 +610,196 @@
         "chatSessionId": "sess_dc30c8bb-241d-4e71-871f-f61d7572cf39",
         "timestamp": 1794729361534
       }
+    ],
+    "9.1 Implement `src/audio/constants.ts` and `src/audio/env.ts`": [
+      {
+        "executionId": "5776fc6a-a976-4777-8bef-d58cc3bf3fd3",
+        "chatSessionId": "sess_10d480c1-7e90-4fa0-aafa-ffc3a2f9c869",
+        "timestamp": 1794729669517
+      },
+      {
+        "executionId": "5776fc6a-a976-4777-8bef-d58cc3bf3fd3",
+        "chatSessionId": "sess_10d480c1-7e90-4fa0-aafa-ffc3a2f9c869",
+        "timestamp": 1794729713167
+      }
+    ],
+    "9.2 Write property test for transmit volume validation": [
+      {
+        "executionId": "5776fc6a-a976-4777-8bef-d58cc3bf3fd3",
+        "chatSessionId": "sess_10d480c1-7e90-4fa0-aafa-ffc3a2f9c869",
+        "timestamp": 1794729724362
+      },
+      {
+        "executionId": "5776fc6a-a976-4777-8bef-d58cc3bf3fd3",
+        "chatSessionId": "sess_10d480c1-7e90-4fa0-aafa-ffc3a2f9c869",
+        "timestamp": 1794729732786
+      },
+      {
+        "executionId": "5776fc6a-a976-4777-8bef-d58cc3bf3fd3",
+        "chatSessionId": "sess_10d480c1-7e90-4fa0-aafa-ffc3a2f9c869",
+        "timestamp": 1794729778856
+      }
+    ],
+    "9.3 Implement `src/audio/session.ts`": [
+      {
+        "executionId": "5776fc6a-a976-4777-8bef-d58cc3bf3fd3",
+        "chatSessionId": "sess_10d480c1-7e90-4fa0-aafa-ffc3a2f9c869",
+        "timestamp": 1794729732842
+      },
+      {
+        "executionId": "5776fc6a-a976-4777-8bef-d58cc3bf3fd3",
+        "chatSessionId": "sess_10d480c1-7e90-4fa0-aafa-ffc3a2f9c869",
+        "timestamp": 1794729779720
+      }
+    ],
+    "9.4 Implement `src/audio/mic.ts`": [
+      {
+        "executionId": "5776fc6a-a976-4777-8bef-d58cc3bf3fd3",
+        "chatSessionId": "sess_10d480c1-7e90-4fa0-aafa-ffc3a2f9c869",
+        "timestamp": 1794729733252
+      },
+      {
+        "executionId": "5776fc6a-a976-4777-8bef-d58cc3bf3fd3",
+        "chatSessionId": "sess_10d480c1-7e90-4fa0-aafa-ffc3a2f9c869",
+        "timestamp": 1794729780416
+      }
+    ],
+    "9.5 Implement `src/audio/engine.ts`": [
+      {
+        "executionId": "5776fc6a-a976-4777-8bef-d58cc3bf3fd3",
+        "chatSessionId": "sess_10d480c1-7e90-4fa0-aafa-ffc3a2f9c869",
+        "timestamp": 1794729781480
+      },
+      {
+        "executionId": "5776fc6a-a976-4777-8bef-d58cc3bf3fd3",
+        "chatSessionId": "sess_10d480c1-7e90-4fa0-aafa-ffc3a2f9c869",
+        "timestamp": 1794729847828
+      }
+    ],
+    "9.6 Implement `src/audio/transmit.ts`": [
+      {
+        "executionId": "5776fc6a-a976-4777-8bef-d58cc3bf3fd3",
+        "chatSessionId": "sess_10d480c1-7e90-4fa0-aafa-ffc3a2f9c869",
+        "timestamp": 1794729782193
+      },
+      {
+        "executionId": "9c1686d7-19ee-44f0-b312-038653753323",
+        "chatSessionId": "sess_10d480c1-7e90-4fa0-aafa-ffc3a2f9c869",
+        "timestamp": 1794749647171
+      },
+      {
+        "executionId": "9c1686d7-19ee-44f0-b312-038653753323",
+        "chatSessionId": "sess_10d480c1-7e90-4fa0-aafa-ffc3a2f9c869",
+        "timestamp": 1794749651794
+      },
+      {
+        "executionId": "9c1686d7-19ee-44f0-b312-038653753323",
+        "chatSessionId": "sess_10d480c1-7e90-4fa0-aafa-ffc3a2f9c869",
+        "timestamp": 1794749684569
+      }
+    ],
+    "9.7 Implement `src/audio/capture.ts` and `src/audio/capture-worklet-source.ts`": [
+      {
+        "executionId": "5776fc6a-a976-4777-8bef-d58cc3bf3fd3",
+        "chatSessionId": "sess_10d480c1-7e90-4fa0-aafa-ffc3a2f9c869",
+        "timestamp": 1794729783045
+      },
+      {
+        "executionId": "5776fc6a-a976-4777-8bef-d58cc3bf3fd3",
+        "chatSessionId": "sess_10d480c1-7e90-4fa0-aafa-ffc3a2f9c869",
+        "timestamp": 1794729848581
+      },
+      {
+        "executionId": "0e2fb50f-fc84-4f58-949d-db0d04057f38",
+        "chatSessionId": "sess_6d664018-d460-4ccb-baf3-5428112a5fb0",
+        "timestamp": 1794750203573
+      },
+      {
+        "executionId": "0e2fb50f-fc84-4f58-949d-db0d04057f38",
+        "chatSessionId": "sess_6d664018-d460-4ccb-baf3-5428112a5fb0",
+        "timestamp": 1794750232719
+      }
+    ],
+    "9.8 Write unit tests for unlock and microphone": [
+      {
+        "executionId": "9c1686d7-19ee-44f0-b312-038653753323",
+        "chatSessionId": "sess_10d480c1-7e90-4fa0-aafa-ffc3a2f9c869",
+        "timestamp": 1794749685366
+      },
+      {
+        "executionId": "9c1686d7-19ee-44f0-b312-038653753323",
+        "chatSessionId": "sess_10d480c1-7e90-4fa0-aafa-ffc3a2f9c869",
+        "timestamp": 1794749792353
+      }
+    ],
+    "9.9 Write unit tests for engine, playback and capture with fakes": [
+      {
+        "executionId": "9c1686d7-19ee-44f0-b312-038653753323",
+        "chatSessionId": "sess_10d480c1-7e90-4fa0-aafa-ffc3a2f9c869",
+        "timestamp": 1794749686569
+      },
+      {
+        "executionId": "9c1686d7-19ee-44f0-b312-038653753323",
+        "chatSessionId": "sess_10d480c1-7e90-4fa0-aafa-ffc3a2f9c869",
+        "timestamp": 1794749793144
+      }
+    ],
+    "9.10 Write the real ggwave round-trip integration test": [
+      {
+        "executionId": "9c1686d7-19ee-44f0-b312-038653753323",
+        "chatSessionId": "sess_10d480c1-7e90-4fa0-aafa-ffc3a2f9c869",
+        "timestamp": 1794749687408
+      },
+      {
+        "executionId": "9c1686d7-19ee-44f0-b312-038653753323",
+        "chatSessionId": "sess_10d480c1-7e90-4fa0-aafa-ffc3a2f9c869",
+        "timestamp": 1794749794370
+      }
+    ],
+    "9.11 Write unit tests for `ensureRunning` and `isRunning`": [
+      {
+        "executionId": "9c1686d7-19ee-44f0-b312-038653753323",
+        "chatSessionId": "sess_10d480c1-7e90-4fa0-aafa-ffc3a2f9c869",
+        "timestamp": 1794749688274
+      },
+      {
+        "executionId": "9c1686d7-19ee-44f0-b312-038653753323",
+        "chatSessionId": "sess_10d480c1-7e90-4fa0-aafa-ffc3a2f9c869",
+        "timestamp": 1794749795026
+      }
+    ],
+    "9. Audio engine": [
+      {
+        "executionId": "9c1686d7-19ee-44f0-b312-038653753323",
+        "chatSessionId": "sess_10d480c1-7e90-4fa0-aafa-ffc3a2f9c869",
+        "timestamp": 1794749811028
+      }
+    ],
+    "10. Checkpoint - Ensure all tests pass": [
+      {
+        "executionId": "4c363fcf-41fd-42b5-838a-b2aef6b0da32",
+        "chatSessionId": "sess_f69c83a4-dbe5-45ae-90ea-de2e17725067",
+        "timestamp": 1794750410690
+      },
+      {
+        "executionId": "4c363fcf-41fd-42b5-838a-b2aef6b0da32",
+        "chatSessionId": "sess_f69c83a4-dbe5-45ae-90ea-de2e17725067",
+        "timestamp": 1794750455351
+      }
+    ],
+    "11. UI shell and theme": [
+      {
+        "executionId": "f0ec33bb-fb50-40be-9864-baa6f3d2bbae",
+        "chatSessionId": "sess_98a182e1-8787-4c43-aacb-33795a0f45b9",
+        "timestamp": 1794750765321
+      }
+    ],
+    "11.1 Create `src/styles/tokens.css`, `motion.css` and `screens.css`": [
+      {
+        "executionId": "f0ec33bb-fb50-40be-9864-baa6f3d2bbae",
+        "chatSessionId": "sess_98a182e1-8787-4c43-aacb-33795a0f45b9",
+        "timestamp": 1794750768320
+      }
     ]
   }
 }

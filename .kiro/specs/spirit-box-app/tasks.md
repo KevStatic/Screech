@@ -208,58 +208,58 @@ iOS user-activation rule (see design "AudioContext unlock sequence"): the hold t
 - [x] 8. Checkpoint - Ensure all tests pass
   - Ensure all tests pass, ask the user if questions arise.
 
-- [ ] 9. Audio engine
-  - [ ] 9.1 Implement `src/audio/constants.ts` and `src/audio/env.ts`
+- [x] 9. Audio engine
+  - [x] 9.1 Implement `src/audio/constants.ts` and `src/audio/env.ts`
     - `defineTransmitVolume` (throws `RangeError` with value and range), `TRANSMIT_VOLUME = defineTransmitVolume(50)` as the only definition, `FFT_SIZE = 2048`; `readCapabilities()` reads window and navigator once
     - _Requirements: 9.18, 9.19, 16.7_
 
-  - [ ] 9.2 Write property test for transmit volume validation
+  - [x] 9.2 Write property test for transmit volume validation
     - **Property 14: Transmit volume validation**
     - **Validates: Requirements 9.18, 9.19**
 
-  - [ ] 9.3 Implement `src/audio/session.ts`
+  - [x] 9.3 Implement `src/audio/session.ts`
     - `getOrCreateContext` with `webkitAudioContext` fallback, replacing a closed context; non-async `unlockAudio` that creates and resumes synchronously and reads the state only after awaiting `resume()`
     - Add `ensureRunning()`: returns a resolved promise when no context exists or the state is `running` or `closed`; otherwise calls `resume()` once and swallows rejection; never creates a context and never reads the state after the await
     - Add `isRunning()`: synchronous, returns `ctx?.state === 'running'`, never calls `resume()` or creates a context
     - _Requirements: 4.2, 4.8, 16.1, 16.2, 16.3, 16.6, 16.9_
 
-  - [ ] 9.4 Implement `src/audio/mic.ts`
+  - [x] 9.4 Implement `src/audio/mic.ts`
     - `openMic` with all three audio filters off and plain-words denial and unavailable results; `stopStream`
     - _Requirements: 4.3, 9.7, 9.14, 16.4_
 
-  - [ ] 9.5 Implement `src/audio/engine.ts`
+  - [x] 9.5 Implement `src/audio/engine.ts`
     - `loadEngine(sampleRate)` with dynamic `import('ggwave')`, `sampleRateInp = sampleRateOut = sampleRate`, F32 formats, cached per rate; `encode` passes a `Uint8Array` with Spirit_Wave and `TRANSMIT_VOLUME` and copies the result with `.slice()`; `decode` returns copied bytes or `null`; failures return "The sound engine could not start."
     - _Requirements: 9.1, 9.2, 9.3, 9.4, 9.5, 9.6, 9.11, 9.13, 9.18_
 
-  - [ ] 9.6 Implement `src/audio/transmit.ts`
+  - [x] 9.6 Implement `src/audio/transmit.ts`
     - `playWaveform` builds the `AudioBuffer`, exposes `elapsedSec()` from `ctx.currentTime`, `stop()` within 100 ms, and `finished` resolving `ended`, `stopped` or `failed` (including a context leaving `running`)
     - _Requirements: 10.1, 10.6, 10.7, 10.8, 10.14_
 
-  - [ ] 9.7 Implement `src/audio/capture.ts` and `src/audio/capture-worklet-source.ts`
+  - [x] 9.7 Implement `src/audio/capture.ts` and `src/audio/capture-worklet-source.ts`
     - Mic source to `AnalyserNode` and to a capture node feeding a muted `GainNode`; `AudioWorkletNode` loaded from a Blob URL with a `ScriptProcessorNode(4096)` fallback; blocks pass through `pushSamples` and each 4096-sample chunk goes to `engine.decode`; `onPacketBytes`, `onMicLost` on track `ended`, `lastBlockAt`, and `stop()` that stops tracks and disconnects every node
     - _Requirements: 9.8, 9.9, 9.10, 9.12, 11.1, 11.10, 11.11, 11.14_
 
-  - [ ] 9.8 Write unit tests for unlock and microphone
+  - [x] 9.8 Write unit tests for unlock and microphone
     - Fake `AudioContext` recording call order: already running, suspended then running, `resume()` rejects, resolves but stays suspended (non-running case: outcome `not-running`, `getUserMedia` never called), `interrupted` state, closed context replaced inside `unlockAudio()`, `webkitAudioContext` only; `create` and `resume` are issued before the first await boundary; `getUserMedia` never called on failure; exact constraints object; denial and missing-device messages
     - _Requirements: 4.2, 4.3, 4.8, 9.7, 9.14, 16.1, 16.4, 16.6_
 
-  - [ ] 9.11 Write unit tests for `ensureRunning` and `isRunning`
+  - [x] 9.11 Write unit tests for `ensureRunning` and `isRunning`
     - `tests/audio/ensure-running.test.ts` with a fake `AudioContext`: no context means nothing is created and nothing is called; `suspended` and `interrupted` call `resume()` exactly once; `running` and `closed` call nothing; a rejecting `resume()` is swallowed; `isRunning()` is synchronous, never calls `resume()`, and is false for every state except `running`
     - _Requirements: 16.1, 16.2, 16.9_
 
-  - [ ] 9.9 Write unit tests for engine, playback and capture with fakes
+  - [x] 9.9 Write unit tests for engine, playback and capture with fakes
     - Fake ggwave module checks init rates, F32 formats, `Uint8Array` payload, volume argument and copied results; init failure message; playback `failed` and `stopped` outcomes; capture worklet and script-processor paths, `stop()` cleanup, `onMicLost`
     - _Requirements: 9.2, 9.4, 9.5, 9.9, 9.10, 9.12, 9.13, 10.8_
 
-  - [ ] 9.10 Write the real ggwave round-trip integration test
+  - [x] 9.10 Write the real ggwave round-trip integration test
     - `tests/audio/ggwave-roundtrip.test.ts`: at 44100 and 48000 Hz, encode a text packet, a Wi-Fi packet containing byte `0xC1` and values above `0x7F`, and a 140-byte packet, feed the waveform through `pushSamples` in 4096-sample chunks, and check the decoded bytes are equal
     - _Requirements: 9.2, 9.4, 9.6, 9.8, 16.3_
 
-- [ ] 10. Checkpoint - Ensure all tests pass
+- [x] 10. Checkpoint - Ensure all tests pass
   - Ensure all tests pass, ask the user if questions arise.
 
-- [ ] 11. UI shell and theme
-  - [ ] 11.1 Create `src/styles/tokens.css`, `motion.css` and `screens.css`
+- [-] 11. UI shell and theme
+  - [-] 11.1 Create `src/styles/tokens.css`, `motion.css` and `screens.css`
     - Colour tokens from `docs/design/README.md`, `--hit: 44px` on a shared `.hit` class, font stacks, portrait layout from 320 to 430 px with `min-width: 0` on flex children, zero-duration rules under `[data-reduced-motion="true"]` and the media query, static solid-pattern scanlines and an inset box-shadow frame instead of gradient washes, reds only on error and seal classes
     - _Requirements: 2.1, 2.2, 2.3, 2.4, 2.5, 2.8, 2.10, 3.1_
 
