@@ -1,0 +1,615 @@
+{
+  "pbtResults": {
+    "2.2 Write property test for Wi-Fi QR round trip": {
+      "status": "passed",
+      "lastRunTimestamp": 1794719368675
+    },
+    "2.3 Write property test for Wi-Fi QR escaping and shape": {
+      "status": "passed",
+      "lastRunTimestamp": 1794719369000
+    },
+    "4.3 Write property test for byte budget against Core encode": {
+      "status": "passed",
+      "lastRunTimestamp": 1794727885323
+    },
+    "4.4 Write property test for byte budget error mapping": {
+      "status": "passed",
+      "lastRunTimestamp": 1794728387763
+    },
+    "4.5 Write property test for the content gate": {
+      "status": "passed",
+      "lastRunTimestamp": 1794727958199
+    },
+    "5.3 Write property test for single firing per press": {
+      "status": "passed",
+      "lastRunTimestamp": 1794728536249
+    },
+    "5.2 Write property test for the hold transition table": {
+      "status": "passed",
+      "lastRunTimestamp": 1794728542110
+    },
+    "5.5 Write property test for progress bounds": {
+      "status": "passed",
+      "lastRunTimestamp": 1794728544413
+    },
+    "5.6 Write property test for progress monotonicity": {
+      "status": "passed",
+      "lastRunTimestamp": 1794728546302
+    },
+    "5.8 Write property test for the Ouija spelling schedule": {
+      "status": "passed",
+      "lastRunTimestamp": 1794728554494
+    },
+    "5.10 Write property test for Exorcise storage parsing": {
+      "status": "passed",
+      "lastRunTimestamp": 1794728587212
+    },
+    "6.2 Write property test for sample chunker conservation": {
+      "status": "passed",
+      "lastRunTimestamp": 1794728862869
+    },
+    "6.5 Write property test for band energy normalisation": {
+      "status": "passed",
+      "lastRunTimestamp": 1794728873057
+    },
+    "6.3 Write property test for ggwave byte conversion": {
+      "status": "passed",
+      "lastRunTimestamp": 1794728874114
+    },
+    "7.4 Write property test for screen state mapping": {
+      "status": "passed",
+      "lastRunTimestamp": 1794729119485
+    },
+    "7.6 Write property test for duplicate suppression": {
+      "status": "passed",
+      "lastRunTimestamp": 1794729120578
+    },
+    "7.7 Write property test for safe link schemes": {
+      "status": "passed",
+      "lastRunTimestamp": 1794729127967
+    },
+    "7.5 Write property test for the receive pipeline on random bytes": {
+      "status": "passed",
+      "lastRunTimestamp": 1794729136260
+    },
+    "7.8 Write property test for send and listen exclusion": {
+      "status": "passed",
+      "lastRunTimestamp": 1794729136418
+    },
+    "7.9 Write property test for the missing-feature report": {
+      "status": "passed",
+      "lastRunTimestamp": 1794729173586
+    }
+  },
+  "executionHistory": {
+    "1.1 Configure `apps/web` dependencies, test config and shared test helpers": [
+      {
+        "executionId": "24ce97a4-8c74-4595-ae64-447fbe3e74d5",
+        "chatSessionId": "sess_a345dc10-1e6a-4033-b4ce-59b56a8f6a10",
+        "timestamp": 1794719114182
+      },
+      {
+        "executionId": "24ce97a4-8c74-4595-ae64-447fbe3e74d5",
+        "chatSessionId": "sess_a345dc10-1e6a-4033-b4ce-59b56a8f6a10",
+        "timestamp": 1794719193813
+      }
+    ],
+    "1. Project setup and dependencies": [
+      {
+        "executionId": "24ce97a4-8c74-4595-ae64-447fbe3e74d5",
+        "chatSessionId": "sess_a345dc10-1e6a-4033-b4ce-59b56a8f6a10",
+        "timestamp": 1794719193880
+      }
+    ],
+    "2. Wi-Fi QR string": [
+      {
+        "executionId": "3c7a43cc-6462-4100-a577-afec65d7a005",
+        "chatSessionId": "sess_428dfd7b-71fb-4039-b633-acbbbb4851f8",
+        "timestamp": 1794719318702
+      },
+      {
+        "executionId": "3c7a43cc-6462-4100-a577-afec65d7a005",
+        "chatSessionId": "sess_428dfd7b-71fb-4039-b633-acbbbb4851f8",
+        "timestamp": 1794719376995
+      }
+    ],
+    "2.1 Implement `src/logic/wifi-qr.ts`": [
+      {
+        "executionId": "d6039d65-ba1c-4953-99c9-af58060b65aa",
+        "chatSessionId": "sess_428dfd7b-71fb-4039-b633-acbbbb4851f8",
+        "timestamp": 1794727604183
+      }
+    ],
+    "2.2 Write property test for Wi-Fi QR round trip": [
+      {
+        "executionId": "d6039d65-ba1c-4953-99c9-af58060b65aa",
+        "chatSessionId": "sess_428dfd7b-71fb-4039-b633-acbbbb4851f8",
+        "timestamp": 1794727604317
+      }
+    ],
+    "2.3 Write property test for Wi-Fi QR escaping and shape": [
+      {
+        "executionId": "d6039d65-ba1c-4953-99c9-af58060b65aa",
+        "chatSessionId": "sess_428dfd7b-71fb-4039-b633-acbbbb4851f8",
+        "timestamp": 1794727604817
+      }
+    ],
+    "2.4 Write unit tests for Wi-Fi QR string": [
+      {
+        "executionId": "d6039d65-ba1c-4953-99c9-af58060b65aa",
+        "chatSessionId": "sess_428dfd7b-71fb-4039-b633-acbbbb4851f8",
+        "timestamp": 1794727605309
+      }
+    ],
+    "3. Contact text and vCard": [
+      {
+        "executionId": "035a31fb-3209-4644-8fa8-2e8b3cfa27fd",
+        "chatSessionId": "sess_c81ec784-4b13-4414-9772-93c792b13d29",
+        "timestamp": 1794727652601
+      },
+      {
+        "executionId": "035a31fb-3209-4644-8fa8-2e8b3cfa27fd",
+        "chatSessionId": "sess_c81ec784-4b13-4414-9772-93c792b13d29",
+        "timestamp": 1794727719364
+      }
+    ],
+    "4.1 Implement `src/logic/byte-budget.ts`": [
+      {
+        "executionId": "c0a8fbc7-94fd-4862-8d7a-d6f0917c9e52",
+        "chatSessionId": "sess_3e527433-4729-418e-ac24-4f408e5cc56c",
+        "timestamp": 1794727781597
+      },
+      {
+        "executionId": "c0a8fbc7-94fd-4862-8d7a-d6f0917c9e52",
+        "chatSessionId": "sess_3e527433-4729-418e-ac24-4f408e5cc56c",
+        "timestamp": 1794727818182
+      },
+      {
+        "executionId": "00e5ff78-81c2-499f-8b80-6bd714c90615",
+        "chatSessionId": "sess_3e527433-4729-418e-ac24-4f408e5cc56c",
+        "timestamp": 1794728343212
+      },
+      {
+        "executionId": "00e5ff78-81c2-499f-8b80-6bd714c90615",
+        "chatSessionId": "sess_3e527433-4729-418e-ac24-4f408e5cc56c",
+        "timestamp": 1794728396932
+      }
+    ],
+    "4.2 Implement `src/logic/payload-draft.ts`": [
+      {
+        "executionId": "c0a8fbc7-94fd-4862-8d7a-d6f0917c9e52",
+        "chatSessionId": "sess_3e527433-4729-418e-ac24-4f408e5cc56c",
+        "timestamp": 1794727818816
+      },
+      {
+        "executionId": "c0a8fbc7-94fd-4862-8d7a-d6f0917c9e52",
+        "chatSessionId": "sess_3e527433-4729-418e-ac24-4f408e5cc56c",
+        "timestamp": 1794727856818
+      }
+    ],
+    "4.3 Write property test for byte budget against Core encode": [
+      {
+        "executionId": "c0a8fbc7-94fd-4862-8d7a-d6f0917c9e52",
+        "chatSessionId": "sess_3e527433-4729-418e-ac24-4f408e5cc56c",
+        "timestamp": 1794727857460
+      },
+      {
+        "executionId": "c0a8fbc7-94fd-4862-8d7a-d6f0917c9e52",
+        "chatSessionId": "sess_3e527433-4729-418e-ac24-4f408e5cc56c",
+        "timestamp": 1794727893816
+      }
+    ],
+    "4.4 Write property test for byte budget error mapping": [
+      {
+        "executionId": "c0a8fbc7-94fd-4862-8d7a-d6f0917c9e52",
+        "chatSessionId": "sess_3e527433-4729-418e-ac24-4f408e5cc56c",
+        "timestamp": 1794727896689
+      },
+      {
+        "executionId": "c0a8fbc7-94fd-4862-8d7a-d6f0917c9e52",
+        "chatSessionId": "sess_3e527433-4729-418e-ac24-4f408e5cc56c",
+        "timestamp": 1794727928265
+      }
+    ],
+    "4.5 Write property test for the content gate": [
+      {
+        "executionId": "c0a8fbc7-94fd-4862-8d7a-d6f0917c9e52",
+        "chatSessionId": "sess_3e527433-4729-418e-ac24-4f408e5cc56c",
+        "timestamp": 1794727931313
+      },
+      {
+        "executionId": "c0a8fbc7-94fd-4862-8d7a-d6f0917c9e52",
+        "chatSessionId": "sess_3e527433-4729-418e-ac24-4f408e5cc56c",
+        "timestamp": 1794727966400
+      }
+    ],
+    "4.6 Write unit tests for byte budget and payload draft": [
+      {
+        "executionId": "c0a8fbc7-94fd-4862-8d7a-d6f0917c9e52",
+        "chatSessionId": "sess_3e527433-4729-418e-ac24-4f408e5cc56c",
+        "timestamp": 1794727967044
+      },
+      {
+        "executionId": "c0a8fbc7-94fd-4862-8d7a-d6f0917c9e52",
+        "chatSessionId": "sess_3e527433-4729-418e-ac24-4f408e5cc56c",
+        "timestamp": 1794728025719
+      }
+    ],
+    "4. Byte budget and payload draft": [
+      {
+        "executionId": "c0a8fbc7-94fd-4862-8d7a-d6f0917c9e52",
+        "chatSessionId": "sess_3e527433-4729-418e-ac24-4f408e5cc56c",
+        "timestamp": 1794728025802
+      }
+    ],
+    "5.1 Implement `src/logic/hold-machine.ts`": [
+      {
+        "executionId": "ecc7b6c4-6d72-474d-a8a1-e169ddbada0f",
+        "chatSessionId": "sess_3ea9dbb5-ce95-4002-a570-082b35b7c254",
+        "timestamp": 1794728475229
+      },
+      {
+        "executionId": "ecc7b6c4-6d72-474d-a8a1-e169ddbada0f",
+        "chatSessionId": "sess_3ea9dbb5-ce95-4002-a570-082b35b7c254",
+        "timestamp": 1794728504833
+      }
+    ],
+    "5.4 Implement `src/logic/progress.ts`": [
+      {
+        "executionId": "ecc7b6c4-6d72-474d-a8a1-e169ddbada0f",
+        "chatSessionId": "sess_3ea9dbb5-ce95-4002-a570-082b35b7c254",
+        "timestamp": 1794728475303
+      },
+      {
+        "executionId": "ecc7b6c4-6d72-474d-a8a1-e169ddbada0f",
+        "chatSessionId": "sess_3ea9dbb5-ce95-4002-a570-082b35b7c254",
+        "timestamp": 1794728505401
+      }
+    ],
+    "5.7 Implement `src/logic/ouija.ts`": [
+      {
+        "executionId": "ecc7b6c4-6d72-474d-a8a1-e169ddbada0f",
+        "chatSessionId": "sess_3ea9dbb5-ce95-4002-a570-082b35b7c254",
+        "timestamp": 1794728475870
+      },
+      {
+        "executionId": "ecc7b6c4-6d72-474d-a8a1-e169ddbada0f",
+        "chatSessionId": "sess_3ea9dbb5-ce95-4002-a570-082b35b7c254",
+        "timestamp": 1794728506197
+      }
+    ],
+    "5.9 Implement `src/logic/motion.ts`": [
+      {
+        "executionId": "ecc7b6c4-6d72-474d-a8a1-e169ddbada0f",
+        "chatSessionId": "sess_3ea9dbb5-ce95-4002-a570-082b35b7c254",
+        "timestamp": 1794728476278
+      },
+      {
+        "executionId": "ecc7b6c4-6d72-474d-a8a1-e169ddbada0f",
+        "chatSessionId": "sess_3ea9dbb5-ce95-4002-a570-082b35b7c254",
+        "timestamp": 1794728506719
+      }
+    ],
+    "5.2 Write property test for the hold transition table": [
+      {
+        "executionId": "ecc7b6c4-6d72-474d-a8a1-e169ddbada0f",
+        "chatSessionId": "sess_3ea9dbb5-ce95-4002-a570-082b35b7c254",
+        "timestamp": 1794728511716
+      },
+      {
+        "executionId": "ecc7b6c4-6d72-474d-a8a1-e169ddbada0f",
+        "chatSessionId": "sess_3ea9dbb5-ce95-4002-a570-082b35b7c254",
+        "timestamp": 1794728564759
+      }
+    ],
+    "5.3 Write property test for single firing per press": [
+      {
+        "executionId": "ecc7b6c4-6d72-474d-a8a1-e169ddbada0f",
+        "chatSessionId": "sess_3ea9dbb5-ce95-4002-a570-082b35b7c254",
+        "timestamp": 1794728511766
+      },
+      {
+        "executionId": "ecc7b6c4-6d72-474d-a8a1-e169ddbada0f",
+        "chatSessionId": "sess_3ea9dbb5-ce95-4002-a570-082b35b7c254",
+        "timestamp": 1794728565692
+      }
+    ],
+    "5.5 Write property test for progress bounds": [
+      {
+        "executionId": "ecc7b6c4-6d72-474d-a8a1-e169ddbada0f",
+        "chatSessionId": "sess_3ea9dbb5-ce95-4002-a570-082b35b7c254",
+        "timestamp": 1794728512398
+      },
+      {
+        "executionId": "ecc7b6c4-6d72-474d-a8a1-e169ddbada0f",
+        "chatSessionId": "sess_3ea9dbb5-ce95-4002-a570-082b35b7c254",
+        "timestamp": 1794728563853
+      }
+    ],
+    "5.6 Write property test for progress monotonicity": [
+      {
+        "executionId": "ecc7b6c4-6d72-474d-a8a1-e169ddbada0f",
+        "chatSessionId": "sess_3ea9dbb5-ce95-4002-a570-082b35b7c254",
+        "timestamp": 1794728512893
+      },
+      {
+        "executionId": "ecc7b6c4-6d72-474d-a8a1-e169ddbada0f",
+        "chatSessionId": "sess_3ea9dbb5-ce95-4002-a570-082b35b7c254",
+        "timestamp": 1794728566123
+      }
+    ],
+    "5.8 Write property test for the Ouija spelling schedule": [
+      {
+        "executionId": "ecc7b6c4-6d72-474d-a8a1-e169ddbada0f",
+        "chatSessionId": "sess_3ea9dbb5-ce95-4002-a570-082b35b7c254",
+        "timestamp": 1794728513543
+      },
+      {
+        "executionId": "ecc7b6c4-6d72-474d-a8a1-e169ddbada0f",
+        "chatSessionId": "sess_3ea9dbb5-ce95-4002-a570-082b35b7c254",
+        "timestamp": 1794728563782
+      }
+    ],
+    "5.10 Write property test for Exorcise storage parsing": [
+      {
+        "executionId": "ecc7b6c4-6d72-474d-a8a1-e169ddbada0f",
+        "chatSessionId": "sess_3ea9dbb5-ce95-4002-a570-082b35b7c254",
+        "timestamp": 1794728566806
+      },
+      {
+        "executionId": "ecc7b6c4-6d72-474d-a8a1-e169ddbada0f",
+        "chatSessionId": "sess_3ea9dbb5-ce95-4002-a570-082b35b7c254",
+        "timestamp": 1794728634559
+      }
+    ],
+    "5.11 Write unit tests for hold machine, progress, Ouija and motion": [
+      {
+        "executionId": "ecc7b6c4-6d72-474d-a8a1-e169ddbada0f",
+        "chatSessionId": "sess_3ea9dbb5-ce95-4002-a570-082b35b7c254",
+        "timestamp": 1794728567520
+      },
+      {
+        "executionId": "ecc7b6c4-6d72-474d-a8a1-e169ddbada0f",
+        "chatSessionId": "sess_3ea9dbb5-ce95-4002-a570-082b35b7c254",
+        "timestamp": 1794728632885
+      }
+    ],
+    "5. Hold machine, progress, Ouija schedule and motion preference": [
+      {
+        "executionId": "ecc7b6c4-6d72-474d-a8a1-e169ddbada0f",
+        "chatSessionId": "sess_3ea9dbb5-ce95-4002-a570-082b35b7c254",
+        "timestamp": 1794728634627
+      }
+    ],
+    "6.1 Implement `src/logic/sample-chunker.ts` and `src/logic/bytes.ts`": [
+      {
+        "executionId": "c4c76147-e75f-40a6-b216-8b4486f8be18",
+        "chatSessionId": "sess_49b3712e-cbc2-4ec4-b6a5-9e35fb07110d",
+        "timestamp": 1794728792286
+      },
+      {
+        "executionId": "c4c76147-e75f-40a6-b216-8b4486f8be18",
+        "chatSessionId": "sess_49b3712e-cbc2-4ec4-b6a5-9e35fb07110d",
+        "timestamp": 1794728820832
+      }
+    ],
+    "6.4 Implement `src/logic/band-energy.ts`": [
+      {
+        "executionId": "c4c76147-e75f-40a6-b216-8b4486f8be18",
+        "chatSessionId": "sess_49b3712e-cbc2-4ec4-b6a5-9e35fb07110d",
+        "timestamp": 1794728792796
+      },
+      {
+        "executionId": "c4c76147-e75f-40a6-b216-8b4486f8be18",
+        "chatSessionId": "sess_49b3712e-cbc2-4ec4-b6a5-9e35fb07110d",
+        "timestamp": 1794728820031
+      }
+    ],
+    "6.2 Write property test for sample chunker conservation": [
+      {
+        "executionId": "c4c76147-e75f-40a6-b216-8b4486f8be18",
+        "chatSessionId": "sess_49b3712e-cbc2-4ec4-b6a5-9e35fb07110d",
+        "timestamp": 1794728833081
+      },
+      {
+        "executionId": "c4c76147-e75f-40a6-b216-8b4486f8be18",
+        "chatSessionId": "sess_49b3712e-cbc2-4ec4-b6a5-9e35fb07110d",
+        "timestamp": 1794728900835
+      }
+    ],
+    "6.3 Write property test for ggwave byte conversion": [
+      {
+        "executionId": "c4c76147-e75f-40a6-b216-8b4486f8be18",
+        "chatSessionId": "sess_49b3712e-cbc2-4ec4-b6a5-9e35fb07110d",
+        "timestamp": 1794728833377
+      },
+      {
+        "executionId": "c4c76147-e75f-40a6-b216-8b4486f8be18",
+        "chatSessionId": "sess_49b3712e-cbc2-4ec4-b6a5-9e35fb07110d",
+        "timestamp": 1794728901589
+      }
+    ],
+    "6.5 Write property test for band energy normalisation": [
+      {
+        "executionId": "c4c76147-e75f-40a6-b216-8b4486f8be18",
+        "chatSessionId": "sess_49b3712e-cbc2-4ec4-b6a5-9e35fb07110d",
+        "timestamp": 1794728834183
+      },
+      {
+        "executionId": "c4c76147-e75f-40a6-b216-8b4486f8be18",
+        "chatSessionId": "sess_49b3712e-cbc2-4ec4-b6a5-9e35fb07110d",
+        "timestamp": 1794728902366
+      }
+    ],
+    "6.6 Write property test for band energy ignoring out-of-band bins": [
+      {
+        "executionId": "c4c76147-e75f-40a6-b216-8b4486f8be18",
+        "chatSessionId": "sess_49b3712e-cbc2-4ec4-b6a5-9e35fb07110d",
+        "timestamp": 1794728834855
+      },
+      {
+        "executionId": "c4c76147-e75f-40a6-b216-8b4486f8be18",
+        "chatSessionId": "sess_49b3712e-cbc2-4ec4-b6a5-9e35fb07110d",
+        "timestamp": 1794728903160
+      }
+    ],
+    "6.7 Write unit tests for chunker, byte conversion and band energy": [
+      {
+        "executionId": "c4c76147-e75f-40a6-b216-8b4486f8be18",
+        "chatSessionId": "sess_49b3712e-cbc2-4ec4-b6a5-9e35fb07110d",
+        "timestamp": 1794728839411
+      },
+      {
+        "executionId": "c4c76147-e75f-40a6-b216-8b4486f8be18",
+        "chatSessionId": "sess_49b3712e-cbc2-4ec4-b6a5-9e35fb07110d",
+        "timestamp": 1794728903850
+      }
+    ],
+    "6. Audio math helpers (pure)": [
+      {
+        "executionId": "c4c76147-e75f-40a6-b216-8b4486f8be18",
+        "chatSessionId": "sess_49b3712e-cbc2-4ec4-b6a5-9e35fb07110d",
+        "timestamp": 1794728903907
+      }
+    ],
+    "7.1 Implement `src/logic/screen-state.ts` and `src/logic/dedupe.ts`": [
+      {
+        "executionId": "5e896f72-6a26-47f4-80a9-b1e8973507db",
+        "chatSessionId": "sess_7317d581-1f7b-4c77-b2ea-c522e8576d16",
+        "timestamp": 1794728976618
+      },
+      {
+        "executionId": "5e896f72-6a26-47f4-80a9-b1e8973507db",
+        "chatSessionId": "sess_7317d581-1f7b-4c77-b2ea-c522e8576d16",
+        "timestamp": 1794729010805
+      }
+    ],
+    "7.2 Implement `src/logic/url-safety.ts`, `src/logic/capabilities.ts` and `src/logic/contrast.ts`": [
+      {
+        "executionId": "5e896f72-6a26-47f4-80a9-b1e8973507db",
+        "chatSessionId": "sess_7317d581-1f7b-4c77-b2ea-c522e8576d16",
+        "timestamp": 1794728976685
+      },
+      {
+        "executionId": "5e896f72-6a26-47f4-80a9-b1e8973507db",
+        "chatSessionId": "sess_7317d581-1f7b-4c77-b2ea-c522e8576d16",
+        "timestamp": 1794729011364
+      }
+    ],
+    "7.3 Implement `src/logic/flow.ts`": [
+      {
+        "executionId": "5e896f72-6a26-47f4-80a9-b1e8973507db",
+        "chatSessionId": "sess_7317d581-1f7b-4c77-b2ea-c522e8576d16",
+        "timestamp": 1794729023377
+      },
+      {
+        "executionId": "5e896f72-6a26-47f4-80a9-b1e8973507db",
+        "chatSessionId": "sess_7317d581-1f7b-4c77-b2ea-c522e8576d16",
+        "timestamp": 1794729088400
+      }
+    ],
+    "7.4 Write property test for screen state mapping": [
+      {
+        "executionId": "5e896f72-6a26-47f4-80a9-b1e8973507db",
+        "chatSessionId": "sess_7317d581-1f7b-4c77-b2ea-c522e8576d16",
+        "timestamp": 1794729092630
+      },
+      {
+        "executionId": "5e896f72-6a26-47f4-80a9-b1e8973507db",
+        "chatSessionId": "sess_7317d581-1f7b-4c77-b2ea-c522e8576d16",
+        "timestamp": 1794729145533
+      }
+    ],
+    "7.5 Write property test for the receive pipeline on random bytes": [
+      {
+        "executionId": "5e896f72-6a26-47f4-80a9-b1e8973507db",
+        "chatSessionId": "sess_7317d581-1f7b-4c77-b2ea-c522e8576d16",
+        "timestamp": 1794729092698
+      },
+      {
+        "executionId": "5e896f72-6a26-47f4-80a9-b1e8973507db",
+        "chatSessionId": "sess_7317d581-1f7b-4c77-b2ea-c522e8576d16",
+        "timestamp": 1794729146317
+      }
+    ],
+    "7.6 Write property test for duplicate suppression": [
+      {
+        "executionId": "5e896f72-6a26-47f4-80a9-b1e8973507db",
+        "chatSessionId": "sess_7317d581-1f7b-4c77-b2ea-c522e8576d16",
+        "timestamp": 1794729093644
+      },
+      {
+        "executionId": "5e896f72-6a26-47f4-80a9-b1e8973507db",
+        "chatSessionId": "sess_7317d581-1f7b-4c77-b2ea-c522e8576d16",
+        "timestamp": 1794729147145
+      }
+    ],
+    "7.7 Write property test for safe link schemes": [
+      {
+        "executionId": "5e896f72-6a26-47f4-80a9-b1e8973507db",
+        "chatSessionId": "sess_7317d581-1f7b-4c77-b2ea-c522e8576d16",
+        "timestamp": 1794729094233
+      },
+      {
+        "executionId": "5e896f72-6a26-47f4-80a9-b1e8973507db",
+        "chatSessionId": "sess_7317d581-1f7b-4c77-b2ea-c522e8576d16",
+        "timestamp": 1794729147716
+      }
+    ],
+    "7.8 Write property test for send and listen exclusion": [
+      {
+        "executionId": "5e896f72-6a26-47f4-80a9-b1e8973507db",
+        "chatSessionId": "sess_7317d581-1f7b-4c77-b2ea-c522e8576d16",
+        "timestamp": 1794729094713
+      },
+      {
+        "executionId": "5e896f72-6a26-47f4-80a9-b1e8973507db",
+        "chatSessionId": "sess_7317d581-1f7b-4c77-b2ea-c522e8576d16",
+        "timestamp": 1794729148499
+      }
+    ],
+    "7.9 Write property test for the missing-feature report": [
+      {
+        "executionId": "5e896f72-6a26-47f4-80a9-b1e8973507db",
+        "chatSessionId": "sess_7317d581-1f7b-4c77-b2ea-c522e8576d16",
+        "timestamp": 1794729149267
+      },
+      {
+        "executionId": "5e896f72-6a26-47f4-80a9-b1e8973507db",
+        "chatSessionId": "sess_7317d581-1f7b-4c77-b2ea-c522e8576d16",
+        "timestamp": 1794729216814
+      }
+    ],
+    "7.10 Write unit tests for screen state, dedupe, flow and capabilities": [
+      {
+        "executionId": "5e896f72-6a26-47f4-80a9-b1e8973507db",
+        "chatSessionId": "sess_7317d581-1f7b-4c77-b2ea-c522e8576d16",
+        "timestamp": 1794729149962
+      },
+      {
+        "executionId": "5e896f72-6a26-47f4-80a9-b1e8973507db",
+        "chatSessionId": "sess_7317d581-1f7b-4c77-b2ea-c522e8576d16",
+        "timestamp": 1794729216051
+      }
+    ],
+    "7. Receive mapping, flow and capabilities": [
+      {
+        "executionId": "5e896f72-6a26-47f4-80a9-b1e8973507db",
+        "chatSessionId": "sess_7317d581-1f7b-4c77-b2ea-c522e8576d16",
+        "timestamp": 1794729216897
+      }
+    ],
+    "8. Checkpoint - Ensure all tests pass": [
+      {
+        "executionId": "61513842-344b-4421-b2ed-e505ca965571",
+        "chatSessionId": "sess_dc30c8bb-241d-4e71-871f-f61d7572cf39",
+        "timestamp": 1794729324067
+      },
+      {
+        "executionId": "61513842-344b-4421-b2ed-e505ca965571",
+        "chatSessionId": "sess_dc30c8bb-241d-4e71-871f-f61d7572cf39",
+        "timestamp": 1794729361534
+      }
+    ]
+  }
+}

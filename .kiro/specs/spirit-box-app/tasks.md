@@ -8,8 +8,8 @@ iOS user-activation rule (see design "AudioContext unlock sequence"): the hold t
 
 ## Tasks
 
-- [ ] 1. Project setup and dependencies
-  - [ ] 1.1 Configure `apps/web` dependencies, test config and shared test helpers
+- [x] 1. Project setup and dependencies
+  - [x] 1.1 Configure `apps/web` dependencies, test config and shared test helpers
     - In `apps/web/package.json` add `@screech/core` as `workspace:*`, `ggwave` pinned to exactly `0.4.0`, `qrcode`, `@fontsource/vt323`, `@fontsource/special-elite`, `@fontsource/creepster`; add devDependencies `fast-check` 3.22.0, `jsdom`, `@testing-library/react`, `@types/qrcode`
     - Create `apps/web/vitest.config.ts` aliasing `@screech/core` to `../../packages/core/src/index.ts`, `node` environment by default, `jsdom` for `tests/ui/**` through `environmentMatchGlobs`
     - Create `apps/web/src/ggwave.d.ts` (encode accepts `string | Uint8Array`) based on `apps/spike/src/ggwave.d.ts`
@@ -17,195 +17,195 @@ iOS user-activation rule (see design "AudioContext unlock sequence"): the hold t
     - Run `pnpm install` and confirm `pnpm build` still passes
     - _Requirements: 1.1, 1.2, 1.3, 1.5, 1.6, 1.7, 16.8_
 
-- [ ] 2. Wi-Fi QR string
-  - [ ] 2.1 Implement `src/logic/wifi-qr.ts`
+- [x] 2. Wi-Fi QR string
+  - [x] 2.1 Implement `src/logic/wifi-qr.ts`
     - `escapeWifiField` prefixes `\ ; , : "` with one backslash; `buildWifiQrString` maps wpa/wep/open to `WPA`/`WEP`/`nopass` and emits `WIFI:T:<t>;S:<s>;P:<p>;;`, with an empty password for open networks
     - _Requirements: 14.1, 14.2, 14.3, 14.4_
 
-  - [ ] 2.2 Write property test for Wi-Fi QR round trip
+  - [x] 2.2 Write property test for Wi-Fi QR round trip
     - **Property 1: Wi-Fi QR string round trip**
     - **Validates: Requirements 14.7**
 
-  - [ ] 2.3 Write property test for Wi-Fi QR escaping and shape
+  - [x] 2.3 Write property test for Wi-Fi QR escaping and shape
     - **Property 2: Wi-Fi QR escaping and shape**
     - **Validates: Requirements 14.1, 14.2, 14.3, 14.4, 14.8, 14.9**
 
-  - [ ] 2.4 Write unit tests for Wi-Fi QR string
+  - [x] 2.4 Write unit tests for Wi-Fi QR string
     - Open, WPA and WEP networks, each escaped character in SSID and password, empty strings, open network with a supplied password
     - _Requirements: 17.1_
 
-- [ ] 3. Contact text and vCard
-  - [ ] 3.1 Implement `src/logic/contact.ts`
+- [x] 3. Contact text and vCard
+  - [x] 3.1 Implement `src/logic/contact.ts`
     - `sanitizeField`, `buildContactText` (U+001F separator, trailing empty fields omitted), total `parseContactText`
     - _Requirements: 6.1, 6.2, 6.4, 6.10_
 
-  - [ ] 3.2 Implement `src/logic/vcard.ts`
+  - [x] 3.2 Implement `src/logic/vcard.ts`
     - `escapeVCardText` (RFC 6350 escapes, newlines to `\n`) and `buildVCard` (vCard 3.0, CRLF lines, TEL and EMAIL only when non-empty)
     - _Requirements: 6.5, 6.6, 6.7_
 
-  - [ ] 3.3 Write property test for contact text round trip
+  - [x] 3.3 Write property test for contact text round trip
     - **Property 3: Contact text round trip with sanitising**
     - **Validates: Requirements 6.1, 6.2, 6.3, 6.4**
 
-  - [ ] 3.4 Write property test for contact parsing totality
+  - [x] 3.4 Write property test for contact parsing totality
     - **Property 4: Contact parsing is total**
     - **Validates: Requirements 6.2, 6.10**
 
-  - [ ] 3.5 Write property test for vCard structure
+  - [x] 3.5 Write property test for vCard structure
     - **Property 5: vCard structure**
     - **Validates: Requirements 6.5, 6.7**
 
-  - [ ] 3.6 Write property test for vCard text escaping
+  - [x] 3.6 Write property test for vCard text escaping
     - **Property 6: vCard text escaping round trip**
     - **Validates: Requirements 6.6**
 
-  - [ ] 3.7 Write unit tests for contact and vCard
+  - [x] 3.7 Write unit tests for contact and vCard
     - Name only, each optional field, empty field, maximum-length field, separator and newline sanitising, unparseable text
     - _Requirements: 17.2_
 
-- [ ] 4. Byte budget and payload draft
-  - [ ] 4.1 Implement `src/logic/byte-budget.ts`
+- [x] 4. Byte budget and payload draft
+  - [x] 4.1 Implement `src/logic/byte-budget.ts`
     - `budget(Result<Uint8Array>)` returning status, size, fill and message; `describeEncodeError`; the `too-large` message is `Too heavy to cross over (<length>/<SIZE_CAP> bytes)` using `SIZE_CAP` from Core
     - _Requirements: 7.2, 7.3, 7.4, 7.5, 7.6, 7.7, 7.8, 7.9_
 
-  - [ ] 4.2 Implement `src/logic/payload-draft.ts`
+  - [x] 4.2 Implement `src/logic/payload-draft.ts`
     - `Draft`, `INITIAL_DRAFT`, `hasContent` (whitespace rule), `buildPayload` (blank contact name gives `name-required`, open Wi-Fi sends empty password, contact built through `buildContactText`)
     - _Requirements: 5.3, 5.8, 5.9, 6.8, 6.9_
 
-  - [ ] 4.3 Write property test for byte budget against Core encode
+  - [x] 4.3 Write property test for byte budget against Core encode
     - **Property 7: Byte budget agrees with Core encode**
     - **Validates: Requirements 7.2, 7.3, 7.8, 7.9, 7.10, 7.11**
 
-  - [ ] 4.4 Write property test for byte budget error mapping
+  - [x] 4.4 Write property test for byte budget error mapping
     - **Property 8: Byte budget error mapping**
     - **Validates: Requirements 2.9, 7.4, 7.5, 7.6, 7.7**
 
-  - [ ] 4.5 Write property test for the content gate
+  - [x] 4.5 Write property test for the content gate
     - **Property 9: Content gate follows the whitespace rule**
     - **Validates: Requirements 5.8, 5.9**
 
-  - [ ] 4.6 Write unit tests for byte budget and payload draft
+  - [x] 4.6 Write unit tests for byte budget and payload draft
     - Sizes 0, 139, 140 and 141 through synthetic results, non-`too-large` errors, each draft type, blank contact name
     - _Requirements: 17.3_
 
-- [ ] 5. Hold machine, progress, Ouija schedule and motion preference
-  - [ ] 5.1 Implement `src/logic/hold-machine.ts`
+- [x] 5. Hold machine, progress, Ouija schedule and motion preference
+  - [x] 5.1 Implement `src/logic/hold-machine.ts`
     - `HOLD_DURATION_MS = 300`, `holdStep` following the design transition table, `holdProgress`
     - _Requirements: 8.1, 8.5, 8.6, 8.10, 8.12_
 
-  - [ ] 5.2 Write property test for the hold transition table
+  - [x] 5.2 Write property test for the hold transition table
     - **Property 10: Hold machine follows the transition table**
     - **Validates: Requirements 8.5, 8.10, 17.6**
 
-  - [ ] 5.3 Write property test for single firing per press
+  - [x] 5.3 Write property test for single firing per press
     - **Property 11: Hold fires at most once per press**
     - **Validates: Requirements 8.6, 8.11, 8.12**
 
-  - [ ] 5.4 Implement `src/logic/progress.ts`
+  - [x] 5.4 Implement `src/logic/progress.ts`
     - `progress`, `percent`, `remainingSeconds`, `formatDuration`; clamp negative and non-finite input
     - _Requirements: 10.3, 10.4, 10.9, 10.12_
 
-  - [ ] 5.5 Write property test for progress bounds
+  - [x] 5.5 Write property test for progress bounds
     - **Property 15: Progress values are bounded**
     - **Validates: Requirements 10.3, 10.9, 10.12**
 
-  - [ ] 5.6 Write property test for progress monotonicity
+  - [x] 5.6 Write property test for progress monotonicity
     - **Property 16: Progress is monotonic**
     - **Validates: Requirements 10.10**
 
-  - [ ] 5.7 Implement `src/logic/ouija.ts`
+  - [x] 5.7 Implement `src/logic/ouija.ts`
     - `SPELL_RATE_CPS`, `SPELL_MAX_CHARS`, `SPELL_MAX_MS`, `spellProgress` counting code points
     - _Requirements: 13.1, 13.2_
 
-  - [ ] 5.8 Write property test for the Ouija spelling schedule
+  - [x] 5.8 Write property test for the Ouija spelling schedule
     - **Property 22: Ouija spelling schedule**
     - **Validates: Requirements 13.1, 13.3**
 
-  - [ ] 5.9 Implement `src/logic/motion.ts`
+  - [x] 5.9 Implement `src/logic/motion.ts`
     - `EXORCISE_KEY`, `parseExorcise` (only `'1'` is true), `serializeExorcise`, `resolveReducedMotion`
     - _Requirements: 3.2, 3.4, 3.5_
 
-  - [ ] 5.10 Write property test for Exorcise storage parsing
+  - [x] 5.10 Write property test for Exorcise storage parsing
     - **Property 24: Exorcise storage parsing**
     - **Validates: Requirements 3.4, 3.5**
 
-  - [ ] 5.11 Write unit tests for hold machine, progress, Ouija and motion
+  - [x] 5.11 Write unit tests for hold machine, progress, Ouija and motion
     - Specific hold sequences including auto-repeat and cancel, zero and exact-duration cases, empty and 30+ character values, null and odd storage values
     - _Requirements: 17.5, 17.6_
 
-- [ ] 6. Audio math helpers (pure)
-  - [ ] 6.1 Implement `src/logic/sample-chunker.ts` and `src/logic/bytes.ts`
+- [x] 6. Audio math helpers (pure)
+  - [x] 6.1 Implement `src/logic/sample-chunker.ts` and `src/logic/bytes.ts`
     - `CHUNK_SIZE = 4096`, `EMPTY_CHUNKER`, `pushSamples`; `ggwaveViewToBytes` using `.slice()`; `waveformFromBytes`
     - _Requirements: 9.5, 9.6, 9.8, 9.15, 9.17_
 
-  - [ ] 6.2 Write property test for sample chunker conservation
+  - [x] 6.2 Write property test for sample chunker conservation
     - **Property 12: Sample chunker conserves samples**
     - **Validates: Requirements 9.15, 9.16**
 
-  - [ ] 6.3 Write property test for ggwave byte conversion
+  - [x] 6.3 Write property test for ggwave byte conversion
     - **Property 13: ggwave byte conversion copies**
     - **Validates: Requirements 9.6, 9.17**
 
-  - [ ] 6.4 Implement `src/logic/band-energy.ts`
+  - [x] 6.4 Implement `src/logic/band-energy.ts`
     - `SCREECH_BAND_LOW_HZ = 1875`, `SCREECH_BAND_HIGH_HZ = 6400`, `binFrequency`, `bandEnergy` (non-finite counts as 0), `meterSteps`
     - _Requirements: 11.3, 11.4, 11.5, 11.6, 11.9_
 
-  - [ ] 6.5 Write property test for band energy normalisation
+  - [x] 6.5 Write property test for band energy normalisation
     - **Property 17: Band energy is normalised**
     - **Validates: Requirements 11.5, 11.6, 11.7, 11.9**
 
-  - [ ] 6.6 Write property test for band energy ignoring out-of-band bins
+  - [x] 6.6 Write property test for band energy ignoring out-of-band bins
     - **Property 18: Band energy ignores out-of-band bins**
     - **Validates: Requirements 11.8**
 
-  - [ ] 6.7 Write unit tests for chunker, byte conversion and band energy
+  - [x] 6.7 Write unit tests for chunker, byte conversion and band energy
     - Empty input, exact multiples of 4096, views with non-zero `byteOffset`, band edges at 1875 Hz and 6400 Hz for 44100 and 48000 Hz, empty magnitudes
     - _Requirements: 17.5_
 
-- [ ] 7. Receive mapping, flow and capabilities
-  - [ ] 7.1 Implement `src/logic/screen-state.ts` and `src/logic/dedupe.ts`
+- [x] 7. Receive mapping, flow and capabilities
+  - [x] 7.1 Implement `src/logic/screen-state.ts` and `src/logic/dedupe.ts`
     - `screenState` maps Core decode results to `ignore`, `reveal`, `garbled`, `pact-required` and never throws; `dedupeStep` with a 5000 ms window
     - _Requirements: 12.2, 12.3, 12.4, 12.5, 12.6, 12.7, 12.8, 12.9, 12.10, 12.12, 12.13_
 
-  - [ ] 7.2 Implement `src/logic/url-safety.ts`, `src/logic/capabilities.ts` and `src/logic/contrast.ts`
+  - [x] 7.2 Implement `src/logic/url-safety.ts`, `src/logic/capabilities.ts` and `src/logic/contrast.ts`
     - `isSafeToOpen` (`/^https?:\/\//i` on the raw string), `missingFeatures` and `micSupport`, `contrastRatio` (WCAG 2.1)
     - _Requirements: 2.6, 4.9, 13.10, 16.7_
 
-  - [ ] 7.3 Implement `src/logic/flow.ts`
+  - [x] 7.3 Implement `src/logic/flow.ts`
     - `FlowState`, `FlowEvent`, `flowReducer`, `canTransmit`, `canListen`; mutual exclusion of sending and listening with plain-words notices; mic retry cap of 3
     - Add `wakePending: boolean` to `FlowState` and events `holdFired(contextRunning)` and `wakeTapped`: `holdFired(false)` sets `wakePending: true` and stays on Speak; `holdFired(true)` and a successful `wakeTapped` clear `wakePending` and lead to `startTransmit`; `wakePending` is also cleared by input edits, card selection and `openListen`
     - _Requirements: 4.7, 4.10, 8.1, 8.13, 8.14, 8.15, 15.5, 15.6, 15.7, 15.8_
 
-  - [ ] 7.4 Write property test for screen state mapping
+  - [x] 7.4 Write property test for screen state mapping
     - **Property 19: Screen state mapping**
     - **Validates: Requirements 12.2, 12.3, 12.4, 12.5, 12.6, 12.7, 12.8, 12.9, 12.10**
 
-  - [ ] 7.5 Write property test for the receive pipeline on random bytes
+  - [x] 7.5 Write property test for the receive pipeline on random bytes
     - **Property 20: Random sound never breaks the receive pipeline**
     - **Validates: Requirements 12.1, 12.9**
 
-  - [ ] 7.6 Write property test for duplicate suppression
+  - [x] 7.6 Write property test for duplicate suppression
     - **Property 21: Duplicate screens are suppressed for 5 seconds**
     - **Validates: Requirements 12.12, 12.13**
 
-  - [ ] 7.7 Write property test for safe link schemes
+  - [x] 7.7 Write property test for safe link schemes
     - **Property 23: Only http and https links are openable**
     - **Validates: Requirements 13.10**
 
-  - [ ] 7.8 Write property test for send and listen exclusion
+  - [x] 7.8 Write property test for send and listen exclusion
     - **Property 25: Sending and listening never overlap**
     - **Validates: Requirements 15.5, 15.6, 15.7, 15.8**
 
-  - [ ] 7.9 Write property test for the missing-feature report
+  - [x] 7.9 Write property test for the missing-feature report
     - **Property 26: Missing-feature report**
     - **Validates: Requirements 16.7**
 
-  - [ ] 7.10 Write unit tests for screen state, dedupe, flow and capabilities
+  - [x] 7.10 Write unit tests for screen state, dedupe, flow and capabilities
     - One test per Screen_State, each Room_Noise_Error code, multipart, dedupe at 4999 and 5000 ms, flow notices, insecure context before missing `getUserMedia`
     - Flow wake cases: `holdFired(false)` sets `wakePending` without changing screen or `transmitting`; `holdFired(true)` starts transmit with `wakePending` false; `wakeTapped` after `holdFired(false)` starts transmit and clears `wakePending`; editing input clears `wakePending`
     - _Requirements: 8.13, 8.14, 8.15, 17.4_
 
-- [ ] 8. Checkpoint - Ensure all tests pass
+- [x] 8. Checkpoint - Ensure all tests pass
   - Ensure all tests pass, ask the user if questions arise.
 
 - [ ] 9. Audio engine
