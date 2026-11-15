@@ -1,0 +1,52 @@
+/* Motion. Every animation is defined here and switched off by
+   [data-reduced-motion="true"] (Exorcise toggle or system setting, set on the
+   root element by useMotion) and by the prefers-reduced-motion media query.
+   Nothing flashes more than 3 times per second. */
+
+@keyframes sb-boot-flicker {
+  0% { opacity: 0; }
+  40% { opacity: 1; }
+  70% { opacity: 0.6; }
+  100% { opacity: 1; }
+}
+
+/* Slow, 4 s per cycle: 0.25 Hz */
+@keyframes sb-scanline-drift {
+  from { background-position: 0 0; }
+  to { background-position: 0 4px; }
+}
+
+/* 1.5 s per cycle: under 1 Hz */
+@keyframes sb-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.55; }
+}
+
+.fx-boot { animation: sb-boot-flicker 0.9s steps(4, end) 1; }
+.fx-drift { animation: sb-scanline-drift 4s linear infinite; }
+.fx-pulse { animation: sb-pulse 1.5s ease-in-out infinite; }
+.fx-smooth { transition: width 120ms linear, opacity 120ms linear; }
+
+[data-reduced-motion="true"] *,
+[data-reduced-motion="true"] *::before,
+[data-reduced-motion="true"] *::after {
+  animation-duration: 0s !important;
+  animation-delay: 0s !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0s !important;
+  transition-delay: 0s !important;
+  scroll-behavior: auto !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0s !important;
+    animation-delay: 0s !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0s !important;
+    transition-delay: 0s !important;
+    scroll-behavior: auto !important;
+  }
+}

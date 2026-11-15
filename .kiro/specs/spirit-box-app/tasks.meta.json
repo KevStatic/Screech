@@ -792,6 +792,11 @@
         "executionId": "f0ec33bb-fb50-40be-9864-baa6f3d2bbae",
         "chatSessionId": "sess_98a182e1-8787-4c43-aacb-33795a0f45b9",
         "timestamp": 1794750765321
+      },
+      {
+        "executionId": "f0ec33bb-fb50-40be-9864-baa6f3d2bbae",
+        "chatSessionId": "sess_98a182e1-8787-4c43-aacb-33795a0f45b9",
+        "timestamp": 1794750988086
       }
     ],
     "11.1 Create `src/styles/tokens.css`, `motion.css` and `screens.css`": [
@@ -799,6 +804,351 @@
         "executionId": "f0ec33bb-fb50-40be-9864-baa6f3d2bbae",
         "chatSessionId": "sess_98a182e1-8787-4c43-aacb-33795a0f45b9",
         "timestamp": 1794750768320
+      },
+      {
+        "executionId": "f0ec33bb-fb50-40be-9864-baa6f3d2bbae",
+        "chatSessionId": "sess_98a182e1-8787-4c43-aacb-33795a0f45b9",
+        "timestamp": 1794750816966
+      }
+    ],
+    "11.2 Update `src/main.tsx` and add `useMotion`, `ExorciseToggle` and `CrtFrame`": [
+      {
+        "executionId": "f0ec33bb-fb50-40be-9864-baa6f3d2bbae",
+        "chatSessionId": "sess_98a182e1-8787-4c43-aacb-33795a0f45b9",
+        "timestamp": 1794750817474
+      },
+      {
+        "executionId": "f0ec33bb-fb50-40be-9864-baa6f3d2bbae",
+        "chatSessionId": "sess_98a182e1-8787-4c43-aacb-33795a0f45b9",
+        "timestamp": 1794750891747
+      }
+    ],
+    "11.4 Write the theme test": [
+      {
+        "executionId": "f0ec33bb-fb50-40be-9864-baa6f3d2bbae",
+        "chatSessionId": "sess_98a182e1-8787-4c43-aacb-33795a0f45b9",
+        "timestamp": 1794750822009
+      },
+      {
+        "executionId": "f0ec33bb-fb50-40be-9864-baa6f3d2bbae",
+        "chatSessionId": "sess_98a182e1-8787-4c43-aacb-33795a0f45b9",
+        "timestamp": 1794750891241
+      }
+    ],
+    "11.5 Write component tests for motion and the Exorcise toggle": [
+      {
+        "executionId": "f0ec33bb-fb50-40be-9864-baa6f3d2bbae",
+        "chatSessionId": "sess_98a182e1-8787-4c43-aacb-33795a0f45b9",
+        "timestamp": 1794750898912
+      },
+      {
+        "executionId": "f0ec33bb-fb50-40be-9864-baa6f3d2bbae",
+        "chatSessionId": "sess_98a182e1-8787-4c43-aacb-33795a0f45b9",
+        "timestamp": 1794750987433
+      }
+    ],
+    "11.3 Implement hooks `useHold`, `useFlow` and `useAudioSession`": [
+      {
+        "executionId": "f0ec33bb-fb50-40be-9864-baa6f3d2bbae",
+        "chatSessionId": "sess_98a182e1-8787-4c43-aacb-33795a0f45b9",
+        "timestamp": 1794750903255
+      },
+      {
+        "executionId": "f0ec33bb-fb50-40be-9864-baa6f3d2bbae",
+        "chatSessionId": "sess_98a182e1-8787-4c43-aacb-33795a0f45b9",
+        "timestamp": 1794750988034
+      }
+    ],
+    "12.1 Implement `src/ui/screens/Awaken.tsx`": [
+      {
+        "executionId": "95fbb5d7-4ec7-4a11-aafb-d8dc0520e238",
+        "chatSessionId": "sess_59078c27-50d4-4c0e-9d2c-2dea37f7fa2a",
+        "timestamp": 1794751041487
+      },
+      {
+        "executionId": "95fbb5d7-4ec7-4a11-aafb-d8dc0520e238",
+        "chatSessionId": "sess_59078c27-50d4-4c0e-9d2c-2dea37f7fa2a",
+        "timestamp": 1794751132423
+      },
+      {
+        "executionId": "c030e21c-3aaa-48c1-81b3-0930d7e86a04",
+        "chatSessionId": "sess_59078c27-50d4-4c0e-9d2c-2dea37f7fa2a",
+        "timestamp": 1794751972213
+      },
+      {
+        "executionId": "c030e21c-3aaa-48c1-81b3-0930d7e86a04",
+        "chatSessionId": "sess_59078c27-50d4-4c0e-9d2c-2dea37f7fa2a",
+        "timestamp": 1794752038212
+      }
+    ],
+    "12.2 Write component tests for the Awaken screen": [
+      {
+        "executionId": "95fbb5d7-4ec7-4a11-aafb-d8dc0520e238",
+        "chatSessionId": "sess_59078c27-50d4-4c0e-9d2c-2dea37f7fa2a",
+        "timestamp": 1794751132951
+      },
+      {
+        "executionId": "95fbb5d7-4ec7-4a11-aafb-d8dc0520e238",
+        "chatSessionId": "sess_59078c27-50d4-4c0e-9d2c-2dea37f7fa2a",
+        "timestamp": 1794751210178
+      }
+    ],
+    "12. Awaken screen": [
+      {
+        "executionId": "95fbb5d7-4ec7-4a11-aafb-d8dc0520e238",
+        "chatSessionId": "sess_59078c27-50d4-4c0e-9d2c-2dea37f7fa2a",
+        "timestamp": 1794751210247
+      }
+    ],
+    "13.1 Implement `TarotCard`, `ByteCandle` and `ScreechKey` components": [
+      {
+        "executionId": "ffcf820e-dfce-4d1c-a74a-c0dd1c285d03",
+        "chatSessionId": "sess_48290ca0-ff33-4103-93f5-04e0479f487e",
+        "timestamp": 1794752126973
+      },
+      {
+        "executionId": "ffcf820e-dfce-4d1c-a74a-c0dd1c285d03",
+        "chatSessionId": "sess_48290ca0-ff33-4103-93f5-04e0479f487e",
+        "timestamp": 1794752206838
+      }
+    ],
+    "13.2 Implement `src/ui/screens/Speak.tsx`": [
+      {
+        "executionId": "ffcf820e-dfce-4d1c-a74a-c0dd1c285d03",
+        "chatSessionId": "sess_48290ca0-ff33-4103-93f5-04e0479f487e",
+        "timestamp": 1794752210233
+      },
+      {
+        "executionId": "ffcf820e-dfce-4d1c-a74a-c0dd1c285d03",
+        "chatSessionId": "sess_48290ca0-ff33-4103-93f5-04e0479f487e",
+        "timestamp": 1794752344281
+      }
+    ],
+    "13.3 Write component tests for the Speak screen": [
+      {
+        "executionId": "ffcf820e-dfce-4d1c-a74a-c0dd1c285d03",
+        "chatSessionId": "sess_48290ca0-ff33-4103-93f5-04e0479f487e",
+        "timestamp": 1794752344768
+      },
+      {
+        "executionId": "ffcf820e-dfce-4d1c-a74a-c0dd1c285d03",
+        "chatSessionId": "sess_48290ca0-ff33-4103-93f5-04e0479f487e",
+        "timestamp": 1794752480460
+      }
+    ],
+    "13.4 Write the wake-control component test": [
+      {
+        "executionId": "ffcf820e-dfce-4d1c-a74a-c0dd1c285d03",
+        "chatSessionId": "sess_48290ca0-ff33-4103-93f5-04e0479f487e",
+        "timestamp": 1794752349390
+      },
+      {
+        "executionId": "ffcf820e-dfce-4d1c-a74a-c0dd1c285d03",
+        "chatSessionId": "sess_48290ca0-ff33-4103-93f5-04e0479f487e",
+        "timestamp": 1794752480892
+      }
+    ],
+    "13. Speak screen": [
+      {
+        "executionId": "ffcf820e-dfce-4d1c-a74a-c0dd1c285d03",
+        "chatSessionId": "sess_48290ca0-ff33-4103-93f5-04e0479f487e",
+        "timestamp": 1794752480941
+      }
+    ],
+    "14.1 Implement the `Oscilloscope` component": [
+      {
+        "executionId": "8c981ee2-45ac-48dc-8b12-c1459ae55ace",
+        "chatSessionId": "sess_3347a2c2-6eaf-46db-955c-cedd294049b2",
+        "timestamp": 1794752552805
+      },
+      {
+        "executionId": "8c981ee2-45ac-48dc-8b12-c1459ae55ace",
+        "chatSessionId": "sess_3347a2c2-6eaf-46db-955c-cedd294049b2",
+        "timestamp": 1794752591514
+      }
+    ],
+    "14.2 Implement `src/ui/screens/Screeching.tsx`": [
+      {
+        "executionId": "8c981ee2-45ac-48dc-8b12-c1459ae55ace",
+        "chatSessionId": "sess_3347a2c2-6eaf-46db-955c-cedd294049b2",
+        "timestamp": 1794752591994
+      },
+      {
+        "executionId": "8c981ee2-45ac-48dc-8b12-c1459ae55ace",
+        "chatSessionId": "sess_3347a2c2-6eaf-46db-955c-cedd294049b2",
+        "timestamp": 1794752679774
+      }
+    ],
+    "14.3 Write component tests for the Screeching screen": [
+      {
+        "executionId": "8c981ee2-45ac-48dc-8b12-c1459ae55ace",
+        "chatSessionId": "sess_3347a2c2-6eaf-46db-955c-cedd294049b2",
+        "timestamp": 1794752680144
+      },
+      {
+        "executionId": "8c981ee2-45ac-48dc-8b12-c1459ae55ace",
+        "chatSessionId": "sess_3347a2c2-6eaf-46db-955c-cedd294049b2",
+        "timestamp": 1794752752611
+      }
+    ],
+    "14. Screeching screen": [
+      {
+        "executionId": "8c981ee2-45ac-48dc-8b12-c1459ae55ace",
+        "chatSessionId": "sess_3347a2c2-6eaf-46db-955c-cedd294049b2",
+        "timestamp": 1794752752687
+      }
+    ],
+    "15.1 Implement `Spectrogram` and `KIIMeter` components": [
+      {
+        "executionId": "260053a5-20d6-48ba-b70a-df7f4bb951f5",
+        "chatSessionId": "sess_4afc4e94-a308-481b-be99-005e24273e7c",
+        "timestamp": 1794753362163
+      },
+      {
+        "executionId": "260053a5-20d6-48ba-b70a-df7f4bb951f5",
+        "chatSessionId": "sess_4afc4e94-a308-481b-be99-005e24273e7c",
+        "timestamp": 1794753432380
+      }
+    ],
+    "15.2 Implement `src/ui/screens/Listen.tsx`": [
+      {
+        "executionId": "260053a5-20d6-48ba-b70a-df7f4bb951f5",
+        "chatSessionId": "sess_4afc4e94-a308-481b-be99-005e24273e7c",
+        "timestamp": 1794753433162
+      },
+      {
+        "executionId": "260053a5-20d6-48ba-b70a-df7f4bb951f5",
+        "chatSessionId": "sess_4afc4e94-a308-481b-be99-005e24273e7c",
+        "timestamp": 1794753583880
+      }
+    ],
+    "15.3 Write component tests for the Listen screen": [
+      {
+        "executionId": "260053a5-20d6-48ba-b70a-df7f4bb951f5",
+        "chatSessionId": "sess_4afc4e94-a308-481b-be99-005e24273e7c",
+        "timestamp": 1794753584325
+      },
+      {
+        "executionId": "260053a5-20d6-48ba-b70a-df7f4bb951f5",
+        "chatSessionId": "sess_4afc4e94-a308-481b-be99-005e24273e7c",
+        "timestamp": 1794753641760
+      }
+    ],
+    "15. Listen screen": [
+      {
+        "executionId": "260053a5-20d6-48ba-b70a-df7f4bb951f5",
+        "chatSessionId": "sess_4afc4e94-a308-481b-be99-005e24273e7c",
+        "timestamp": 1794753641816
+      }
+    ],
+    "16.1 Implement the `OuijaBoard` component": [
+      {
+        "executionId": "f3ff4544-470b-4018-b203-c2f6c4aa72c0",
+        "chatSessionId": "sess_9f4e7b24-442d-45c3-aa93-72ecd1ade2b3",
+        "timestamp": 1794753867224
+      },
+      {
+        "executionId": "f3ff4544-470b-4018-b203-c2f6c4aa72c0",
+        "chatSessionId": "sess_9f4e7b24-442d-45c3-aa93-72ecd1ade2b3",
+        "timestamp": 1794753915486
+      }
+    ],
+    "16.2 Implement the `ActionCard` component": [
+      {
+        "executionId": "f3ff4544-470b-4018-b203-c2f6c4aa72c0",
+        "chatSessionId": "sess_9f4e7b24-442d-45c3-aa93-72ecd1ade2b3",
+        "timestamp": 1794753915895
+      },
+      {
+        "executionId": "f3ff4544-470b-4018-b203-c2f6c4aa72c0",
+        "chatSessionId": "sess_9f4e7b24-442d-45c3-aa93-72ecd1ade2b3",
+        "timestamp": 1794753971283
+      }
+    ],
+    "16.3 Implement `Reveal`, `Garbled` and `Sealed` screens": [
+      {
+        "executionId": "f3ff4544-470b-4018-b203-c2f6c4aa72c0",
+        "chatSessionId": "sess_9f4e7b24-442d-45c3-aa93-72ecd1ade2b3",
+        "timestamp": 1794753971677
+      },
+      {
+        "executionId": "f3ff4544-470b-4018-b203-c2f6c4aa72c0",
+        "chatSessionId": "sess_9f4e7b24-442d-45c3-aa93-72ecd1ade2b3",
+        "timestamp": 1794754051827
+      }
+    ],
+    "16.4 Write component tests for the Reveal, Garbled and Sealed screens": [
+      {
+        "executionId": "f3ff4544-470b-4018-b203-c2f6c4aa72c0",
+        "chatSessionId": "sess_9f4e7b24-442d-45c3-aa93-72ecd1ade2b3",
+        "timestamp": 1794754052591
+      },
+      {
+        "executionId": "f3ff4544-470b-4018-b203-c2f6c4aa72c0",
+        "chatSessionId": "sess_9f4e7b24-442d-45c3-aa93-72ecd1ade2b3",
+        "timestamp": 1794754126143
+      }
+    ],
+    "16. Reveal screen": [
+      {
+        "executionId": "f3ff4544-470b-4018-b203-c2f6c4aa72c0",
+        "chatSessionId": "sess_9f4e7b24-442d-45c3-aa93-72ecd1ade2b3",
+        "timestamp": 1794754126201
+      }
+    ],
+    "17.1 Implement `src/ui/App.tsx` and mount it from `main.tsx`": [
+      {
+        "executionId": "07a883a3-b4b3-4bcf-9856-badd10bd083a",
+        "chatSessionId": "sess_b4aef816-5977-4c72-9788-47a00e5a4e95",
+        "timestamp": 1794764501335
+      },
+      {
+        "executionId": "07a883a3-b4b3-4bcf-9856-badd10bd083a",
+        "chatSessionId": "sess_b4aef816-5977-4c72-9788-47a00e5a4e95",
+        "timestamp": 1794764559918
+      }
+    ],
+    "17.2 Write `tests/architecture.test.ts`": [
+      {
+        "executionId": "07a883a3-b4b3-4bcf-9856-badd10bd083a",
+        "chatSessionId": "sess_b4aef816-5977-4c72-9788-47a00e5a4e95",
+        "timestamp": 1794764560338
+      },
+      {
+        "executionId": "07a883a3-b4b3-4bcf-9856-badd10bd083a",
+        "chatSessionId": "sess_b4aef816-5977-4c72-9788-47a00e5a4e95",
+        "timestamp": 1794764730198
+      }
+    ],
+    "17.3 Write an integration component test for the full flow": [
+      {
+        "executionId": "07a883a3-b4b3-4bcf-9856-badd10bd083a",
+        "chatSessionId": "sess_b4aef816-5977-4c72-9788-47a00e5a4e95",
+        "timestamp": 1794764564337
+      },
+      {
+        "executionId": "07a883a3-b4b3-4bcf-9856-badd10bd083a",
+        "chatSessionId": "sess_b4aef816-5977-4c72-9788-47a00e5a4e95",
+        "timestamp": 1794764730700
+      }
+    ],
+    "17. Wiring and architecture checks": [
+      {
+        "executionId": "07a883a3-b4b3-4bcf-9856-badd10bd083a",
+        "chatSessionId": "sess_b4aef816-5977-4c72-9788-47a00e5a4e95",
+        "timestamp": 1794764730750
+      }
+    ],
+    "18. Final checkpoint - Ensure all tests pass": [
+      {
+        "executionId": "e3c233d5-c5a4-4bcc-b60b-180e52dc5a1b",
+        "chatSessionId": "sess_0d526a8e-6f64-4772-880d-9d36d3e9a252",
+        "timestamp": 1794765026983
+      },
+      {
+        "executionId": "e3c233d5-c5a4-4bcc-b60b-180e52dc5a1b",
+        "chatSessionId": "sess_0d526a8e-6f64-4772-880d-9d36d3e9a252",
+        "timestamp": 1794765086696
       }
     ]
   }

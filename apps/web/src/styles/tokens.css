@@ -1,0 +1,39 @@
+/* Design tokens: the spirit box. Source: docs/design/README.md */
+:root {
+  /* Surfaces */
+  --bg: #050806;
+  --panel: #07110a;
+  --panel-2: #08130b;
+  --border: #2f5a3a;
+  --border-dim: #1f3a27;
+
+  /* Signal and text */
+  --phosphor: #39ff7a;
+  --green-2: #5aa86c;
+  --bone: #e9e4d4;
+
+  /* Blood red: only used by .is-error, .is-seal and .is-curse (see screens.css) */
+  --blood: #ff3b3b;
+  --blood-2: #ff5a5a;
+  --salmon: #ff8a7a;
+
+  /* Fonts (self-hosted via @fontsource, imported in main.tsx) */
+  --font-ui: "VT323", "Courier New", monospace;
+  --font-note: "Special Elite", "Courier New", monospace;
+  --font-title: "Creepster", "VT323", monospace;
+
+  /* Sizing */
+  --hit: 44px;
+  --gap: 12px;
+  --pad: 16px;
+  --radius: 4px;
+  --screen-min: 320px;
+  --screen-max: 430px;
+  --screen-design: 390px;
+
+  /* Type scale (VT323 is small for its size) */
+  --fs-body: 20px;
+  --fs-small: 18px;
+  --fs-label: 16px;
+  --fs-title: 36px;
+}

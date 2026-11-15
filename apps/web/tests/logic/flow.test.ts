@@ -4,10 +4,42 @@ import {
   MAX_MIC_ATTEMPTS,
   NOTICE_LISTEN_BLOCKED,
   NOTICE_SEND_BLOCKED,
+  canListen,
   flowReducer,
+  listenUnavailableReason,
+  micStatusForFailure,
   type FlowEvent,
   type FlowState,
 } from '../../src/logic/flow';
+import { MIC_BLOCKED_MESSAGE } from '../../src/audio/mic';
+
+describe('blocked mic status', () => {
+  it('maps mic failure reasons to flow statuses', () => {
+    expect(micStatusForFailure('blocked')).toBe('blocked');
+    expect(micStatusForFailure('denied')).toBe('denied');
+    expect(micStatusForFailure('unavailable')).toBe('denied');
+  });
+
+  it('stores blocked on the awaken screen and stays there', () => {
+    const s = flowReducer(INITIAL_FLOW_STATE, { type: 'micResult', status: 'blocked' });
+    expect(s.mic).toBe('blocked');
+    expect(s.screen).toBe('awaken');
+  });
+
+  it('blocked can continue to Speak as skipped', () => {
+    const s = run(INITIAL_FLOW_STATE, { type: 'micResult', status: 'blocked' }, { type: 'continueWithoutListening' });
+    expect(s.screen).toBe('speak');
+    expect(s.mic).toBe('skipped');
+  });
+
+  it('Listen-unavailable reason is MIC_BLOCKED_MESSAGE for blocked only', () => {
+    const blockedState: FlowState = { ...INITIAL_FLOW_STATE, screen: 'speak', mic: 'blocked' };
+    expect(canListen(blockedState)).toBe(false);
+    expect(listenUnavailableReason(blockedState)).toBe(MIC_BLOCKED_MESSAGE);
+    expect(listenUnavailableReason({ ...blockedState, mic: 'denied' })).toBeNull();
+    expect(listenUnavailableReason({ ...blockedState, mic: 'granted' })).toBeNull();
+  });
+});
 
 const speak: FlowState = { ...INITIAL_FLOW_STATE, screen: 'speak', mic: 'granted' };
 

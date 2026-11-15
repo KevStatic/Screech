@@ -1,13 +1,15 @@
+import {
+  MIC_BLOCKED_MESSAGE,
+  MIC_DENIED_MESSAGE,
+  MIC_UNAVAILABLE_MESSAGE,
+  type MicFailureReason,
+} from '../logic/mic-messages';
+
+export { MIC_BLOCKED_MESSAGE, MIC_DENIED_MESSAGE, MIC_UNAVAILABLE_MESSAGE };
+
 export type MicResult =
   | { readonly ok: true; readonly stream: MediaStream }
-  | { readonly ok: false; readonly reason: 'denied' | 'blocked' | 'unavailable'; readonly message: string };
-
-export const MIC_DENIED_MESSAGE =
-  'The microphone was refused. Screech cannot hear without it. Allow it in your browser settings.';
-export const MIC_BLOCKED_MESSAGE =
-  "This page can't use the microphone here. Open the link in Safari or Chrome.";
-export const MIC_UNAVAILABLE_MESSAGE =
-  'The microphone could not be opened. No microphone was found, or another app is using it.';
+  | { readonly ok: false; readonly reason: MicFailureReason; readonly message: string };
 
 const DENIAL_NAMES: readonly string[] = ['NotAllowedError', 'PermissionDeniedError'];
 

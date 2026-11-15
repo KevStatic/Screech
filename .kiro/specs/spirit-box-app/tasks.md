@@ -258,43 +258,43 @@ iOS user-activation rule (see design "AudioContext unlock sequence"): the hold t
 - [x] 10. Checkpoint - Ensure all tests pass
   - Ensure all tests pass, ask the user if questions arise.
 
-- [-] 11. UI shell and theme
-  - [-] 11.1 Create `src/styles/tokens.css`, `motion.css` and `screens.css`
+- [x] 11. UI shell and theme
+  - [x] 11.1 Create `src/styles/tokens.css`, `motion.css` and `screens.css`
     - Colour tokens from `docs/design/README.md`, `--hit: 44px` on a shared `.hit` class, font stacks, portrait layout from 320 to 430 px with `min-width: 0` on flex children, zero-duration rules under `[data-reduced-motion="true"]` and the media query, static solid-pattern scanlines and an inset box-shadow frame instead of gradient washes, reds only on error and seal classes
     - _Requirements: 2.1, 2.2, 2.3, 2.4, 2.5, 2.8, 2.10, 3.1_
 
-  - [ ] 11.2 Update `src/main.tsx` and add `useMotion`, `ExorciseToggle` and `CrtFrame`
+  - [x] 11.2 Update `src/main.tsx` and add `useMotion`, `ExorciseToggle` and `CrtFrame`
     - Import the three fonts and the stylesheets; read `localStorage` in try/catch and set `data-reduced-motion` before the first render; `matchMedia` listener updates within one event turn; toggle shows on and disabled with "System setting is in effect." when the system prefers reduced motion, with an on/off label and a 44 px target
     - _Requirements: 2.3, 3.2, 3.3, 3.4, 3.5, 3.6, 3.8, 4.11_
 
-  - [ ] 11.3 Implement hooks `useHold`, `useFlow` and `useAudioSession`
+  - [x] 11.3 Implement hooks `useHold`, `useFlow` and `useAudioSession`
     - `useHold` drives `holdStep` from a 33 ms interval using `performance.now()`, drops key auto-repeat, cancels on pointer leave and `pointercancel`, and on the transition into `fired` calls an `onFired(isRunning())` callback once and never calls `unlockAudio()` or `resume()` from the timer; `useFlow` wraps `flowReducer` (including `holdFired` and `wakeTapped`); `useAudioSession` owns the context, engine, capture handle and `visibilitychange` resume and restart, with a tap retry on failure
     - `useAudioSession` also exposes `unlockAudio`, `ensureRunning` and `isRunning` from `audio/session.ts`; on `visibilitychange` it awaits `ctx.resume()` and uses `ensureRunning` semantics for Speak
     - _Requirements: 8.1, 8.2, 8.3, 8.4, 8.5, 8.6, 8.7, 8.8, 8.13, 8.14, 8.15, 15.10, 15.11, 16.1, 16.2, 16.9_
 
-  - [ ] 11.4 Write the theme test
+  - [x] 11.4 Write the theme test
     - Token table equals the README hex values, `contrastRatio` of every text and background pair is at least 4.5, red classes appear only for errors and the seal, every control uses `.hit`
     - _Requirements: 2.1, 2.2, 2.5, 2.6_
 
-  - [ ] 11.5 Write component tests for motion and the Exorcise toggle
+  - [x] 11.5 Write component tests for motion and the Exorcise toggle
     - Saved "on" applies before first render, unavailable or odd storage falls back to off, system preference disables and labels the toggle, label updates on tap
     - _Requirements: 3.2, 3.3, 3.4, 3.5, 3.6_
 
-- [ ] 12. Awaken screen
-  - [ ] 12.1 Implement `src/ui/screens/Awaken.tsx`
+- [x] 12. Awaken screen
+  - [x] 12.1 Implement `src/ui/screens/Awaken.tsx`
     - Boot lines, Awaken control calling `unlockAudio()` synchronously in the tap handler, then `openMic()` and an immediate `stopStream`; mic denied, unlock failed, insecure context and missing `getUserMedia` messages with retry (max 3) and continue-without-listening controls; missing-feature message from `missingFeatures`; moves to Speak on success
     - _Requirements: 4.1, 4.2, 4.3, 4.4, 4.5, 4.6, 4.7, 4.8, 4.9, 4.10, 4.11, 15.1, 15.2, 15.9, 16.7_
 
-  - [ ] 12.2 Write component tests for the Awaken screen
+  - [x] 12.2 Write component tests for the Awaken screen
     - Granted, denied with retry cap of 3, unlock failure without mic request, insecure context, no `getUserMedia`, continue without listening
     - _Requirements: 4.4, 4.5, 4.6, 4.7, 4.8, 4.9_
 
-- [ ] 13. Speak screen
-  - [ ] 13.1 Implement `TarotCard`, `ByteCandle` and `ScreechKey` components
+- [x] 13. Speak screen
+  - [x] 13.1 Implement `TarotCard`, `ByteCandle` and `ScreechKey` components
     - `TarotCard` with `aria-pressed`; `ByteCandle` showing `<size>/<cap> bytes`, fill and red `too-large` message, flame flicker only when fill is above 0 and motion is allowed; `ScreechKey` with hold fill from `holdProgress`, accessible name and a description stating the 300 ms hold
     - _Requirements: 5.1, 5.11, 7.2, 7.3, 7.4, 7.7, 8.5, 8.8, 8.9_
 
-  - [ ] 13.2 Implement `src/ui/screens/Speak.tsx`
+  - [x] 13.2 Implement `src/ui/screens/Speak.tsx`
     - Four cards with the text card selected first, per-type inputs that keep every draft value across card changes, `budget(encode(...))` on each change, disabled SCREECH key with "nothing written" and error messages, disabled seal toggle with its later-release text, Listen control from `canListen`
     - Every click and keydown handler on the Speak screen (cards, inputs, seal toggle, Listen button, SCREECH key press and keyboard) calls `ensureRunning()` first, synchronously and without awaiting it; Listen button also calls `unlockAudio()` inside its own click handler
     - Implement `startTransmission()` (plain async function, no gesture needed): `loadEngine(ctx.sampleRate)`, `buildPayload`, Core `encode`, `engine.encode`, `playWaveform`, then `startTransmit`; engine or playback failure goes to the Screeching error state
@@ -302,73 +302,73 @@ iOS user-activation rule (see design "AudioContext unlock sequence"): the hold t
     - Wake control click handler calls `unlockAudio()` first with nothing awaited before it; on `ok` it dispatches `wakeTapped` and calls `startTransmission()`; on failure it keeps the control and shows "Audio could not start. Tap to try again."
     - _Requirements: 5.1, 5.2, 5.3, 5.4, 5.5, 5.6, 5.7, 5.8, 5.9, 5.10, 6.8, 6.9, 7.1, 7.5, 7.6, 7.8, 8.1, 8.2, 8.3, 8.13, 8.14, 8.15, 10.7, 15.3, 15.5, 15.6, 15.9, 16.1, 16.2, 16.9_
 
-  - [ ] 13.3 Write component tests for the Speak screen
+  - [x] 13.3 Write component tests for the Speak screen
     - Card selection and `aria-pressed`, retained fields, SCREECH enabled and disabled states, hold by pointer and keyboard with auto-repeat and pointer leave, disabled seal toggle, over-budget message; clicks and keydowns on cards, inputs, the seal toggle and the Listen button each call `ensureRunning()` before anything else; the hold timer never calls `resume()` or `unlockAudio()`
     - _Requirements: 5.3, 5.8, 5.10, 5.11, 7.5, 8.1, 8.2, 8.3, 8.6, 8.7, 8.8, 8.13, 16.1, 16.2, 16.9_
 
-  - [ ] 13.4 Write the wake-control component test
+  - [x] 13.4 Write the wake-control component test
     - `tests/ui/wake-control.test.tsx` with a fake `AudioContext` and fake timers, three cases. (a) Context `suspended` at hold fire: `resume()` not called by the timer, no `playWaveform` call, no Screeching screen, "Tap to wake the box" visible, draft unchanged; then `resume()` settles to `running` and the wake control is clicked: `unlockAudio()` ran inside the click before the first await, then exactly one transmission starts. (b) `resume()` leaves the state `suspended`: control stays, "Audio could not start. Tap to try again." appears, nothing plays. (c) Context `running` at fire: transmission starts at once, wake control never shows, `resume()` not called
     - _Requirements: 8.1, 8.3, 8.13, 8.14, 8.15, 10.7, 16.1, 16.2_
 
-- [ ] 14. Screeching screen
-  - [ ] 14.1 Implement the `Oscilloscope` component
+- [x] 14. Screeching screen
+  - [x] 14.1 Implement the `Oscilloscope` component
     - Canvas drawing the waveform window at `elapsedSec() * sampleRate` through `requestAnimationFrame` (at least 20 fps); static full waveform under reduced motion
     - _Requirements: 10.2, 10.11_
 
-  - [ ] 14.2 Implement `src/ui/screens/Screeching.tsx`
+  - [x] 14.2 Implement `src/ui/screens/Screeching.tsx`
     - Screen is entered only after the context was running and `playWaveform` was requested (never from a bare hold on a non-running context); playback or context failure after that shows the error state
     - Percent, duration and remaining seconds from `progress` helpers and `elapsedSec()`; the "still travelling" message; cancel control stopping playback within 100 ms; completion message and return control; failure message "The sound did not leave the speaker." with return control; text progress updated once per second under reduced motion; draft preserved on return
     - _Requirements: 10.1, 10.3, 10.4, 10.5, 10.6, 10.7, 10.8, 10.11, 10.12, 10.13, 10.14, 15.9_
 
-  - [ ] 14.3 Write component tests for the Screeching screen
+  - [x] 14.3 Write component tests for the Screeching screen
     - Progress text from a fake clock, remaining seconds, cancel returns to Speak with draft kept, completion state, failure state
     - _Requirements: 10.3, 10.5, 10.6, 10.8, 10.12_
 
-- [ ] 15. Listen screen
-  - [ ] 15.1 Implement `Spectrogram` and `KIIMeter` components
+- [x] 15. Listen screen
+  - [x] 15.1 Implement `Spectrogram` and `KIIMeter` components
     - Spectrogram canvas from `AnalyserNode.getByteFrequencyData` at least 10 fps with the Screech band highlighted using `binFrequency`; K-II LEDs from `meterSteps(bandEnergy(...))`; at most 3 frames per second and text meter under reduced motion
     - _Requirements: 11.2, 11.3, 11.4, 11.5, 11.13_
 
-  - [ ] 15.2 Implement `src/ui/screens/Listen.tsx`
+  - [x] 15.2 Implement `src/ui/screens/Listen.tsx`
     - Open mic inside the tap handler, `startCapture`, "Listening" label, band label "1.9 kHz to 6.4 kHz"; each packet goes through Core `decode`, `screenState` and `dedupeStep`, `ignore` shows nothing, other states stop capture and switch screens; silent-mic message with retry tap; "Sending is unavailable while listening." notice; back control releases the mic; no UI sound
     - _Requirements: 11.1, 11.10, 11.11, 11.12, 11.14, 11.15, 12.1, 12.3, 12.11, 12.12, 12.13, 15.4, 15.7, 15.8, 15.9_
 
-  - [ ] 15.3 Write component tests for the Listen screen
+  - [x] 15.3 Write component tests for the Listen screen
     - Listening label, mic-lost message and retry, leaving stops tracks, `ignore` leaves the screen unchanged, reduced-motion text meter
     - _Requirements: 11.11, 11.12, 11.13, 11.14, 11.15, 12.3_
 
-- [ ] 16. Reveal screen
-  - [ ] 16.1 Implement the `OuijaBoard` component
+- [x] 16. Reveal screen
+  - [x] 16.1 Implement the `OuijaBoard` component
     - Board with the planchette on the most recently spelled letter, spelled characters appended in a steady colour, `aria-hidden` on the spelling display
     - _Requirements: 13.1, 13.22_
 
-  - [ ] 16.2 Implement the `ActionCard` component
+  - [x] 16.2 Implement the `ActionCard` component
     - Text, checkin and hunt-clue text; url with `window.open(url, '_blank', 'noopener,noreferrer')` only on tap and only when `isSafeToOpen`, otherwise the "not safe to open" message; wifi SSID, security, copy password (omitted for open, with success and failure messages), QR canvas from `buildWifiQrString` with text fallback; contact fields (absent ones omitted) and `.vcf` download as `text/vcard`, or the unreadable-contact message with raw text; all received text rendered as React text nodes
     - _Requirements: 6.10, 13.6, 13.7, 13.8, 13.9, 13.10, 13.11, 13.12, 13.13, 13.14, 13.15, 13.16, 13.17, 13.19, 14.5, 14.6_
 
-  - [ ] 16.3 Implement `Reveal`, `Garbled` and `Sealed` screens
+  - [x] 16.3 Implement `Reveal`, `Garbled` and `Sealed` screens
     - Reveal with a hidden full-text element from the first frame, `spellProgress` schedule, skip control (click, Space, Enter), Action_Card after spelling or at once under reduced motion, controls back to Listen and to Speak; Garbled "This message arrived damaged." with return control; Sealed with the exact text "A sealed message. Join the pact to read it."
     - _Requirements: 12.4, 12.5, 13.1, 13.2, 13.3, 13.4, 13.5, 13.18, 13.20, 13.21, 15.9_
 
-  - [ ] 16.4 Write component tests for the Reveal, Garbled and Sealed screens
+  - [x] 16.4 Write component tests for the Reveal, Garbled and Sealed screens
     - Spelling pace with fake timers, skip by click and keyboard, reduced motion shows everything at once, action cards per type with mocked `window.open`, clipboard and `Blob`, unsafe URL scheme, a payload containing `<img onerror=...>` rendered as text, Garbled and Sealed texts
     - _Requirements: 12.4, 12.5, 13.1, 13.2, 13.8, 13.10, 13.12, 13.13, 13.17, 13.19, 13.20, 13.21_
 
-- [ ] 17. Wiring and architecture checks
-  - [ ] 17.1 Implement `src/ui/App.tsx` and mount it from `main.tsx`
+- [x] 17. Wiring and architecture checks
+  - [x] 17.1 Implement `src/ui/App.tsx` and mount it from `main.tsx`
     - Screen switch from `useFlow`, passing the audio session, engine and draft to each screen; Awaken is the only screen at start; received `reveal`, `garbled` and `pact-required` states route to their screens; transmission and listening exclusion enforced through the reducer; remove the old stub `App.tsx`
     - Wire `wakePending` from `useFlow` to the Speak screen's wake control and `startTransmission()`, so the hold-fired path and the wake-tap path share one transmit function; Screeching return and cancel clear `wakePending`
     - _Requirements: 8.1, 8.13, 8.14, 8.15, 10.7, 15.1, 15.2, 15.3, 15.4, 15.5, 15.6, 15.7, 15.8, 15.9, 12.11, 16.1, 16.2_
 
-  - [ ] 17.2 Write `tests/architecture.test.ts`
+  - [x] 17.2 Write `tests/architecture.test.ts`
     - Import-graph walk fails with the offending module path if any `src/logic` module reaches `react`, `react-dom`, `ggwave`, `src/audio` or mentions a browser audio API; `src/audio` imports no React; no `44100` or `48000` literal in `src`; the `TRANSMIT_VOLUME` value 50 is defined once; no `: any`, `as any` or `<any>`; `package.json` pins `ggwave` to `0.4.0` and `@screech/core` to `workspace:*`
     - _Requirements: 1.1, 1.2, 9.1, 9.3, 9.18, 16.3, 16.8, 17.7, 17.8_
 
-  - [ ] 17.3 Write an integration component test for the full flow
+  - [x] 17.3 Write an integration component test for the full flow
     - With fake audio and engine: Awaken to Speak, hold to transmit and Screeching (running context), hold on a suspended context then wake tap to transmit, listening blocked while transmitting, Listen to Reveal on a decoded packet, duplicate packet within 5 seconds ignored
     - _Requirements: 8.13, 8.14, 8.15, 12.12, 15.2, 15.5, 15.6, 15.7, 16.9_
 
-- [ ] 18. Final checkpoint - Ensure all tests pass
+- [x] 18. Final checkpoint - Ensure all tests pass
   - Ensure all tests pass, ask the user if questions arise.
 
 ## Notes

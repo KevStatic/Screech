@@ -1,3 +1,4 @@
+import { MIC_BLOCKED_MESSAGE, type MicFailureReason } from './mic-messages';
 import type { ScreenState } from './screen-state';
 
 export type Screen = 'awaken' | 'speak' | 'screeching' | 'listen' | 'reveal' | 'garbled' | 'sealed';
@@ -5,6 +6,7 @@ export type MicStatus =
   | 'unprobed'
   | 'granted'
   | 'denied'
+  | 'blocked'
   | 'insecure-context'
   | 'no-getusermedia'
   | 'skipped';
@@ -60,6 +62,16 @@ export function canTransmit(state: FlowState): boolean {
 
 export function canListen(state: FlowState): boolean {
   return state.mic === 'granted' && !state.transmitting;
+}
+
+/** Why Listen cannot open because of the mic, or null when the mic is not the cause. */
+export function listenUnavailableReason(state: FlowState): string | null {
+  return state.mic === 'blocked' ? MIC_BLOCKED_MESSAGE : null;
+}
+
+/** Maps a failed mic request to the flow status. 'unavailable' is treated as denied. */
+export function micStatusForFailure(reason: MicFailureReason): MicStatus {
+  return reason === 'blocked' ? 'blocked' : 'denied';
 }
 
 function startTransmit(state: FlowState): FlowState {

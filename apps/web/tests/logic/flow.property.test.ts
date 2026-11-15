@@ -15,6 +15,7 @@ import {
 const micStatus: fc.Arbitrary<MicStatus> = fc.constantFrom(
   'unprobed',
   'granted',
+  'blocked',
   'denied',
   'insecure-context',
   'no-getusermedia',

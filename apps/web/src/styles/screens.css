@@ -1,0 +1,537 @@
+/* Shared screen layout and components. Portrait, 320 to 430 px, designed at 390. */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--bone);
+  font-family: var(--font-ui);
+  font-size: var(--fs-body);
+  line-height: 1.25;
+  max-width: 100%;
+  overflow-x: hidden;
+  -webkit-text-size-adjust: 100%;
+}
+
+#root {
+  min-height: 100vh;
+  min-height: 100dvh;
+  max-width: 100%;
+}
+
+img,
+canvas,
+svg {
+  max-width: 100%;
+}
+
+/* ---- Screen shell ---- */
+
+.screen {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap);
+  width: 100%;
+  min-width: var(--screen-min);
+  max-width: var(--screen-max);
+  min-height: 100vh;
+  min-height: 100dvh;
+  margin: 0 auto;
+  padding: var(--pad);
+  background: var(--bg);
+  color: var(--bone);
+  overflow-x: hidden;
+}
+
+/* Flex and grid children may shrink below their content width */
+.screen > *,
+.row > *,
+.col > *,
+.grid > * {
+  min-width: 0;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--gap);
+  min-width: 0;
+}
+
+.col {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap);
+  min-width: 0;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
+  gap: var(--gap);
+  min-width: 0;
+}
+
+.grow {
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.wrap {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+/* ---- CRT frame: static scanlines (solid pattern, no gradients) and inset frame ---- */
+
+.crt {
+  position: relative;
+  background-color: var(--bg);
+  box-shadow: inset 0 0 0 2px var(--border-dim), inset 0 0 24px 4px #000;
+}
+
+.crt::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 10;
+  /* 1 px dark line every 4 px, a solid tile rather than a gradient */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4'%3E%3Crect width='4' height='1' y='3' fill='%23000' fill-opacity='0.28'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+}
+
+/* ---- Type ---- */
+
+.title {
+  font-family: var(--font-title);
+  font-size: var(--fs-title);
+  font-weight: 400;
+  letter-spacing: 1px;
+  color: var(--phosphor);
+  margin: 0;
+}
+
+.note {
+  font-family: var(--font-note);
+  font-size: var(--fs-small);
+  line-height: 1.4;
+  color: var(--bone);
+}
+
+.label {
+  font-size: var(--fs-label);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--green-2);
+}
+
+.signal {
+  color: var(--phosphor);
+}
+
+.muted {
+  color: var(--green-2);
+}
+
+/* ---- Panels ---- */
+
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: var(--pad);
+  min-width: 0;
+}
+
+/* ---- Controls ---- */
+
+.hit {
+  min-width: var(--hit);
+  min-height: var(--hit);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-width: var(--hit);
+  min-height: var(--hit);
+  padding: 8px 14px;
+  font-family: var(--font-ui);
+  font-size: var(--fs-body);
+  color: var(--bg);
+  background: var(--phosphor);
+  border: 1px solid var(--phosphor);
+  border-radius: var(--radius);
+  cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.btn.secondary {
+  color: var(--phosphor);
+  background: var(--panel-2);
+  border-color: var(--border);
+}
+
+.btn:disabled,
+.btn[aria-disabled="true"] {
+  color: var(--green-2);
+  background: var(--panel);
+  border-color: var(--border-dim);
+  cursor: not-allowed;
+}
+
+.btn:focus-visible,
+.field:focus-visible,
+.hit:focus-visible {
+  outline: 2px solid var(--bone);
+  outline-offset: 2px;
+}
+
+.field {
+  width: 100%;
+  min-width: 0;
+  min-height: var(--hit);
+  padding: 8px 10px;
+  font-family: var(--font-ui);
+  font-size: var(--fs-body);
+  color: var(--bone);
+  background: var(--panel-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+/* ---- Meters (width or value comes from real state, set inline by the component) ---- */
+
+.meter {
+  width: 100%;
+  height: 12px;
+  background: var(--panel-2);
+  border: 1px solid var(--border);
+  overflow: hidden;
+}
+
+.meter > .fill {
+  height: 100%;
+  background: var(--phosphor);
+}
+
+/* ---- Red states: the only place the reds are used ---- */
+
+.is-error {
+  color: var(--blood-2);
+  border-color: var(--blood);
+}
+
+.is-error.panel {
+  background: var(--panel);
+}
+
+.is-curse {
+  color: var(--blood);
+  border-color: var(--blood);
+}
+
+.is-seal {
+  color: var(--salmon);
+  border-color: var(--blood-2);
+}
+
+.btn.is-seal {
+  color: var(--salmon);
+  background: var(--panel-2);
+  border-color: var(--blood-2);
+}
+
+.meter > .fill.is-error,
+.meter > .fill.is-curse {
+  background: var(--blood);
+}
+
+/* Text without a box, on error: keep the border off */
+.note.is-error,
+.note.is-curse,
+.note.is-seal,
+.label.is-error,
+.label.is-seal {
+  border: 0;
+}
+
+/* ---- Narrow phones: 320 px ---- */
+
+@media (max-width: 359px) {
+  :root {
+    --pad: 12px;
+    --gap: 10px;
+    --fs-title: 30px;
+  }
+}
+
+/* ---- Speak: tarot cards ---- */
+
+.tarot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 112px;
+  padding: 8px 4px;
+  font-family: var(--font-ui);
+  color: var(--phosphor);
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.tarot[aria-pressed="true"] {
+  background: var(--panel-2);
+  border-color: var(--phosphor);
+  box-shadow: inset 0 0 0 1px var(--phosphor);
+}
+
+.tarot-numeral,
+.tarot-kind {
+  font-size: var(--fs-label);
+  color: var(--green-2);
+}
+
+.tarot-name {
+  font-size: var(--fs-small);
+  color: var(--bone);
+}
+
+.tarot-icon {
+  display: inline-flex;
+  min-height: 30px;
+}
+
+/* ---- Speak: byte candle ---- */
+
+.candle {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--gap);
+  min-width: 0;
+}
+
+.candle-stick {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  width: 56px;
+  height: 160px;
+  flex: 0 0 auto;
+  border-bottom: 2px solid var(--border);
+}
+
+.candle-track {
+  display: flex;
+  align-items: flex-end;
+  width: 36px;
+  height: 100px;
+}
+
+.candle-wax {
+  display: block;
+  width: 100%;
+  background: var(--bone);
+  border-radius: 3px 3px 0 0;
+}
+
+.candle-wax.is-curse {
+  background: var(--blood);
+}
+
+.candle-wick {
+  width: 2px;
+  height: 8px;
+  background: var(--green-2);
+}
+
+.candle-flame {
+  width: 16px;
+  height: 26px;
+  background: var(--phosphor);
+  border-radius: 50% 50% 50% 50% / 70% 70% 30% 30%;
+  transform-origin: 50% 100%;
+}
+
+.candle-flame.is-flickering {
+  animation: sb-flame 1.6s ease-in-out infinite alternate;
+}
+
+/* Under 1 Hz, so far below the 3 flashes per second limit */
+@keyframes sb-flame {
+  0% { transform: scale(1, 1) rotate(-2deg); }
+  50% { transform: scale(0.92, 1.08) rotate(2deg); }
+  100% { transform: scale(1.04, 0.94) rotate(-1deg); }
+}
+
+.candle-count {
+  font-size: 32px;
+  line-height: 1;
+  color: var(--phosphor);
+}
+
+.candle-count.is-error {
+  color: var(--blood-2);
+}
+
+/* ---- Speak: SCREECH key ---- */
+
+.screech-key {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 72px;
+  overflow: hidden;
+  font-family: var(--font-title);
+  font-size: 36px;
+  letter-spacing: 4px;
+  color: var(--phosphor);
+  background: var(--panel-2);
+  border: 2px solid var(--phosphor);
+  border-radius: var(--radius);
+  cursor: pointer;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.screech-key:disabled {
+  color: var(--green-2);
+  border-color: var(--border-dim);
+  border-style: dashed;
+  cursor: not-allowed;
+}
+
+.screech-key-fill {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 10px;
+  background: var(--phosphor);
+}
+
+.screech-key-label {
+  position: relative;
+  color: var(--phosphor);
+}
+
+.screech-key:disabled .screech-key-label {
+  color: var(--green-2);
+}
+
+/* ---- Reveal: ouija board (no animation, no transition) ---- */
+
+.ouija {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap);
+}
+.ouija-board {
+  position: relative;
+  width: 100%;
+  max-width: 350px;
+  aspect-ratio: 350 / 262;
+  margin: 0 auto;
+  border: 1px solid var(--border);
+  border-radius: 120px 120px 14px 14px;
+  background: var(--panel);
+}
+.ouija-letter {
+  position: absolute;
+  width: 6.3%;
+  text-align: center;
+  font-family: var(--font-note);
+  font-size: 19px;
+  color: var(--green-2);
+}
+.ouija-letter.is-lit {
+  color: var(--phosphor);
+}
+.ouija-word {
+  position: absolute;
+  top: 15%;
+  font-family: var(--font-title);
+  font-size: 24px;
+  color: var(--green-2);
+}
+.ouija-yes {
+  left: 7%;
+}
+.ouija-no {
+  right: 7%;
+}
+.ouija-bye {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 5%;
+  text-align: center;
+  font-family: var(--font-note);
+  font-size: 16px;
+  letter-spacing: 4px;
+  color: var(--green-2);
+}
+.ouija-planchette {
+  position: absolute;
+  width: 21.7%;
+  height: auto;
+}
+.ouija-spelled-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+.ouija-caption {
+  font-size: var(--fs-small);
+  letter-spacing: 2px;
+  color: var(--green-2);
+}
+.ouija-spelled {
+  margin: 0;
+  min-height: 1em;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  text-align: center;
+  font-size: 50px;
+  line-height: 1;
+  letter-spacing: 3px;
+  color: var(--phosphor);
+}
+
+/* ---- Text for assistive technology only (Reveal full value) ---- */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
