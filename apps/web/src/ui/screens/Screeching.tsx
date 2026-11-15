@@ -4,6 +4,8 @@ import { formatDuration, percent, progress, remainingSeconds } from '../../logic
 import CrtFrame from '../components/CrtFrame';
 import ExorciseToggle from '../components/ExorciseToggle';
 import Oscilloscope from '../components/Oscilloscope';
+import SpeakerGrille from '../components/SpeakerGrille';
+import SwallowedText from '../components/SwallowedText';
 import type { FlowApi } from '../hooks/useFlow';
 import { useMotion } from '../hooks/useMotion';
 import type { TransmissionOutcome } from './Speak';
@@ -75,10 +77,11 @@ interface PlaybackProps {
   readonly handle: PlaybackHandle;
   readonly wave: Float32Array;
   readonly sampleRate: number;
+  readonly message: string;
   readonly onLeave: () => void;
 }
 
-function Playback({ handle, wave, sampleRate, onLeave }: PlaybackProps): ReactElement {
+function Playback({ handle, wave, sampleRate, message, onLeave }: PlaybackProps): ReactElement {
   const { reduced } = useMotion();
   const [phase, setPhase] = useState<Phase>('playing');
   const [elapsed, setElapsed] = useState<number>(() => handle.elapsedSec());
@@ -148,6 +151,8 @@ function Playback({ handle, wave, sampleRate, onLeave }: PlaybackProps): ReactEl
         <Oscilloscope wave={wave} sampleRate={sampleRate} elapsedSec={readElapsed} reducedMotion={reduced} />
         <figcaption className="muted">OSCILLOSCOPE · OUTGOING</figcaption>
       </figure>
+      <SwallowedText text={message} progress={p} />
+      <SpeakerGrille active={!done && !reduced} />
 
       <div className="col">
         <div style={{ position: 'relative', height: 34 }}>
@@ -219,6 +224,12 @@ export default function Screeching({ flow, outcome }: ScreechingProps): ReactEle
     return <Failure detail={outcome.message} onReturn={leave} />;
   }
   return (
-    <Playback handle={outcome.handle} wave={outcome.wave} sampleRate={outcome.sampleRate} onLeave={leave} />
+    <Playback
+      handle={outcome.handle}
+      wave={outcome.wave}
+      sampleRate={outcome.sampleRate}
+      message={outcome.message ?? ''}
+      onLeave={leave}
+    />
   );
 }

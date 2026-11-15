@@ -10,6 +10,13 @@
   100% { opacity: 1; }
 }
 
+/* The title never drops below 60% opacity, so it is readable from the first frame. */
+@keyframes sb-title-flicker {
+  0% { opacity: 0.6; }
+  50% { opacity: 1; }
+  75% { opacity: 0.75; }
+  100% { opacity: 1; }
+}
 /* Slow, 4 s per cycle: 0.25 Hz */
 @keyframes sb-scanline-drift {
   from { background-position: 0 0; }
@@ -23,6 +30,7 @@
 }
 
 .fx-boot { animation: sb-boot-flicker 0.9s steps(4, end) 1; }
+.fx-boot-title { animation: sb-title-flicker 0.6s steps(3, end) 1; }
 .fx-drift { animation: sb-scanline-drift 4s linear infinite; }
 .fx-pulse { animation: sb-pulse 1.5s ease-in-out infinite; }
 .fx-smooth { transition: width 120ms linear, opacity 120ms linear; }

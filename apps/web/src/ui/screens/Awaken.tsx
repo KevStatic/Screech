@@ -118,7 +118,7 @@ export default function Awaken({ flow, audio, env }: AwakenProps): ReactElement 
         </div>
 
         <div className="col" style={{ alignItems: 'center' }}>
-          <h1 id="awaken-title" className="title fx-boot" style={{ fontSize: 56 }}>
+          <h1 id="awaken-title" className="title fx-boot-title" style={{ fontSize: 56 }}>
             SCREECH
           </h1>
           <p className="note">a spirit box for your data</p>

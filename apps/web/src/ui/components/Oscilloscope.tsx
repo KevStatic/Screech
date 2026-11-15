@@ -13,7 +13,6 @@ const WIDTH = 350;
 const HEIGHT = 120;
 /** Samples shown at once while animating (about 43 ms at 48 kHz). */
 const WINDOW_SAMPLES = 2048;
-const BACKGROUND = '#050806';
 const TRACE = '#39ff7a';
 const GRATICULE = '#5aa86c';
 
@@ -27,8 +26,8 @@ export function drawWave(
   start: number,
   end: number,
 ): void {
-  ctx.fillStyle = BACKGROUND;
-  ctx.fillRect(0, 0, WIDTH, HEIGHT);
+  // Clear only: the framed grid panel behind the canvas supplies the background.
+  ctx.clearRect(0, 0, WIDTH, HEIGHT);
 
   ctx.globalAlpha = 0.4;
   ctx.strokeStyle = GRATICULE;
@@ -98,6 +97,7 @@ export default function Oscilloscope({ wave, sampleRate, elapsedSec, reducedMoti
   }, [wave, sampleRate, elapsedSec, reducedMotion]);
 
   return (
+    <div className="scope-panel">
     <canvas
       ref={canvasRef}
       className="scope"
@@ -106,7 +106,8 @@ export default function Oscilloscope({ wave, sampleRate, elapsedSec, reducedMoti
       role="img"
       aria-label="Waveform of the outgoing sound"
       data-testid="oscilloscope"
-      style={{ width: '100%', maxWidth: WIDTH, height: 'auto', display: 'block', background: BACKGROUND }}
+      style={{ width: '100%', maxWidth: WIDTH, height: 'auto', display: 'block' }}
     />
+    </div>
   );
 }

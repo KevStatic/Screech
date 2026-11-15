@@ -321,62 +321,48 @@ svg {
 }
 
 /* ---- Speak: byte candle ---- */
-
 .candle {
   display: flex;
-  align-items: flex-end;
-  gap: var(--gap);
+  align-items: stretch;
+  gap: 16px;
   min-width: 0;
 }
-
 .candle-stick {
-  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-end;
-  width: 56px;
-  height: 160px;
+  width: 66px;
+  height: 164px;
   flex: 0 0 auto;
   border-bottom: 2px solid var(--border);
 }
-
-.candle-track {
-  display: flex;
-  align-items: flex-end;
-  width: 36px;
-  height: 100px;
-}
-
 .candle-wax {
   display: block;
-  width: 100%;
+  width: 40px;
   background: var(--bone);
-  border-radius: 3px 3px 0 0;
+  border-radius: 4px 4px 0 0;
+  transition: height 0.3s ease;
 }
-
 .candle-wax.is-curse {
   background: var(--blood);
 }
-
 .candle-wick {
   width: 2px;
   height: 8px;
-  background: var(--green-2);
+  background: #1b1b1b;
+  flex: 0 0 auto;
 }
-
 .candle-flame {
-  width: 16px;
-  height: 26px;
-  background: var(--phosphor);
-  border-radius: 50% 50% 50% 50% / 70% 70% 30% 30%;
+  display: block;
+  flex: 0 0 auto;
+  margin-bottom: -2px;
+  filter: drop-shadow(0 0 8px rgba(255, 190, 90, 0.8));
   transform-origin: 50% 100%;
 }
-
 .candle-flame.is-flickering {
   animation: sb-flame 1.6s ease-in-out infinite alternate;
 }
-
 /* Under 1 Hz, so far below the 3 flashes per second limit */
 @keyframes sb-flame {
   0% { transform: scale(1, 1) rotate(-2deg); }
@@ -395,22 +381,20 @@ svg {
 }
 
 /* ---- Speak: SCREECH key ---- */
-
 .screech-key {
   position: relative;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   width: 100%;
-  min-height: 72px;
+  min-height: 78px;
   overflow: hidden;
-  font-family: var(--font-title);
-  font-size: 36px;
-  letter-spacing: 4px;
-  color: var(--phosphor);
-  background: var(--panel-2);
+  line-height: 1;
+  color: var(--bg);
+  background: var(--phosphor);
   border: 2px solid var(--phosphor);
-  border-radius: var(--radius);
+  border-radius: 10px;
   cursor: pointer;
   touch-action: none;
   user-select: none;
@@ -418,31 +402,39 @@ svg {
   -webkit-touch-callout: none;
   -webkit-tap-highlight-color: transparent;
 }
-
 .screech-key:disabled {
   color: var(--green-2);
+  background: var(--panel);
   border-color: var(--border-dim);
   border-style: dashed;
   cursor: not-allowed;
 }
-
+/* Hold progress: the fill grows left to right inside the key */
 .screech-key-fill {
   position: absolute;
+  top: 0;
   bottom: 0;
   left: 0;
-  height: 10px;
-  background: var(--phosphor);
+  background: var(--green-2);
 }
-
 .screech-key-label {
   position: relative;
-  color: var(--phosphor);
+  font-family: var(--font-title);
+  font-size: 38px;
+  letter-spacing: 4px;
+  color: inherit;
 }
-
-.screech-key:disabled .screech-key-label {
+.screech-key-hint {
+  position: relative;
+  font-family: var(--font-ui);
+  font-size: 18px;
+  letter-spacing: 2px;
+  color: inherit;
+}
+.screech-key:disabled .screech-key-label,
+.screech-key:disabled .screech-key-hint {
   color: var(--green-2);
 }
-
 /* ---- Reveal: ouija board (no animation, no transition) ---- */
 
 .ouija {
@@ -534,4 +526,166 @@ svg {
   clip-path: inset(50%);
   white-space: nowrap;
   border: 0;
+}
+/* ---- Mode switch (top of Speak and Listen) ---- */
+.mode-switch {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+.mode-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 46px;
+  font-family: var(--font-ui);
+  font-size: 24px;
+  letter-spacing: 4px;
+  color: var(--green-2);
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+.mode-btn.is-current {
+  color: var(--bg);
+  background: var(--phosphor);
+  border-color: var(--phosphor);
+}
+.mode-btn:disabled {
+  color: var(--green-2);
+  border-color: var(--border-dim);
+  border-style: dashed;
+  cursor: not-allowed;
+}
+/* ---- Exorcise toggle ---- */
+.exorcise-toggle {
+  padding: 4px 10px;
+  font-family: var(--font-ui);
+  font-size: var(--fs-small);
+  color: var(--phosphor);
+  background: transparent;
+  border: 1px solid var(--phosphor);
+  border-radius: var(--radius);
+  cursor: pointer;
+  touch-action: manipulation;
+  white-space: nowrap;
+}
+.exorcise-toggle:disabled {
+  color: var(--green-2);
+  border-color: var(--border-dim);
+  cursor: not-allowed;
+}
+/* ---- Speak fits 390 x 844 without scrolling ---- */
+.screen-tight {
+  --gap: 10px;
+  padding: 12px 16px 16px;
+}
+.screen-tight .tarot {
+  min-height: 104px;
+}
+/* ---- Speak: candle beside the byte count ---- */
+.candle-side {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  justify-content: space-between;
+  align-self: stretch;
+  gap: 8px;
+  min-width: 0;
+}
+.candle-total {
+  font-size: 44px;
+}
+.candle-cap {
+  font-size: 24px;
+  color: var(--green-2);
+}
+.seal-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 10px;
+  font-family: var(--font-ui);
+  font-size: var(--fs-body);
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  cursor: not-allowed;
+}
+/* ---- Screeching: framed oscilloscope grid ---- */
+.scope-panel {
+  overflow: hidden;
+  background-color: var(--panel);
+  /* 25 px phosphor grid as a tiled SVG, not a gradient */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='25' height='25'%3E%3Cpath d='M0 .5H25M.5 0V25' stroke='%2339ff7a' stroke-opacity='0.12' fill='none'/%3E%3C/svg%3E");
+  background-size: 25px 25px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+.scope-panel canvas {
+  filter: drop-shadow(0 0 4px rgba(57, 255, 122, 0.8));
+}
+/* ---- Screeching: swallowed letters ---- */
+.swallow-box {
+  min-height: 92px;
+  font-size: 26px;
+  line-height: 1.15;
+  color: var(--bone);
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+.swallow {
+  display: inline-block;
+  white-space: pre;
+  transition: transform 0.6s ease-in, opacity 0.6s ease-in;
+}
+.swallow.is-swallowed {
+  transform: translate(0, 150px) scale(0.15) rotate(25deg);
+  opacity: 0;
+}
+/* Static under reduced motion: swallowed letters stay in place, dimmed */
+[data-reduced-motion="true"] .swallow.is-swallowed {
+  transform: none;
+  opacity: 0.3;
+}
+@media (prefers-reduced-motion: reduce) {
+  .swallow.is-swallowed {
+    transform: none;
+    opacity: 0.3;
+  }
+}
+/* ---- Screeching: speaker grille ---- */
+.grille {
+  position: relative;
+  align-self: center;
+  width: 150px;
+  height: 150px;
+  flex: 0 0 auto;
+}
+.grille-face {
+  position: absolute;
+  inset: 0;
+  border: 3px solid var(--border);
+  border-radius: 50%;
+  background-color: var(--panel-2);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12'%3E%3Ccircle cx='6' cy='6' r='1.6' fill='%2339ff7a'/%3E%3C/svg%3E");
+  background-size: 12px 12px;
+  box-shadow: inset 0 0 30px #000;
+}
+.grille-ring {
+  position: absolute;
+  inset: 0;
+  border: 2px solid var(--phosphor);
+  border-radius: 50%;
+  animation: sb-ring 1.6s ease-out infinite;
+}
+.grille-ring.is-late {
+  animation-delay: 0.8s;
+}
+/* 0.6 Hz */
+@keyframes sb-ring {
+  from { transform: scale(0.9); opacity: 0.8; }
+  to { transform: scale(1.4); opacity: 0; }
 }

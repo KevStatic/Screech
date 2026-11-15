@@ -8,6 +8,7 @@ import { buildPayload, hasContent, type Draft, type TypeKey } from '../../logic/
 import ByteCandle from '../components/ByteCandle';
 import CrtFrame from '../components/CrtFrame';
 import ExorciseToggle from '../components/ExorciseToggle';
+import ModeSwitch from '../components/ModeSwitch';
 import ScreechKey from '../components/ScreechKey';
 import TarotCard from '../components/TarotCard';
 import type { AudioSessionApi } from '../hooks/useAudioSession';
@@ -28,6 +29,8 @@ export type TransmissionOutcome =
       readonly sampleRate: number;
       /** The waveform that was handed to playWaveform, for the oscilloscope. */
       readonly wave: Float32Array;
+      /** Short text of what is being sent, for the letters swallowed on Screeching. */
+      readonly message?: string;
     }
   /** The engine could not start, so nothing was played. Screeching shows its error state. */
   | { readonly ok: false; readonly message: string };
@@ -113,7 +116,25 @@ const CARDS: readonly CardInfo[] = [
     ),
   },
 ];
-const SECURITY_OPTIONS: readonly WifiSecurity[] = ['open', 'wpa', 'wep'];
+const SECURITY_OPTIONS: readonly { readonly value: WifiSecurity; readonly label: string }[] = [
+  { value: 'open', label: 'Open' },
+  { value: 'wpa', label: 'WPA' },
+  { value: 'wep', label: 'WEP' },
+];
+
+/** The words that are swallowed by the speaker while the sound plays. */
+function spokenText(draft: Draft): string {
+  switch (draft.selected) {
+    case 'text':
+      return draft.text;
+    case 'url':
+      return draft.url;
+    case 'wifi':
+      return draft.wifi.ssid;
+    case 'contact':
+      return draft.contact.name || draft.contact.email || draft.contact.phone;
+  }
+}
 /** What the byte candle and SCREECH key show for the current draft. */
 interface Reading {
   readonly budget: Budget;
@@ -188,7 +209,13 @@ export default function Speak({ flow, audio, draft: draftApi, onTransmission }: 
         return;
       }
       const handle = playWaveform(ctx, waveform);
-      onTransmission({ ok: true, handle, sampleRate: ctx.sampleRate, wave: waveform });
+      onTransmission({
+        ok: true,
+        handle,
+        sampleRate: ctx.sampleRate,
+        wave: waveform,
+        message: spokenText(draftRef.current),
+      });
       dispatch({ type: 'startTransmit' });
     } finally {
       sending.current = false;
@@ -226,8 +253,8 @@ export default function Speak({ flow, audio, draft: draftApi, onTransmission }: 
       }
     })();
   }
+  /** Called by the mode switch, which runs keepAlive first. */
   function openListen(): void {
-    keepAlive();
     const unlocking = audio.unlockAudio();
     void unlocking.then((outcome) => {
       if (outcome.ok) {
@@ -276,14 +303,21 @@ export default function Speak({ flow, audio, draft: draftApi, onTransmission }: 
   const shownNotice = state.notice ?? notice;
   return (
     <CrtFrame>
-      <main className="screen" aria-labelledby="speak-title">
+      <main className="screen screen-tight" aria-labelledby="speak-title">
+        <span className="sr-only">Screen: Speak</span>
+        <ModeSwitch
+          current="speak"
+          onListen={openListen}
+          listenDisabled={!listenEnabled}
+          onGesture={keepAlive}
+        />
+        {listenReason !== null ? <span className="muted">{listenReason}</span> : null}
         <div className="row">
-          <span className="label grow">Screen: Speak</span>
+          <h1 id="speak-title" className="note grow" style={{ margin: 0 }}>
+            Draw a card. Choose what crosses over.
+          </h1>
           <ExorciseToggle />
         </div>
-        <h1 id="speak-title" className="note" style={{ margin: 0 }}>
-          Draw a card. Choose what crosses over.
-        </h1>
         <div
           role="group"
           aria-label="Message type"
@@ -379,8 +413,8 @@ export default function Speak({ flow, audio, draft: draftApi, onTransmission }: 
                 {...gesture}
               >
                 {SECURITY_OPTIONS.map((option) => (
-                  <option key={option} value={option}>
-                    {option}
+                  <option key={option.value} value={option.value}>
+                    {option.label}
                   </option>
                 ))}
               </select>
@@ -428,7 +462,21 @@ export default function Speak({ flow, audio, draft: draftApi, onTransmission }: 
             </>
           ) : null}
         </div>
-        <ByteCandle budget={reading.budget} />
+        <ByteCandle budget={reading.budget}>
+          <button
+            type="button"
+            className="seal-toggle hit is-seal"
+            aria-disabled="true"
+            aria-pressed="false"
+            aria-describedby="speak-seal-note"
+            {...gesture}
+          >
+            Seal this message
+          </button>
+          <span id="speak-seal-note" className="muted">
+            {MSG_SEAL_LATER}
+          </span>
+        </ByteCandle>
         {reading.message !== null ? (
           <p
             className={`note${reading.budget.status === 'invalid' ? ' is-error' : ''}`}
@@ -437,19 +485,6 @@ export default function Speak({ flow, audio, draft: draftApi, onTransmission }: 
             {reading.message}
           </p>
         ) : null}
-        <button
-          type="button"
-          className="btn secondary hit is-seal"
-          aria-disabled="true"
-          aria-pressed="false"
-          aria-describedby="speak-seal-note"
-          {...gesture}
-        >
-          Seal this message
-        </button>
-        <span id="speak-seal-note" className="muted">
-          {MSG_SEAL_LATER}
-        </span>
         {state.wakePending ? (
           <div className="panel col" role="alert">
             <p className="note">{MSG_WAKE_SLEEPING}</p>
@@ -476,16 +511,6 @@ export default function Speak({ flow, audio, draft: draftApi, onTransmission }: 
         ) : null}
         <div className="col" style={{ marginTop: 'auto' }}>
           <ScreechKey hold={hold} disabled={!canSend} />
-          <button
-            type="button"
-            className="btn secondary hit"
-            disabled={!listenEnabled}
-            onClick={openListen}
-            onKeyDown={keepAlive}
-          >
-            LISTEN
-          </button>
-          {listenReason !== null ? <span className="muted">{listenReason}</span> : null}
         </div>
       </main>
     </CrtFrame>
