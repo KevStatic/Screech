@@ -34,6 +34,16 @@ describe('SwallowedText', () => {
     render(createElement(SwallowedText, { text: 'abcd', progress: 0.5 }));
     expect(document.querySelectorAll('.is-swallowed').length).toBe(2);
   });
+  it('groups each word, with its punctuation, so lines only break at spaces', () => {
+    render(createElement(SwallowedText, { text: 'Meet, me at 9!', progress: 0 }));
+    const words = [...document.querySelectorAll('[data-testid="swallow-word"]')].map((w) => w.textContent);
+    expect(words).toEqual(['Meet,', 'me', 'at', '9!']);
+    expect(document.querySelector('.swallow-box')?.textContent).toBe('Meet, me at 9!');
+  });
+  it('keeps swallowing in step across words', () => {
+    render(createElement(SwallowedText, { text: 'ab cd', progress: 0.6 }));
+    expect(document.querySelectorAll('.is-swallowed').length).toBe(3);
+  });
 });
 
 describe('SpeakerGrille', () => {

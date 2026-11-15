@@ -3,6 +3,15 @@ import { encode, type WifiSecurity } from '@screech/core';
 import { loadEngine } from '../../audio/engine';
 import { playWaveform, type PlaybackHandle } from '../../audio/transmit';
 import { budget, type Budget } from '../../logic/byte-budget';
+import {
+  LAB_DEFAULTS,
+  LAB_PROTOCOLS,
+  LAB_VOLUMES,
+  isLabEnabled,
+  type LabProtocol,
+  type LabSettings,
+  type LabVolume,
+} from '../../logic/lab';
 import { canListen, canTransmit, listenUnavailableReason } from '../../logic/flow';
 import { buildPayload, hasContent, type Draft, type TypeKey } from '../../logic/payload-draft';
 import ByteCandle from '../components/ByteCandle';
@@ -20,6 +29,7 @@ export const MSG_WAKE_SLEEPING = 'The box fell asleep. Tap to wake it.';
 export const MSG_WAKE_FAILED = 'Audio could not start. Tap to try again.';
 export const MSG_SEAL_LATER = 'Sealed messages arrive in a later release.';
 export const MSG_LISTEN_NO_MIC = 'Listening is off. The microphone is not available.';
+export const MSG_CONTACT_TOO_HEAVY_HINT = 'Try removing the phone number or shortening the name.';
 export const WAKE_LABEL = 'Tap to wake the box';
 /** What startTransmission() hands to the Screeching screen. */
 export type TransmissionOutcome =
@@ -40,6 +50,8 @@ export interface SpeakProps {
   readonly draft: DraftApi;
   /** Called just before the flow moves to Screeching. */
   readonly onTransmission: (outcome: TransmissionOutcome) => void;
+  /** Shows the dev-only range lab. Read from ?lab=1 in the URL when omitted. */
+  readonly lab?: boolean;
 }
 interface CardInfo {
   readonly key: TypeKey;
@@ -161,7 +173,17 @@ function read(draft: Draft): Reading {
   return { budget: result, message, sendable: result.status === 'ok' };
 }
 /** Screen 2: choose a card, write the message, hold SCREECH. */
-export default function Speak({ flow, audio, draft: draftApi, onTransmission }: SpeakProps): ReactElement {
+export default function Speak({
+  flow,
+  audio,
+  draft: draftApi,
+  onTransmission,
+  lab,
+}: SpeakProps): ReactElement {
+  const labOn = lab ?? isLabEnabled(window.location.search);
+  const [labSettings, setLabSettings] = useState<LabSettings>(LAB_DEFAULTS);
+  const labRef = useRef(labSettings);
+  labRef.current = labSettings;
   const { state, dispatch } = flow;
   const { draft, update } = draftApi;
   const [wakeBusy, setWakeBusy] = useState(false);
@@ -202,7 +224,9 @@ export default function Speak({ flow, audio, draft: draftApi, onTransmission }: 
       }
       let waveform: Float32Array;
       try {
-        waveform = engine.engine.encode(packet.value);
+        waveform = labOn
+          ? engine.engine.encode(packet.value, labRef.current)
+          : engine.engine.encode(packet.value);
       } catch {
         onTransmission({ ok: false, message: 'The sound engine could not start.' });
         dispatch({ type: 'startTransmit' });
@@ -477,6 +501,11 @@ export default function Speak({ flow, audio, draft: draftApi, onTransmission }: 
             {MSG_SEAL_LATER}
           </span>
         </ByteCandle>
+        {draft.selected === 'contact' && reading.budget.status === 'too-large' ? (
+          <p className="note" data-testid="contact-heavy-hint">
+            {MSG_CONTACT_TOO_HEAVY_HINT}
+          </p>
+        ) : null}
         {reading.message !== null ? (
           <p
             className={`note${reading.budget.status === 'invalid' ? ' is-error' : ''}`}
@@ -484,6 +513,43 @@ export default function Speak({ flow, audio, draft: draftApi, onTransmission }: 
           >
             {reading.message}
           </p>
+        ) : null}
+        {labOn ? (
+          <fieldset className="panel col lab" data-testid="range-lab">
+            <legend className="label">Range lab (dev)</legend>
+            <label className="label" htmlFor="lab-volume">
+              Transmit volume
+            </label>
+            <select
+              id="lab-volume"
+              className="field"
+              value={labSettings.volume}
+              onChange={(e) => setLabSettings((l) => ({ ...l, volume: Number(e.target.value) as LabVolume }))}
+            >
+              {LAB_VOLUMES.map((v) => (
+                <option key={v} value={v}>
+                  {v}
+                </option>
+              ))}
+            </select>
+            <label className="label" htmlFor="lab-protocol">
+              Protocol
+            </label>
+            <select
+              id="lab-protocol"
+              className="field"
+              value={labSettings.protocol}
+              onChange={(e) =>
+                setLabSettings((l) => ({ ...l, protocol: e.target.value as LabProtocol }))
+              }
+            >
+              {LAB_PROTOCOLS.map((p) => (
+                <option key={p} value={p}>
+                  {p}
+                </option>
+              ))}
+            </select>
+          </fieldset>
         ) : null}
         {state.wakePending ? (
           <div className="panel col" role="alert">

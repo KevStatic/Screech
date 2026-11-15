@@ -36,7 +36,7 @@ function installFake(): Fake {
           return fake.waveBytes;
         },
         decode: () => fake.decodeResult,
-        ProtocolId: { GGWAVE_PROTOCOL_AUDIBLE_FAST: 42 },
+        ProtocolId: { GGWAVE_PROTOCOL_AUDIBLE_FAST: 42, GGWAVE_PROTOCOL_AUDIBLE_NORMAL: 41 },
         SampleFormat: { GGWAVE_SAMPLE_FORMAT_F32: 5 },
       };
     },
@@ -80,6 +80,19 @@ describe('engine', () => {
     expect(Array.from(wave)).toEqual([0.25, -0.5]);
   });
 
+  it('encodes with the normal protocol and a chosen volume when asked', async () => {
+    const { loadEngine } = await import('../../src/audio/engine');
+    const r = await loadEngine(48000);
+    if (!r.ok) throw new Error('engine failed');
+    r.engine.encode(new Uint8Array([1]), { protocol: 'normal', volume: 100 });
+    expect(fake.encodeCalls[0]).toMatchObject({ protocol: 41, volume: 100 });
+  });
+  it('rejects a volume outside 1..100', async () => {
+    const { loadEngine } = await import('../../src/audio/engine');
+    const r = await loadEngine(48000);
+    if (!r.ok) throw new Error('engine failed');
+    expect(() => r.engine.encode(new Uint8Array([1]), { volume: 150 })).toThrow(RangeError);
+  });
   it('returns an encode result that does not share the fake buffer', async () => {
     const { loadEngine } = await import('../../src/audio/engine');
     const r = await loadEngine(48000);

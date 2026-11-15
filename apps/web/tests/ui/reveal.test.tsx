@@ -104,16 +104,63 @@ describe('Reveal spelling', () => {
     renderReveal({ type: 'text', text: evil } as Payload);
     expect(document.querySelector('img')).toBeNull();
     expect(document.querySelector('[onerror]')).toBeNull();
-    expect(document.querySelector('.action-card')?.textContent).toBe(evil);
+    expect(document.querySelector('.action-card')?.textContent).not.toContain(evil);
     expect(screen.getByTestId('reveal-full-text').textContent).toBe(evil);
   });
 });
 
 describe('ActionCard', () => {
-  it.each(['text', 'checkin', 'hunt-clue'] as const)('shows %s as plain text', (type) => {
-    render(<ActionCard payload={{ type, text: 'plain words' } as Payload} />);
+  it.each(['text', 'checkin', 'hunt-clue'] as const)(
+    '%s shows a Copy text button and does not repeat the text',
+    async (type) => {
+      const writeText = vi.fn(() => Promise.resolve());
+      Object.defineProperty(navigator, 'clipboard', { value: { writeText }, configurable: true });
+      render(<ActionCard payload={{ type, text: 'plain words' } as Payload} />);
+      expect(screen.queryByText('plain words')).toBeNull();
+      await act(async () => {
+        fireEvent.click(screen.getByRole('button', { name: 'Copy text' }));
+      });
+      expect(writeText).toHaveBeenCalledWith('plain words');
+      expect(screen.getByRole('status').textContent).toBe('Text copied.');
+    },
+  );
+  it('shows the text for hand copying when Copy text fails', async () => {
+    const writeText = vi.fn(() => Promise.reject(new Error('denied')));
+    Object.defineProperty(navigator, 'clipboard', { value: { writeText }, configurable: true });
+    render(<ActionCard payload={{ type: 'text', text: 'plain words' } as Payload} />);
+    await act(async () => {
+      fireEvent.click(screen.getByRole('button', { name: 'Copy text' }));
+    });
     expect(screen.getByText('plain words')).toBeTruthy();
-    expect(screen.queryByRole('button')).toBeNull();
+    expect(screen.getByRole('alert').textContent).toMatch(/Copying failed/);
+  });
+  it('wifi: network name is large, steps are shown, Copy password comes first, QR is hidden', () => {
+    render(
+      <ActionCard payload={{ type: 'wifi', ssid: 'CoffeeNet', password: 'hunter2', security: 'wpa' } as Payload} />,
+    );
+    expect(screen.getByTestId('wifi-ssid').textContent).toBe('CoffeeNet');
+    expect(screen.getByTestId('wifi-steps').textContent).toBe(
+      'Open Wi-Fi settings, choose CoffeeNet, paste the password.',
+    );
+    const buttons = screen.getAllByRole('button');
+    expect(buttons[0]?.textContent).toBe('Copy password');
+    expect(buttons[0]?.className).not.toContain('secondary');
+    expect(document.querySelector('canvas.wifi-qr')).toBeNull();
+  });
+  it('wifi: the QR appears only after "Show QR for someone else" and hides again', () => {
+    render(
+      <ActionCard payload={{ type: 'wifi', ssid: 'CoffeeNet', password: 'hunter2', security: 'wpa' } as Payload} />,
+    );
+    const toggle = screen.getByRole('button', { name: 'Show QR for someone else' });
+    expect(toggle.getAttribute('aria-expanded')).toBe('false');
+    fireEvent.click(toggle);
+    expect(document.querySelector('canvas.wifi-qr, [aria-label="QR code to join CoffeeNet"]')).not.toBeNull();
+    fireEvent.click(screen.getByRole('button', { name: 'Hide QR' }));
+    expect(document.querySelector('canvas.wifi-qr')).toBeNull();
+  });
+  it('wifi: an open network has steps without a password', () => {
+    render(<ActionCard payload={{ type: 'wifi', ssid: 'Free', password: '', security: 'open' } as Payload} />);
+    expect(screen.getByTestId('wifi-steps').textContent).toBe('Open Wi-Fi settings, choose Free.');
   });
 
   it('opens a safe url only on tap, with noopener', () => {

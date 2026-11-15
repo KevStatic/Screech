@@ -17,7 +17,7 @@ declare module 'ggwave' {
       volume: number,
     ): Int8Array;
     decode(instance: number, samples: Int8Array): Int8Array;
-    ProtocolId: { GGWAVE_PROTOCOL_AUDIBLE_FAST: number; [key: string]: number };
+    ProtocolId: { GGWAVE_PROTOCOL_AUDIBLE_FAST: number; GGWAVE_PROTOCOL_AUDIBLE_NORMAL: number; [key: string]: number };
     SampleFormat: { GGWAVE_SAMPLE_FORMAT_F32: number; [key: string]: number };
   }
 

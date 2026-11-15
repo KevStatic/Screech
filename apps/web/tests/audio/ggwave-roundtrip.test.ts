@@ -81,3 +81,27 @@ describe('real ggwave round trip', () => {
     });
   }
 });
+
+describe('real ggwave: the receiver decodes both protocols', () => {
+  for (const protocol of ['fast', 'normal'] as const) {
+    for (const volume of [50, 75, 100]) {
+      it(`${protocol} at volume ${volume} decodes unchanged`, async () => {
+        const loaded = await loadEngine(48000);
+        if (!loaded.ok) throw new Error(loaded.message);
+        const bytes = coreBytes({ type: 'text', text: 'Range lab check' });
+        const wave = loaded.engine.encode(bytes, { protocol, volume });
+        const found = decodeThroughChunker(loaded.engine, wave, 48000);
+        expect(found.length).toBeGreaterThanOrEqual(1);
+        expect(Array.from(found[0]!)).toEqual(Array.from(bytes));
+      }, 60_000);
+    }
+  }
+  it('normal is slower than fast', async () => {
+    const loaded = await loadEngine(48000);
+    if (!loaded.ok) throw new Error(loaded.message);
+    const bytes = coreBytes({ type: 'text', text: 'Range lab check' });
+    expect(loaded.engine.encode(bytes, { protocol: 'normal' }).length).toBeGreaterThan(
+      loaded.engine.encode(bytes, { protocol: 'fast' }).length,
+    );
+  }, 60_000);
+});

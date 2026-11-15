@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import type { ReactNode } from 'react';
 import QRCode from 'qrcode';
 import type { Payload } from '@screech/core';
@@ -49,22 +49,41 @@ function UrlCard({ url }: { readonly url: string }) {
   );
 }
 
-function WifiCard(props: {
+/** Copies to the clipboard. Never throws; reports the outcome through `done`. */
+function copyText(value: string, done: (state: CopyState) => void): void {
+  try {
+    const write = navigator.clipboard?.writeText(value);
+    if (write === undefined) {
+      done('failed');
+      return;
+    }
+    write.then(
+      () => done('copied'),
+      () => done('failed'),
+    );
+  } catch {
+    done('failed');
+  }
+}
+function WifiQr(props: {
   readonly ssid: string;
   readonly password: string;
   readonly security: 'open' | 'wpa' | 'wep';
+  readonly onFailed: () => void;
 }) {
-  const { ssid, password, security } = props;
-  const [copy, setCopy] = useState<CopyState>('idle');
+  const { ssid, password, security, onFailed } = props;
   const [qr, setQr] = useState<QrState>('pending');
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const isOpen = security === 'open';
-
   useEffect(() => {
     let cancelled = false;
     const canvas = canvasRef.current;
-    if (canvas === null) {
+    const fail = (): void => {
+      if (cancelled) return;
       setQr('failed');
+      onFailed();
+    };
+    if (canvas === null) {
+      fail();
       return undefined;
     }
     try {
@@ -72,42 +91,44 @@ function WifiCard(props: {
         () => {
           if (!cancelled) setQr('drawn');
         },
-        () => {
-          if (!cancelled) setQr('failed');
-        },
+        fail,
       );
     } catch {
-      setQr('failed');
+      fail();
     }
     return () => {
       cancelled = true;
     };
-  }, [ssid, password, security]);
-
-  const onCopy = (): void => {
-    try {
-      const write = navigator.clipboard?.writeText(password);
-      if (write === undefined) {
-        setCopy('failed');
-        return;
-      }
-      write.then(
-        () => setCopy('copied'),
-        () => setCopy('failed'),
-      );
-    } catch {
-      setCopy('failed');
-    }
-  };
-
-  const qrFailed = qr === 'failed';
+  }, [ssid, password, security, onFailed]);
+  if (qr === 'failed') {
+    return (
+      <p className="note is-error" role="alert">
+        The QR code could not be drawn. The network details are shown above.
+      </p>
+    );
+  }
+  return <canvas ref={canvasRef} className="wifi-qr" role="img" aria-label={`QR code to join ${ssid}`} />;
+}
+function WifiCard(props: {
+  readonly ssid: string;
+  readonly password: string;
+  readonly security: 'open' | 'wpa' | 'wep';
+}) {
+  const { ssid, password, security } = props;
+  const [copy, setCopy] = useState<CopyState>('idle');
+  const [showQr, setShowQr] = useState(false);
+  const [qrFailed, setQrFailed] = useState(false);
+  const isOpen = security === 'open';
+  const onQrFailed = useCallback(() => setQrFailed(true), []);
   return (
     <div className="action-card" data-type="wifi">
-      <Row label="Network">{ssid}</Row>
+      <p className="action-ssid wrap" data-testid="wifi-ssid">
+        {ssid}
+      </p>
       <Row label="Security">{SECURITY_LABEL[security]}</Row>
       {!isOpen && (
         <>
-          <button type="button" className="btn hit" onClick={onCopy}>
+          <button type="button" className="btn hit" onClick={() => copyText(password, setCopy)}>
             Copy password
           </button>
           {copy === 'copied' && (
@@ -127,22 +148,48 @@ function WifiCard(props: {
           )}
         </>
       )}
-      {qrFailed ? (
-        <p className="note is-error" role="alert">
-          The QR code could not be drawn. The network details are shown above.
+      <p className="note" data-testid="wifi-steps">
+        {isOpen
+          ? `Open Wi-Fi settings, choose ${ssid}.`
+          : `Open Wi-Fi settings, choose ${ssid}, paste the password.`}
+      </p>
+      <button
+        type="button"
+        className="btn secondary hit"
+        aria-expanded={showQr}
+        onClick={() => setShowQr((v) => !v)}
+      >
+        {showQr ? 'Hide QR' : 'Show QR for someone else'}
+      </button>
+      {showQr ? <WifiQr ssid={ssid} password={password} security={security} onFailed={onQrFailed} /> : null}
+    </div>
+  );
+}
+function TextCard(props: { readonly type: string; readonly text: string }) {
+  const [copy, setCopy] = useState<CopyState>('idle');
+  return (
+    <div className="action-card" data-type={props.type}>
+      <button type="button" className="btn hit" onClick={() => copyText(props.text, setCopy)}>
+        Copy text
+      </button>
+      {copy === 'copied' && (
+        <p className="note" role="status">
+          Text copied.
         </p>
-      ) : (
-        <canvas
-          ref={canvasRef}
-          className="wifi-qr"
-          role="img"
-          aria-label={`QR code to join ${ssid}`}
-        />
+      )}
+      {copy === 'failed' && (
+        <>
+          <p className="note is-error" role="alert">
+            Copying failed. Select the text below and copy it by hand.
+          </p>
+          <p className="note" style={{ userSelect: 'all' }}>
+            {props.text}
+          </p>
+        </>
       )}
     </div>
   );
 }
-
 function ContactCard({ text }: { readonly text: string }) {
   const parsed = parseContactText(text);
   if (!parsed.ok) {
@@ -191,10 +238,6 @@ export default function ActionCard({ payload }: ActionCardProps) {
     case 'text':
     case 'checkin':
     case 'hunt-clue':
-      return (
-        <div className="action-card" data-type={payload.type}>
-          <p className="note">{payload.text}</p>
-        </div>
-      );
+      return <TextCard type={payload.type} text={payload.text} />;
   }
 }

@@ -1,7 +1,7 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { act, cleanup, fireEvent, render, screen } from '@testing-library/react';
 import { createElement, useEffect, type ReactElement } from 'react';
-import Speak, { MSG_NOTHING_WRITTEN, MSG_SEAL_LATER } from '../../src/ui/screens/Speak';
+import Speak, { MSG_CONTACT_TOO_HEAVY_HINT, MSG_NOTHING_WRITTEN, MSG_SEAL_LATER } from '../../src/ui/screens/Speak';
 import { useFlow } from '../../src/ui/hooks/useFlow';
 import { useDraft } from '../../src/ui/hooks/useDraft';
 import { HOLD_DURATION_MS } from '../../src/logic/hold-machine';
@@ -186,6 +186,30 @@ describe('Speak: SCREECH key states', () => {
     expect((screechKey() as HTMLButtonElement).disabled).toBe(true);
   });
 
+  it('too heavy for a contact: suggests removing the phone or shortening the name', () => {
+    mount();
+    fireEvent.click(card(/summon/i));
+    write(/^name$/i, 'N'.repeat(100));
+    write(/^phone$/i, '5'.repeat(30));
+    write(/^email$/i, 'e'.repeat(30) + '@example.com');
+    expect(screen.getByTestId('contact-heavy-hint').textContent).toBe(MSG_CONTACT_TOO_HEAVY_HINT);
+    expect((screechKey() as HTMLButtonElement).disabled).toBe(true);
+  });
+  it('shows no contact hint when the contact fits, or for other types when too heavy', () => {
+    mount();
+    fireEvent.click(card(/summon/i));
+    write(/^name$/i, 'Ada');
+    expect(screen.queryByTestId('contact-heavy-hint')).toBeNull();
+    fireEvent.click(card(/whisper/i));
+    write(/your whisper/i, 'a'.repeat(300));
+    expect(screen.queryByTestId('contact-heavy-hint')).toBeNull();
+  });
+  it('labels the Wi-Fi security options Open, WPA and WEP', () => {
+    mount();
+    fireEvent.click(card(/ether/i));
+    const labels = [...(field(/security/i) as unknown as HTMLSelectElement).options].map((o) => o.textContent);
+    expect(labels).toEqual(['Open', 'WPA', 'WEP']);
+  });
   it('is disabled while listening is not possible to combine with sending', () => {
     mount();
     write(/your whisper/i, 'hi');

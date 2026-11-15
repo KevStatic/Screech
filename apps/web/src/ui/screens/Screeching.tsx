@@ -12,6 +12,7 @@ import type { TransmissionOutcome } from './Speak';
 
 export const MSG_TRAVELLING = 'The sound is still travelling. Keep the phones close until it ends.';
 export const MSG_CROSSED_OVER = 'The sound has crossed over.';
+export const MSG_NOBODY_HEARD = 'Nobody heard? Turn up the volume and screech again.';
 export const MSG_NOT_LEFT = 'The sound did not leave the speaker.';
 export const LABEL_CANCEL = 'Cancel';
 export const LABEL_RETURN = 'Back to Speak';
@@ -188,9 +189,14 @@ function Playback({ handle, wave, sampleRate, message, onLeave }: PlaybackProps)
       </div>
 
       {done ? (
-        <p className="note" role="status" data-testid="screeching-done">
-          {MSG_CROSSED_OVER}
-        </p>
+        <>
+          <p className="note" role="status" data-testid="screeching-done">
+            {MSG_CROSSED_OVER}
+          </p>
+          <p className="muted" data-testid="screeching-nobody-heard">
+            {MSG_NOBODY_HEARD}
+          </p>
+        </>
       ) : (
         <p className="note" data-testid="screeching-travelling">
           {MSG_TRAVELLING}

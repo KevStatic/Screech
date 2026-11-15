@@ -334,4 +334,42 @@ describe('full flow (App with fake audio and engine)', () => {
     });
     expect(screenLabel('Reveal')).toBeTruthy();
   });
+
+  describe('range lab', () => {
+    const encodeSpy = vi.fn((_p: Uint8Array, _o?: unknown) => new Float32Array(480));
+    beforeEach(() => {
+      encodeSpy.mockClear();
+      loadEngineMock.mockResolvedValue({ ok: true, engine: { encode: encodeSpy, decode: () => null } });
+    });
+    afterEach(() => {
+      window.history.replaceState(null, '', '/');
+    });
+    it('is hidden without ?lab=1 and the default transmission passes no options', async () => {
+      await awaken();
+      expect(screen.queryByTestId('range-lab')).toBeNull();
+      write('plain send');
+      await holdKey();
+      expect(encodeSpy).toHaveBeenCalledTimes(1);
+      expect(encodeSpy.mock.calls[0]).toHaveLength(1);
+    });
+    it('with ?lab=1 shows the selectors, defaulting to 50 and fast', async () => {
+      window.history.replaceState(null, '', '/?lab=1');
+      await awaken();
+      expect(screen.getByTestId('range-lab')).toBeTruthy();
+      expect((screen.getByLabelText('Transmit volume') as HTMLSelectElement).value).toBe('50');
+      expect((screen.getByLabelText('Protocol') as HTMLSelectElement).value).toBe('fast');
+      write('lab default');
+      await holdKey();
+      expect(encodeSpy.mock.calls[0]?.[1]).toEqual({ volume: 50, protocol: 'fast' });
+    });
+    it('with ?lab=1 transmits with the chosen volume and protocol', async () => {
+      window.history.replaceState(null, '', '/?lab=1');
+      await awaken();
+      fireEvent.change(screen.getByLabelText('Transmit volume'), { target: { value: '75' } });
+      fireEvent.change(screen.getByLabelText('Protocol'), { target: { value: 'normal' } });
+      write('lab custom');
+      await holdKey();
+      expect(encodeSpy.mock.calls[0]?.[1]).toEqual({ volume: 75, protocol: 'normal' });
+    });
+  });
 });

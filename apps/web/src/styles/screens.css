@@ -634,7 +634,10 @@ svg {
   line-height: 1.15;
   color: var(--bone);
   text-align: center;
-  overflow-wrap: anywhere;
+}
+.swallow-word {
+  display: inline-block;
+  white-space: nowrap;
 }
 .swallow {
   display: inline-block;
@@ -688,4 +691,11 @@ svg {
 @keyframes sb-ring {
   from { transform: scale(0.9); opacity: 0.8; }
   to { transform: scale(1.4); opacity: 0; }
+}
+/* ---- Reveal: Wi-Fi network name ---- */
+.action-ssid {
+  margin: 0;
+  font-size: 40px;
+  line-height: 1.05;
+  color: var(--phosphor);
 }

@@ -1,11 +1,17 @@
 import { ggwaveViewToBytes, waveformFromBytes } from '../logic/bytes';
-import { TRANSMIT_VOLUME } from './constants';
+import { TRANSMIT_VOLUME, defineTransmitVolume } from './constants';
 
 /** The sound engine as the rest of the app sees it. Easy to fake in tests. */
+export type SoundProtocol = 'fast' | 'normal';
+/** Per-call overrides. Omitted fields use the product defaults (fast, TRANSMIT_VOLUME). */
+export interface EncodeOptions {
+  readonly volume?: number;
+  readonly protocol?: SoundProtocol;
+}
 export interface GgwaveEngine {
   /** Turns packet bytes into audio samples (a fresh, owned Float32Array). */
-  encode(packet: Uint8Array): Float32Array;
-  /** Decodes one chunk of samples. Returns a copy of the packet bytes, or null if none. */
+  encode(packet: Uint8Array, options?: EncodeOptions): Float32Array;
+  /** Decodes one chunk of samples, whichever protocol sent it. Returns a copy of the packet bytes, or null if none. */
   decode(samples: Float32Array): Uint8Array | null;
 }
 
@@ -29,13 +35,14 @@ async function createEngine(sampleRate: number): Promise<EngineResult> {
     const instance = gg.init(params);
 
     const engine: GgwaveEngine = {
-      encode(packet) {
-        const wave = gg.encode(
-          instance,
-          packet,
-          gg.ProtocolId.GGWAVE_PROTOCOL_AUDIBLE_FAST,
-          TRANSMIT_VOLUME,
-        );
+      encode(packet, options) {
+        const protocol =
+          options?.protocol === 'normal'
+            ? gg.ProtocolId.GGWAVE_PROTOCOL_AUDIBLE_NORMAL
+            : gg.ProtocolId.GGWAVE_PROTOCOL_AUDIBLE_FAST;
+        const volume =
+          options?.volume === undefined ? TRANSMIT_VOLUME : defineTransmitVolume(options.volume);
+        const wave = gg.encode(instance, packet, protocol, volume);
         return waveformFromBytes(wave);
       },
       decode(samples) {
