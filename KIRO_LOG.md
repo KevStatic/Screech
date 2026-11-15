@@ -48,3 +48,9 @@
 - Kiro features used: chat, property tests.
 - 9:36 PM - Added a crypto self-test button to the `apps/spike` page so the sealed mode can be checked on a real phone, which is the manual iOS Safari and Android Chrome check still open from the spec. `apps/spike/src/selftest.ts` seals and opens a message with `@screech/core` (now a workspace dependency of the spike) and also compares one sealed packet against a known answer generated with `node:crypto`. Results are listed as PASS or FAIL on the page. It has not been run on a phone yet.
 - Kiro features used: chat.
+
+## November 15, 2026
+
+- 9:52 AM - Added the UI design reference in `docs/design/`: a README and seven `.dc.html` mockup screens (Awaken, Speak, Screeching, Listen, Reveal, Cursed packet, Séance room). They are reference only and are meant to be rebuilt in React in `apps/web`.
+- 9:56 AM - Added a `ui-theme.md` steering file, "the spirit box". It sets the colours, the three fonts, mobile-first sizing (390 px wide, 44 px touch targets, 4.5:1 contrast), the reduced-motion and Exorcise rules, and the copy voice. Its main rule is that every spooky effect must show real state.
+- Kiro features used: steering.

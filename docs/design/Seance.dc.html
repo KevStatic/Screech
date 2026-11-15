@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Screech · Séance room</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Creepster&amp;family=Special+Elite&amp;family=VT323&amp;display=swap">
+<style>
+body{margin:0;background:#050806}
+a{color:#39ff7a}
+a:hover{color:#b6ffcb}
+.crt{position:relative;overflow:hidden}
+.crt::before{content:"";position:absolute;inset:0;pointer-events:none;z-index:20;background:radial-gradient(ellipse at 30% 50%,rgba(0,0,0,0) 45%,rgba(0,0,0,0.75) 100%)}
+.crt::after{content:"";position:absolute;inset:0;pointer-events:none;z-index:21;background:repeating-linear-gradient(to bottom,rgba(255,255,255,0.025) 0,rgba(255,255,255,0.025) 1px,rgba(0,0,0,0) 2px,rgba(0,0,0,0) 4px)}
+.glow{text-shadow:0 0 6px rgba(57,255,122,0.6),0 0 22px rgba(57,255,122,0.25)}
+.spin{transform-origin:50% 50%;animation:spin 80s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.burst{animation:burst 2.6s ease-out forwards}
+@keyframes burst{from{transform:scale(.55);opacity:.9}to{transform:scale(2.1);opacity:0}}
+.flame{transform-origin:50% 100%;animation:flame 1.5s ease-in-out infinite alternate}
+@keyframes flame{0%{transform:scale(1,1) rotate(-3deg)}50%{transform:scale(.9,1.1) rotate(2deg)}100%{transform:scale(1.05,.92) rotate(-1deg)}}
+.arrive{animation:arrive .7s ease-out backwards}
+@keyframes arrive{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion: reduce){*,*::before,*::after{animation:none !important;transition:none !important}.burst{display:none}}
+</style>
+</helmet>
+<div class="crt" style="width: 1280px; height: 800px; box-sizing: border-box; background: radial-gradient(circle at 34% 50%, #0b1a0f 0%, #050806 60%); color: #39ff7a; font-family: 'VT323', monospace; display: flex; gap: 40px; padding: 48px 56px 48px 40px">
+  <div aria-hidden="true" style="position: relative; flex: 0 0 auto; width: 680px; height: 704px">
+    <div style="position: absolute; left: 20px; top: 32px; width: 640px; height: 640px">
+      <div style="position: absolute; inset: 40px; border-radius: 50%; border: 1px solid #2f5a3a"></div>
+      <div style="position: absolute; inset: 70px; border-radius: 50%; border: 1px dashed #1f3a27"></div>
+      <sc-if value="{{pulsing}}" hint-placeholder-val="{{ false }}">
+        <div class="burst" style="position: absolute; left: 190px; top: 190px; width: 260px; height: 260px; border-radius: 50%; border: 3px solid #39ff7a; box-shadow: 0 0 30px rgba(57,255,122,.6)"></div>
+      </sc-if>
+      <svg class="spin" viewBox="0 0 640 640" width="640" height="640" style="position: absolute; left: 0; top: 0; filter: drop-shadow(0 0 8px rgba(57,255,122,.55))"><circle cx="320" cy="320" r="132" fill="none" stroke="#39ff7a" style="stroke-width: 1.5px"></circle><circle cx="320" cy="320" r="104" fill="none" stroke="#2f5a3a" style="stroke-width: 1px"></circle><polygon points="{{sigil}}" fill="none" stroke="#39ff7a" style="stroke-width: 1.6px; stroke-linejoin: round"></polygon><circle cx="320" cy="320" r="10" fill="#39ff7a"></circle></svg>
+      <sc-for list="{{candles}}" as="c" hint-placeholder-count="12">
+        <div style="position: absolute; left: {{c.x}}px; top: {{c.y}}px; width: 72px; height: 104px; display: flex; flex-direction: column; align-items: center; justify-content: flex-end">
+          <sc-if value="{{c.lit}}" hint-placeholder-val="{{ true }}">
+            <svg class="flame arrive" width="20" height="30" viewBox="0 0 26 36" style="filter: drop-shadow(0 0 10px rgba(255,180,80,.9))"><path d="M13 1C17 9 23 14 23 22a10 10 0 0 1-20 0C3 15 9 10 13 1z" fill="#ffb347"></path><path d="M13 13c2 4 5 6 5 10a5 5 0 0 1-10 0c0-3 3-6 5-10z" fill="#fff1c9"></path></svg>
+          </sc-if>
+          <div style="width: 2px; height: 6px; background: #222"></div>
+          <div style="width: 22px; height: 40px; border-radius: 3px 3px 0 0; background: {{c.wax}}"></div>
+          <span style="margin-top: 4px; font-size: 18px; color: {{c.nameColor}}; white-space: nowrap">{{c.name}}</span>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+
+  <div style="flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 22px">
+    <div>
+      <h1 class="glow" style="margin: 0; font-family: 'Creepster', cursive; font-weight: 400; font-size: 66px; letter-spacing: 4px; line-height: 1">THE SÉANCE</h1>
+      <p style="margin: 6px 0 0; font-family: 'Special Elite', monospace; font-size: 18px; color: #e9e4d4">[YOUR EVENT NAME] · check-in by sound</p>
+    </div>
+
+    <div style="display: flex; align-items: flex-end; gap: 16px">
+      <span class="glow" style="font-size: 132px; line-height: .8">{{souls}}</span>
+      <span style="font-size: 30px; line-height: 1.1; color: #e9e4d4; padding-bottom: 6px">souls<br>present</span>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 8px">
+      <div style="display: flex; justify-content: space-between; font-size: 24px"><span style="color: #e9e4d4">Next screech in</span><span>{{t}} s</span></div>
+      <div style="height: 8px; border-radius: 4px; background: #15291a; overflow: hidden"><div style="height: 8px; width: {{tPct}}%; background: #39ff7a; transition: width 1s linear"></div></div>
+      <p style="margin: 0; font-family: 'Special Elite', monospace; font-size: 15px; line-height: 1.45; color: #e9e4d4">The sigil is this window's check-in code. It changes every 20 seconds, so a photo of it is useless a minute later.</p>
+    </div>
+
+    <section aria-label="Latest arrivals" style="display: flex; flex-direction: column; gap: 6px; padding: 14px 16px; border: 1px solid #2f5a3a; border-radius: 10px">
+      <span style="font-size: 20px; letter-spacing: 2px; color: #5aa86c">LATEST ARRIVALS</span>
+      <sc-for list="{{recent}}" as="r" hint-placeholder-count="4">
+        <div style="display: flex; justify-content: space-between; font-size: 22px"><span style="color: #e9e4d4">{{r.name}} crossed over</span><span style="color: #5aa86c">{{r.when}}</span></div>
+      </sc-for>
+    </section>
+
+    <div style="margin-top: auto; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px">
+      <button type="button" onClick="{{screechNow}}" style="min-height: 56px; border-radius: 10px; border: none; background: #39ff7a; color: #050806; font-family: 'VT323', monospace; font-size: 26px; letter-spacing: 2px; cursor: pointer">Screech now</button>
+      <button type="button" aria-pressed="{{pausedStr}}" onClick="{{togglePause}}" style="min-height: 56px; border-radius: 10px; border: 1px solid #39ff7a; background: transparent; color: #39ff7a; font-family: 'VT323', monospace; font-size: 26px; cursor: pointer">{{pauseLabel}}</button>
+    </div>
+    <p style="margin: 0; font-size: 19px; color: #5aa86c">Remote guests: share this tab with audio on your call.</p>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1280,"height":800}}'>
+class Component extends DCLogic {
+  componentDidMount() {
+    var self = this;
+    this.timer = setInterval(function () {
+      var s = self.state || {};
+      if (s.paused) return;
+      var t = (s.t === undefined ? 13 : s.t) - 1;
+      if (t <= 0) {
+        self.broadcast();
+      } else {
+        self.setState({ t: t });
+      }
+    }, 1000);
+  }
+  componentWillUnmount() {
+    clearInterval(this.timer);
+  }
+  broadcast() {
+    var s = this.state || {};
+    var souls = s.souls === undefined ? 7 : s.souls;
+    this.setState({ t: 20, souls: Math.min(12, souls + 1) });
+  }
+  renderVals() {
+    var s = this.state || {};
+    var self = this;
+    var names = ['Raven', 'Moth', 'Hex', 'Wren', 'Ash', 'Vesper', 'Nyx', 'Rook', 'Sable', 'Thorn', 'Ember', 'Wisp'];
+    var souls = s.souls === undefined ? 7 : s.souls;
+    var t = s.t === undefined ? 13 : s.t;
+    var paused = !!s.paused;
+    var candles = [];
+    for (var i = 0; i < 12; i++) {
+      var a = (-90 + i * 30) * Math.PI / 180;
+      var lit = i < souls;
+      candles.push({
+        x: Math.round(320 + 268 * Math.cos(a) - 36),
+        y: Math.round(320 + 268 * Math.sin(a) - 62),
+        lit: lit,
+        name: lit ? names[i] : '·',
+        wax: lit ? 'linear-gradient(90deg, #cfc8b2, #f4efe0 45%, #b9b29c)' : '#1d2a20',
+        nameColor: lit ? '#e9e4d4' : '#2f5a3a'
+      });
+    }
+    var pts = [];
+    for (var k = 0; k < 12; k++) {
+      var idx = (k * 5) % 12;
+      var ang = (-90 + idx * 30) * Math.PI / 180;
+      pts.push((320 + 120 * Math.cos(ang)).toFixed(1) + ',' + (320 + 120 * Math.sin(ang)).toFixed(1));
+    }
+    var recent = [];
+    for (var r = souls - 1; r >= 0 && recent.length < 4; r--) {
+      recent.push({ name: names[r], when: recent.length === 0 ? 'just now' : (recent.length * 20) + ' s ago' });
+    }
+    return {
+      candles: candles,
+      sigil: pts.join(' '),
+      souls: souls,
+      t: t,
+      tPct: Math.round((20 - t) / 20 * 100),
+      pulsing: t >= 18,
+      recent: recent,
+      pausedStr: String(paused),
+      pauseLabel: paused ? 'Resume séance' : 'Pause séance',
+      togglePause: function () { self.setState({ paused: !paused }); },
+      screechNow: function () { self.broadcast(); }
+    };
+  }
+}
+</script>
+</body>
+</html>

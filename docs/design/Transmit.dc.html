@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Screech · Screeching</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Creepster&amp;family=Special+Elite&amp;family=VT323&amp;display=swap">
+<style>
+body{margin:0;background:#050806}
+a{color:#39ff7a}
+a:hover{color:#b6ffcb}
+.crt{position:relative;overflow:hidden}
+.crt::before{content:"";position:absolute;inset:0;pointer-events:none;z-index:20;background:radial-gradient(ellipse at center,rgba(0,0,0,0) 58%,rgba(0,0,0,0.72) 100%)}
+.crt::after{content:"";position:absolute;inset:0;pointer-events:none;z-index:21;background:repeating-linear-gradient(to bottom,rgba(255,255,255,0.03) 0,rgba(255,255,255,0.03) 1px,rgba(0,0,0,0) 2px,rgba(0,0,0,0) 4px)}
+.glow{text-shadow:0 0 6px rgba(57,255,122,0.6),0 0 22px rgba(57,255,122,0.25)}
+.scope{animation:scroll 1.2s linear infinite}
+@keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-350px)}}
+.suck{display:inline-block;animation:suck 2.6s ease-in infinite}
+@keyframes suck{0%,35%{transform:none;opacity:1}100%{transform:translate(0,190px) scale(.15) rotate(25deg);opacity:0}}
+.ring{animation:ring 1.6s ease-out infinite}
+@keyframes ring{from{transform:scale(.9);opacity:.8}to{transform:scale(1.55);opacity:0}}
+.ghostmove{animation:ghostmove 3.2s linear infinite}
+@keyframes ghostmove{from{left:0%}to{left:calc(100% - 34px)}}
+.fill{animation:fill 3.2s linear infinite}
+@keyframes fill{from{width:0%}to{width:100%}}
+.dots::after{content:"...";animation:dots 1.5s steps(4) infinite;display:inline-block;width:1.5em;overflow:hidden;vertical-align:bottom}
+@keyframes dots{from{width:0}to{width:1.5em}}
+@media (prefers-reduced-motion: reduce){*,*::before,*::after{animation:none !important;transition:none !important}.fill{width:62%}.ghostmove{left:58%}}
+</style>
+</helmet>
+<div class="crt" style="width: 390px; height: 844px; box-sizing: border-box; background: #050806; color: #39ff7a; font-family: 'VT323', monospace; display: flex; flex-direction: column; gap: 18px; padding: 20px 20px 24px">
+  <div style="display: flex; justify-content: space-between; align-items: baseline">
+    <h1 class="glow dots" style="margin: 0; font-weight: 400; font-size: 34px; letter-spacing: 3px">POSSESSING THE AIR</h1>
+  </div>
+  <p style="margin: 0; font-family: 'Special Elite', monospace; font-size: 15px; line-height: 1.45; color: #e9e4d4">Hold the phone up. Every device in earshot is listening.</p>
+
+  <figure style="margin: 0; display: flex; flex-direction: column; gap: 6px">
+    <div style="position: relative; height: 128px; border: 1px solid #2f5a3a; border-radius: 8px; overflow: hidden; background-color: #07110a; background-image: linear-gradient(rgba(57,255,122,.08) 1px, transparent 1px), linear-gradient(90deg, rgba(57,255,122,.08) 1px, transparent 1px); background-size: 25px 25px">
+      <svg class="scope" width="700" height="120" viewBox="0 0 700 120" aria-hidden="true" style="position: absolute; left: 0; top: 4px; filter: drop-shadow(0 0 4px rgba(57,255,122,.8))"><path d="{{wave}}" fill="none" stroke="#39ff7a" style="stroke-width: 2px"></path></svg>
+    </div>
+    <figcaption style="display: flex; justify-content: space-between; font-size: 17px; color: #5aa86c"><span>OSCILLOSCOPE · OUTGOING</span><span>AUDIBLE FAST</span></figcaption>
+  </figure>
+
+  <div aria-label="Message being sent" style="min-height: 92px; font-size: 26px; line-height: 1.15; color: #e9e4d4; text-align: center">
+    <sc-for list="{{letters}}" as="c" hint-placeholder-count="20">
+      <span class="suck" style="animation-delay: {{c.d}}; white-space: pre">{{c.ch}}</span>
+    </sc-for>
+  </div>
+
+  <div aria-hidden="true" style="position: relative; align-self: center; width: 170px; height: 170px">
+    <div class="ring" style="position: absolute; inset: 0; border: 2px solid #39ff7a; border-radius: 50%"></div>
+    <div class="ring" style="position: absolute; inset: 0; border: 2px solid #39ff7a; border-radius: 50%; animation-delay: .8s"></div>
+    <div style="position: absolute; inset: 0; border-radius: 50%; border: 3px solid #2f5a3a; background-color: #0a140c; background-image: radial-gradient(circle, #39ff7a 1.6px, transparent 2.2px); background-size: 12px 12px; box-shadow: inset 0 0 30px #000"></div>
+  </div>
+
+  <div style="display: flex; flex-direction: column; gap: 6px">
+    <div style="position: relative; height: 34px">
+      <div style="position: absolute; left: 0; right: 0; top: 15px; height: 4px; border-radius: 2px; background: #15291a"></div>
+      <div class="fill" style="position: absolute; left: 0; top: 15px; height: 4px; border-radius: 2px; background: #39ff7a"></div>
+      <svg class="ghostmove" width="34" height="34" viewBox="0 0 24 24" aria-hidden="true" fill="#e9e4d4" style="position: absolute; top: 0"><path d="M12 2a8 8 0 0 0-8 8v11l2.7-2 2.6 2 2.7-2 2.7 2 2.6-2L20 21V10a8 8 0 0 0-8-8z"></path><circle cx="9" cy="10" r="1.4" fill="#050806"></circle><circle cx="15" cy="10" r="1.4" fill="#050806"></circle></svg>
+    </div>
+    <div style="display: flex; justify-content: space-between; font-size: 18px; color: #5aa86c"><span>53 bytes · whisper</span><span>crossing over</span></div>
+  </div>
+
+  <div style="margin-top: auto; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px">
+    <a href="Speak.dc.html" style="display: flex; align-items: center; justify-content: center; height: 54px; border-radius: 8px; border: 1px solid #39ff7a; color: #39ff7a; text-decoration: none; font-size: 22px">Screech again</a>
+    <a href="Listen.dc.html" style="display: flex; align-items: center; justify-content: center; height: 54px; border-radius: 8px; background: #39ff7a; color: #050806; text-decoration: none; font-size: 22px">Hear it elsewhere</a>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  renderVals() {
+    var freqs = [0.18, 0.32, 0.24, 0.4, 0.2, 0.36, 0.28, 0.22, 0.34, 0.3];
+    var steps = [];
+    var sum = 0;
+    for (var x = 0; x < 350; x += 2) {
+      var f = freqs[Math.floor(x / 35)];
+      steps.push(f);
+      sum += f;
+    }
+    var k = Math.max(1, Math.round(sum / (2 * Math.PI)));
+    var scale = (2 * Math.PI * k) / sum;
+    var ys = [];
+    var phase = 0;
+    for (var j = 0; j < steps.length; j++) {
+      ys.push(60 + Math.sin(phase) * 40);
+      phase += steps[j] * scale;
+    }
+    var parts = [];
+    for (var copy = 0; copy < 2; copy++) {
+      for (var n = 0; n < ys.length; n++) {
+        var px = copy * 350 + n * 2;
+        parts.push((parts.length === 0 ? 'M' : 'L') + px + ' ' + ys[n].toFixed(1));
+      }
+    }
+    parts.push('L700 ' + ys[0].toFixed(1));
+    var msg = 'MEET AT THE OLD CHAPEL AT MIDNIGHT';
+    var letters = msg.split('').map(function (ch, i) { return { ch: ch, d: (i * 0.06).toFixed(2) + 's' }; });
+    return { wave: parts.join(' '), letters: letters };
+  }
+}
+</script>
+</body>
+</html>

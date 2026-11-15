@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Screech · The reveal</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Creepster&amp;family=Special+Elite&amp;family=VT323&amp;display=swap">
+<style>
+body{margin:0;background:#050806}
+a{color:#39ff7a}
+a:hover{color:#b6ffcb}
+.crt{position:relative;overflow:hidden}
+.crt::before{content:"";position:absolute;inset:0;pointer-events:none;z-index:20;background:radial-gradient(ellipse at center,rgba(0,0,0,0) 58%,rgba(0,0,0,0.72) 100%)}
+.crt::after{content:"";position:absolute;inset:0;pointer-events:none;z-index:21;background:repeating-linear-gradient(to bottom,rgba(255,255,255,0.03) 0,rgba(255,255,255,0.03) 1px,rgba(0,0,0,0) 2px,rgba(0,0,0,0) 4px)}
+.glow{text-shadow:0 0 6px rgba(57,255,122,0.6),0 0 22px rgba(57,255,122,0.25)}
+.spell{display:inline-block;animation:spell .5s ease-out backwards}
+@keyframes spell{0%{opacity:0;transform:translateY(-10px) scale(1.6);filter:blur(4px)}100%{opacity:1;transform:none;filter:none}}
+.drift{animation:drift 3s ease-in-out infinite alternate}
+@keyframes drift{from{transform:translate(-3px,2px) rotate(-4deg)}to{transform:translate(3px,-2px) rotate(3deg)}}
+.rise{animation:rise .6s ease-out 2.4s backwards}
+@keyframes rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion: reduce){*,*::before,*::after{animation:none !important;transition:none !important}}
+</style>
+</helmet>
+<div class="crt" style="width: 390px; height: 844px; box-sizing: border-box; background: #050806; color: #39ff7a; font-family: 'VT323', monospace; display: flex; flex-direction: column; gap: 12px; padding: 16px 20px 22px">
+  <div aria-hidden="true" style="position: relative; width: 350px; height: 262px; border: 1px solid #2f5a3a; border-radius: 120px 120px 14px 14px; background: radial-gradient(ellipse at 50% 85%, #0f2215 0%, #070c08 70%)">
+    <span style="position: absolute; left: 26px; top: 40px; font-family: 'Creepster', cursive; font-size: 24px; color: #5aa86c">YES</span>
+    <span style="position: absolute; right: 26px; top: 40px; font-family: 'Creepster', cursive; font-size: 24px; color: #5aa86c">NO</span>
+    <sc-for list="{{letters}}" as="l" hint-placeholder-count="26">
+      <span style="position: absolute; left: {{l.x}}px; top: {{l.y}}px; width: 22px; text-align: center; font-family: 'Special Elite', monospace; font-size: 19px; color: {{l.c}}; text-shadow: {{l.g}}">{{l.ch}}</span>
+    </sc-for>
+    <span style="position: absolute; left: 0; right: 0; bottom: 14px; text-align: center; font-family: 'Special Elite', monospace; font-size: 16px; letter-spacing: 4px; color: #5aa86c">GOOD BYE</span>
+    <svg class="drift" width="76" height="92" viewBox="0 0 76 92" style="position: absolute; left: 137px; top: 92px; filter: drop-shadow(0 0 10px rgba(57,255,122,.45))"><path d="M38 2C58 2 72 22 72 44c0 22-16 42-34 46C20 86 4 66 4 44 4 22 18 2 38 2z" fill="rgba(233,228,212,.12)" stroke="#e9e4d4" style="stroke-width: 2px"></path><circle cx="38" cy="36" r="13" fill="rgba(5,8,6,.35)" stroke="#39ff7a" style="stroke-width: 2px"></circle></svg>
+  </div>
+
+  <div style="display: flex; flex-direction: column; align-items: center; gap: 2px">
+    <span style="font-size: 18px; color: #5aa86c; letter-spacing: 2px">THE SPIRITS SPELL</span>
+    <p class="glow" aria-label="Crypt-Guest" style="margin: 0; font-size: 50px; line-height: 1; letter-spacing: 3px; color: #39ff7a">
+      <sc-for list="{{msg}}" as="m" hint-placeholder-count="11">
+        <span class="spell" aria-hidden="true" style="animation-delay: {{m.d}}">{{m.ch}}</span>
+      </sc-for>
+    </p>
+  </div>
+
+  <section class="rise" aria-label="Wi-Fi network received" style="display: flex; flex-direction: column; gap: 10px; padding: 14px; border: 1px solid #39ff7a; border-radius: 12px; background: #08130b; box-shadow: 0 0 24px rgba(57,255,122,.15)">
+    <div style="display: flex; justify-content: space-between; align-items: center; gap: 8px">
+      <span style="display: flex; align-items: center; gap: 8px; font-size: 22px; color: #e9e4d4">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#39ff7a" aria-hidden="true" style="stroke-width: 1.8px; stroke-linecap: round"><path d="M2.5 9a14 14 0 0 1 19 0"></path><path d="M6 12.5a9 9 0 0 1 12 0"></path><path d="M9.5 16a4 4 0 0 1 5 0"></path><path d="M12 19.5h0.01"></path></svg>
+        A network crossed over
+      </span>
+      <span style="display: flex; align-items: center; gap: 4px; padding: 2px 8px; border: 1px solid #ff8a7a; border-radius: 999px; font-size: 16px; color: #ff8a7a">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#ff8a7a" aria-hidden="true" style="stroke-width: 2px; stroke-linecap: round; stroke-linejoin: round"><path d="M6 11V8a6 6 0 0 1 12 0v3"></path><path d="M5 11h14v10H5z"></path></svg>
+        SEALED · VERIFIED
+      </span>
+    </div>
+    <dl style="margin: 0; display: grid; grid-template-columns: 96px minmax(0, 1fr); row-gap: 4px; font-size: 21px">
+      <dt style="color: #5aa86c">Network</dt><dd style="margin: 0; color: #e9e4d4">Crypt-Guest</dd>
+      <dt style="color: #5aa86c">Security</dt><dd style="margin: 0; color: #e9e4d4">WPA</dd>
+      <dt style="color: #5aa86c">Password</dt>
+      <dd style="margin: 0; display: flex; justify-content: space-between; align-items: center; gap: 8px; color: #e9e4d4"><span>{{pwShown}}</span><button type="button" aria-pressed="{{showStr}}" onClick="{{toggleShow}}" style="min-height: 44px; min-width: 64px; background: transparent; border: none; color: #39ff7a; font-family: 'VT323', monospace; font-size: 20px; text-decoration: underline; cursor: pointer">{{showLabel}}</button></dd>
+    </dl>
+    <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px">
+      <button type="button" onClick="{{copy}}" style="min-height: 50px; border-radius: 8px; border: 1px solid #39ff7a; background: transparent; color: #39ff7a; font-family: 'VT323', monospace; font-size: 21px; cursor: pointer">{{copyLabel}}</button>
+      <button type="button" aria-expanded="{{qrStr}}" onClick="{{toggleQr}}" style="min-height: 50px; border-radius: 8px; border: none; background: #39ff7a; color: #050806; font-family: 'VT323', monospace; font-size: 21px; cursor: pointer">{{qrLabel}}</button>
+    </div>
+    <sc-if value="{{qr}}" hint-placeholder-val="{{ false }}">
+      <div style="display: flex; align-items: center; gap: 12px">
+        <div role="img" aria-label="Join QR code placeholder" style="width: 92px; height: 92px; flex: 0 0 auto; border-radius: 6px; background-color: #e9e4d4; background-image: linear-gradient(90deg, #050806 50%, transparent 50%), linear-gradient(#050806 50%, transparent 50%); background-size: 12px 12px, 12px 12px; background-blend-mode: difference; border: 6px solid #e9e4d4"></div>
+        <p style="margin: 0; font-family: 'Special Elite', monospace; font-size: 14px; line-height: 1.4; color: #e9e4d4">Point your camera here to join. Browsers can't join Wi-Fi themselves.</p>
+      </div>
+    </sc-if>
+  </section>
+
+  <a href="Listen.dc.html" style="margin-top: auto; display: flex; align-items: center; justify-content: center; min-height: 48px; border: 1px solid #2f5a3a; border-radius: 8px; color: #5aa86c; text-decoration: none; font-size: 21px">Back to the spirit box</a>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  renderVals() {
+    var s = this.state || {};
+    var self = this;
+    var cx = 175;
+    var cy = 236;
+    var letters = [];
+    var top = 'ABCDEFGHIJKLM'.split('');
+    var low = 'NOPQRSTUVWXYZ'.split('');
+    function place(arr, r, from, to) {
+      for (var i = 0; i < arr.length; i++) {
+        var a = (from + (to - from) * i / (arr.length - 1)) * Math.PI / 180;
+        var hot = arr[i] === 'T';
+        letters.push({
+          ch: arr[i],
+          x: Math.round(cx + r * Math.cos(a) - 11),
+          y: Math.round(cy + r * Math.sin(a) - 12),
+          c: hot ? '#39ff7a' : '#4f8f5e',
+          g: hot ? '0 0 10px rgba(57,255,122,.9)' : 'none'
+        });
+      }
+    }
+    place(top, 158, 198, 342);
+    place(low, 108, 205, 335);
+    var word = 'CRYPT-GUEST';
+    var msg = word.split('').map(function (ch, i) { return { ch: ch, d: (0.3 + i * 0.18).toFixed(2) + 's' }; });
+    var show = !!s.show;
+    var qr = !!s.qr;
+    return {
+      letters: letters,
+      msg: msg,
+      pwShown: show ? 'candlewax13' : '•••••••••••',
+      showStr: String(show),
+      showLabel: show ? 'Hide' : 'Show',
+      toggleShow: function () { self.setState({ show: !show }); },
+      copyLabel: s.copied ? 'Copied' : 'Copy password',
+      copy: function () { self.setState({ copied: true }); },
+      qr: qr,
+      qrStr: String(qr),
+      qrLabel: qr ? 'Hide join QR' : 'Show join QR',
+      toggleQr: function () { self.setState({ qr: !qr }); }
+    };
+  }
+}
+</script>
+</body>
+</html>

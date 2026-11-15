@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Screech · Speak</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Creepster&amp;family=Special+Elite&amp;family=VT323&amp;display=swap">
+<style>
+body{margin:0;background:#050806}
+a{color:#39ff7a}
+a:hover{color:#b6ffcb}
+.crt{position:relative;overflow:hidden}
+.crt::before{content:"";position:absolute;inset:0;pointer-events:none;z-index:20;background:radial-gradient(ellipse at center,rgba(0,0,0,0) 58%,rgba(0,0,0,0.72) 100%)}
+.crt::after{content:"";position:absolute;inset:0;pointer-events:none;z-index:21;background:repeating-linear-gradient(to bottom,rgba(255,255,255,0.03) 0,rgba(255,255,255,0.03) 1px,rgba(0,0,0,0) 2px,rgba(0,0,0,0) 4px)}
+.glow{text-shadow:0 0 6px rgba(57,255,122,0.6),0 0 22px rgba(57,255,122,0.25)}
+.card{transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease}
+.flame{transform-origin:50% 100%;animation:flame 1.6s ease-in-out infinite alternate}
+@keyframes flame{0%{transform:scale(1,1) rotate(-2deg)}50%{transform:scale(.92,1.08) rotate(2deg)}100%{transform:scale(1.04,.94) rotate(-1deg)}}
+.breathe{animation:breathe 2.4s ease-in-out infinite}
+@keyframes breathe{0%,100%{box-shadow:0 0 0 rgba(57,255,122,0)}50%{box-shadow:0 0 28px rgba(57,255,122,.55)}}
+.field{width:100%;box-sizing:border-box;background:#0b130d;border:1px solid #2f5a3a;border-radius:6px;color:#e9e4d4;font-family:'VT323',monospace;font-size:21px;padding:8px 10px;outline:none}
+.field:focus{border-color:#39ff7a;box-shadow:0 0 0 2px rgba(57,255,122,.25)}
+@media (prefers-reduced-motion: reduce){*,*::before,*::after{animation:none !important;transition:none !important}}
+</style>
+</helmet>
+<div class="crt" style="width: 390px; height: 844px; box-sizing: border-box; background: #050806; color: #39ff7a; font-family: 'VT323', monospace; display: flex; flex-direction: column; gap: 14px; padding: 16px 20px 24px">
+  <nav aria-label="Mode" style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px">
+    <a href="Speak.dc.html" aria-current="page" style="display: flex; align-items: center; justify-content: center; height: 46px; border-radius: 6px; background: #39ff7a; color: #050806; text-decoration: none; font-size: 24px; letter-spacing: 4px">SPEAK</a>
+    <a href="Listen.dc.html" style="display: flex; align-items: center; justify-content: center; height: 46px; border-radius: 6px; border: 1px solid #2f5a3a; color: #5aa86c; text-decoration: none; font-size: 24px; letter-spacing: 4px">LISTEN</a>
+  </nav>
+
+  <p style="margin: 2px 0 0; font-family: 'Special Elite', monospace; font-size: 15px; color: #e9e4d4">Draw a card. Choose what crosses over.</p>
+
+  <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px">
+    <button type="button" class="card" aria-pressed="{{p.text}}" onClick="{{pick.text}}" style="height: 122px; display: flex; flex-direction: column; align-items: center; justify-content: space-between; padding: 8px 4px; background: #08100a; border: 1px solid #2f5a3a; border-radius: 8px; color: #39ff7a; font-family: 'VT323', monospace; cursor: pointer; {{cs.text}}">
+      <span style="font-size: 16px; color: #5aa86c">I</span>
+      <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true" style="stroke-width: 1.6px; stroke-linecap: round; stroke-linejoin: round"><path d="M4 6h16M4 11h16M4 16h10"></path></svg>
+      <span style="display: flex; flex-direction: column; align-items: center; line-height: 1"><span style="font-size: 17px; color: #e9e4d4">Whisper</span><span style="font-size: 15px; color: #5aa86c">text</span></span>
+    </button>
+    <button type="button" class="card" aria-pressed="{{p.url}}" onClick="{{pick.url}}" style="height: 122px; display: flex; flex-direction: column; align-items: center; justify-content: space-between; padding: 8px 4px; background: #08100a; border: 1px solid #2f5a3a; border-radius: 8px; color: #39ff7a; font-family: 'VT323', monospace; cursor: pointer; {{cs.url}}">
+      <span style="font-size: 16px; color: #5aa86c">II</span>
+      <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true" style="stroke-width: 1.6px; stroke-linecap: round; stroke-linejoin: round"><path d="M12 3a9 9 0 1 0 0 18a9 9 0 1 0 0-18z"></path><path d="M12 7a5 5 0 1 0 0 10a5 5 0 1 0 0-10z"></path><path d="M12 11a1 1 0 1 0 0 2a1 1 0 1 0 0-2z"></path></svg>
+      <span style="display: flex; flex-direction: column; align-items: center; line-height: 1"><span style="font-size: 17px; color: #e9e4d4">Portal</span><span style="font-size: 15px; color: #5aa86c">link</span></span>
+    </button>
+    <button type="button" class="card" aria-pressed="{{p.wifi}}" onClick="{{pick.wifi}}" style="height: 122px; display: flex; flex-direction: column; align-items: center; justify-content: space-between; padding: 8px 4px; background: #08100a; border: 1px solid #2f5a3a; border-radius: 8px; color: #39ff7a; font-family: 'VT323', monospace; cursor: pointer; {{cs.wifi}}">
+      <span style="font-size: 16px; color: #5aa86c">III</span>
+      <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true" style="stroke-width: 1.6px; stroke-linecap: round; stroke-linejoin: round"><path d="M2.5 9a14 14 0 0 1 19 0"></path><path d="M6 12.5a9 9 0 0 1 12 0"></path><path d="M9.5 16a4 4 0 0 1 5 0"></path><path d="M12 19.5h0.01"></path></svg>
+      <span style="display: flex; flex-direction: column; align-items: center; line-height: 1"><span style="font-size: 17px; color: #e9e4d4">Ether</span><span style="font-size: 15px; color: #5aa86c">wi-fi</span></span>
+    </button>
+    <button type="button" class="card" aria-pressed="{{p.contact}}" onClick="{{pick.contact}}" style="height: 122px; display: flex; flex-direction: column; align-items: center; justify-content: space-between; padding: 8px 4px; background: #08100a; border: 1px solid #2f5a3a; border-radius: 8px; color: #39ff7a; font-family: 'VT323', monospace; cursor: pointer; {{cs.contact}}">
+      <span style="font-size: 16px; color: #5aa86c">IV</span>
+      <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true" style="stroke-width: 1.6px; stroke-linecap: round; stroke-linejoin: round"><path d="M12 4a4 4 0 1 0 0 8a4 4 0 1 0 0-8z"></path><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"></path></svg>
+      <span style="display: flex; flex-direction: column; align-items: center; line-height: 1"><span style="font-size: 17px; color: #e9e4d4">Summon</span><span style="font-size: 15px; color: #5aa86c">contact</span></span>
+    </button>
+  </div>
+
+  <div style="display: flex; flex-direction: column; gap: 8px; min-height: 132px">
+    <sc-if value="{{isText}}" hint-placeholder-val="{{ true }}">
+      <label for="msg" style="font-size: 19px; color: #5aa86c">Your whisper</label>
+      <textarea id="msg" class="field" rows="3" value="{{text}}" onChange="{{onText}}" style="resize: none; line-height: 1.1"></textarea>
+    </sc-if>
+    <sc-if value="{{isUrl}}" hint-placeholder-val="{{ false }}">
+      <label for="url" style="font-size: 19px; color: #5aa86c">Portal address</label>
+      <input id="url" class="field" type="url" value="{{url}}" onChange="{{onUrl}}">
+      <span style="font-size: 17px; color: #5aa86c">Known realms like meet.google.com/ shrink to one byte.</span>
+    </sc-if>
+    <sc-if value="{{isWifi}}" hint-placeholder-val="{{ false }}">
+      <label for="ssid" style="font-size: 19px; color: #5aa86c">Network name</label>
+      <input id="ssid" class="field" type="text" value="{{ssid}}" onChange="{{onSsid}}">
+      <label for="pw" style="font-size: 19px; color: #5aa86c">Password</label>
+      <input id="pw" class="field" type="text" value="{{pw}}" onChange="{{onPw}}">
+    </sc-if>
+    <sc-if value="{{isContact}}" hint-placeholder-val="{{ false }}">
+      <label for="contact" style="font-size: 19px; color: #5aa86c">Who is summoned</label>
+      <input id="contact" class="field" type="text" value="{{contact}}" onChange="{{onContact}}">
+    </sc-if>
+  </div>
+
+  <div style="display: flex; gap: 16px; align-items: stretch">
+    <div aria-hidden="true" style="width: 66px; height: 186px; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; border-bottom: 2px solid #2f5a3a">
+      <sc-if value="{{lit}}" hint-placeholder-val="{{ true }}">
+        <svg class="flame" width="26" height="36" viewBox="0 0 26 36" style="margin-bottom: -2px; filter: drop-shadow(0 0 8px rgba(255,190,90,.8))"><path d="M13 1C17 9 23 14 23 22a10 10 0 0 1-20 0C3 15 9 10 13 1z" fill="#ffb347"></path><path d="M13 13c2 4 5 6 5 10a5 5 0 0 1-10 0c0-3 3-6 5-10z" fill="#fff1c9"></path></svg>
+      </sc-if>
+      <div style="width: 2px; height: 8px; background: #1b1b1b"></div>
+      <div style="width: 40px; height: {{waxH}}px; background: linear-gradient(90deg, #cfc8b2, #f4efe0 45%, #b9b29c); border-radius: 4px 4px 0 0; transition: height .3s ease"></div>
+    </div>
+    <div style="flex: 1 1 auto; display: flex; flex-direction: column; justify-content: space-between; gap: 10px">
+      <div>
+        <div style="font-size: 44px; line-height: 1; color: {{countColor}}"><span class="glow">{{total}}</span><span style="font-size: 24px; color: #5aa86c"> / 140 bytes</span></div>
+        <sc-if value="{{fits}}" hint-placeholder-val="{{ true }}">
+          <p style="margin: 4px 0 0; font-family: 'Special Elite', monospace; font-size: 14px; color: #e9e4d4">{{remaining}} bytes of wax left. Emoji burn faster.</p>
+        </sc-if>
+        <sc-if value="{{over}}" hint-placeholder-val="{{ false }}">
+          <p style="margin: 4px 0 0; font-family: 'Special Elite', monospace; font-size: 14px; color: #ff6b6b">Too heavy to cross over. Trim {{overBy}} bytes.</p>
+        </sc-if>
+      </div>
+      <button type="button" aria-pressed="{{sealedStr}}" onClick="{{toggleSeal}}" style="display: flex; align-items: center; gap: 10px; min-height: 56px; padding: 6px 10px; background: {{sealBg}}; border: 1px solid {{sealBorder}}; border-radius: 8px; color: #e9e4d4; text-align: left; font-family: 'VT323', monospace; cursor: pointer">
+        <svg width="30" height="30" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="#ff8a7a" style="stroke-width: 1.6px; stroke-linejoin: round"><path d="M12 2l2.2 2.4 3.2-.5.6 3.2 2.9 1.5-1.4 2.9 1.4 2.9-2.9 1.5-.6 3.2-3.2-.5L12 22l-2.2-2.4-3.2.5-.6-3.2-2.9-1.5 1.4-2.9-1.4-2.9 2.9-1.5.6-3.2 3.2.5z"></path><path d="M9 12l2 2 4-4"></path></svg>
+        <span style="display: flex; flex-direction: column; line-height: 1.05"><span style="font-size: 20px">{{sealLabel}}</span><span style="font-size: 16px; color: #5aa86c">Only your room can open it · +14 bytes</span></span>
+      </button>
+    </div>
+  </div>
+
+  <div style="margin-top: auto">
+    <sc-if value="{{fits}}" hint-placeholder-val="{{ true }}">
+      <a href="Transmit.dc.html" class="breathe" style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 78px; border-radius: 10px; background: #39ff7a; color: #050806; text-decoration: none; line-height: 1"><span style="font-family: 'Creepster', cursive; font-size: 38px; letter-spacing: 4px">SCREECH</span><span style="font-size: 18px; letter-spacing: 2px">hold to transmit</span></a>
+    </sc-if>
+    <sc-if value="{{over}}" hint-placeholder-val="{{ false }}">
+      <div style="display: flex; align-items: center; justify-content: center; height: 78px; border-radius: 10px; border: 2px dashed #ff6b6b; color: #ff6b6b; font-size: 24px; letter-spacing: 2px">THE CANDLE HAS BURNT OUT</div>
+    </sc-if>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  renderVals() {
+    var s = this.state || {};
+    var self = this;
+    var kind = s.kind || 'text';
+    var text = s.text !== undefined ? s.text : 'Meet at the old chapel at midnight. Bring a torch.';
+    var url = s.url !== undefined ? s.url : 'https://meet.google.com/abc-defg-hij';
+    var ssid = s.ssid !== undefined ? s.ssid : 'Crypt-Guest';
+    var pw = s.pw !== undefined ? s.pw : 'candlewax13';
+    var contact = s.contact !== undefined ? s.contact : 'Raven · raven@example.com';
+    var sealed = !!s.sealed;
+    var enc = new TextEncoder();
+    function len(v) { return enc.encode(v).length; }
+    var prefixes = ['www.youtube.com/', 'meet.google.com/', 'docs.google.com/', 'drive.google.com/', 'github.com/', 'discord.gg/', 'youtu.be/', 'zoom.us/', 'bit.ly/', 'x.com/', 'www.'];
+    var body = 0;
+    if (kind === 'text') body = len(text);
+    else if (kind === 'contact') body = len(contact);
+    else if (kind === 'wifi') body = 3 + len(ssid) + len(pw);
+    else {
+      var rest = url.replace(/^https?:\/\//i, '');
+      var best = '';
+      for (var i = 0; i < prefixes.length; i++) {
+        if (rest.indexOf(prefixes[i]) === 0 && prefixes[i].length > best.length) best = prefixes[i];
+      }
+      body = 1 + len(rest.slice(best.length));
+    }
+    var cap = 140;
+    var total = 3 + body + (sealed ? 14 : 0);
+    var over = total > cap;
+    var remaining = Math.max(0, cap - total);
+    var on = 'border-color: #39ff7a; transform: translateY(-6px); box-shadow: 0 0 18px rgba(57,255,122,.45); background: #0d1f12';
+    function cardStyle(k) { return kind === k ? on : ''; }
+    function picker(k) { return function () { self.setState({ kind: k }); }; }
+    return {
+      p: { text: String(kind === 'text'), url: String(kind === 'url'), wifi: String(kind === 'wifi'), contact: String(kind === 'contact') },
+      cs: { text: cardStyle('text'), url: cardStyle('url'), wifi: cardStyle('wifi'), contact: cardStyle('contact') },
+      pick: { text: picker('text'), url: picker('url'), wifi: picker('wifi'), contact: picker('contact') },
+      isText: kind === 'text', isUrl: kind === 'url', isWifi: kind === 'wifi', isContact: kind === 'contact',
+      text: text, url: url, ssid: ssid, pw: pw, contact: contact,
+      onText: function (e) { self.setState({ text: e.target.value }); },
+      onUrl: function (e) { self.setState({ url: e.target.value }); },
+      onSsid: function (e) { self.setState({ ssid: e.target.value }); },
+      onPw: function (e) { self.setState({ pw: e.target.value }); },
+      onContact: function (e) { self.setState({ contact: e.target.value }); },
+      total: total,
+      remaining: remaining,
+      overBy: total - cap,
+      over: over,
+      fits: !over,
+      lit: !over,
+      waxH: Math.round(remaining / cap * 140),
+      countColor: over ? '#ff6b6b' : '#39ff7a',
+      sealedStr: String(sealed),
+      sealLabel: sealed ? 'Sealed with the pact' : 'Seal with the pact',
+      sealBg: sealed ? '#2a0f0d' : 'transparent',
+      sealBorder: sealed ? '#ff8a7a' : '#2f5a3a',
+      toggleSeal: function () { self.setState({ sealed: !sealed }); }
+    };
+  }
+}
+</script>
+</body>
+</html>
