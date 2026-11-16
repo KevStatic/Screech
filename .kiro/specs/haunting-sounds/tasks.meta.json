@@ -864,6 +864,16 @@
         "executionId": "6eef7247-9727-4b9a-af3f-43b1b5899bf8",
         "chatSessionId": "sess_e540de37-ecb0-43dc-9e15-539106cbd923",
         "timestamp": 1794851657012
+      },
+      {
+        "executionId": "2b4c12b2-48dd-4cb0-ba51-eb84850804a5",
+        "chatSessionId": "sess_cd95f70c-8cee-443e-bd9e-cd6742df12e9",
+        "timestamp": 1794852224812
+      },
+      {
+        "executionId": "2b4c12b2-48dd-4cb0-ba51-eb84850804a5",
+        "chatSessionId": "sess_cd95f70c-8cee-443e-bd9e-cd6742df12e9",
+        "timestamp": 1794852333585
       }
     ],
     "12.2 Add `scripts/check-no-audio.mjs` and an `apps/web` script `check:no-audio`": [
@@ -871,6 +881,16 @@
         "executionId": "6eef7247-9727-4b9a-af3f-43b1b5899bf8",
         "chatSessionId": "sess_e540de37-ecb0-43dc-9e15-539106cbd923",
         "timestamp": 1794851657103
+      },
+      {
+        "executionId": "2b4c12b2-48dd-4cb0-ba51-eb84850804a5",
+        "chatSessionId": "sess_cd95f70c-8cee-443e-bd9e-cd6742df12e9",
+        "timestamp": 1794852225354
+      },
+      {
+        "executionId": "2b4c12b2-48dd-4cb0-ba51-eb84850804a5",
+        "chatSessionId": "sess_cd95f70c-8cee-443e-bd9e-cd6742df12e9",
+        "timestamp": 1794852333902
       }
     ],
     "13. Final checkpoint - tests, typecheck and build": [
@@ -885,6 +905,13 @@
         "executionId": "6eef7247-9727-4b9a-af3f-43b1b5899bf8",
         "chatSessionId": "sess_e540de37-ecb0-43dc-9e15-539106cbd923",
         "timestamp": 1794851932990
+      }
+    ],
+    "12. Architecture and build guards": [
+      {
+        "executionId": "2b4c12b2-48dd-4cb0-ba51-eb84850804a5",
+        "chatSessionId": "sess_cd95f70c-8cee-443e-bd9e-cd6742df12e9",
+        "timestamp": 1794852333960
       }
     ]
   }

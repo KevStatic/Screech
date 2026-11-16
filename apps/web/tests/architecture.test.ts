@@ -130,6 +130,92 @@ describe('architecture', () => {
     expect(offenders).toEqual([]);
   });
 
+  describe('haunting sounds', () => {
+    /** Drops block and line comments so prose such as "Hann windows" cannot trip a check. */
+    function stripComments(source: string): string {
+      return source.replace(/\/\*[\s\S]*?\*\//g, '').replace(/(^|[^:'"`])\/\/.*$/gm, '$1');
+    }
+
+    const HAUNT_NAME = /^(haunt-.*|sound-pref|sound-hint|useHaunt|useSoundHint|useSoundPref|SoundHint|SoundToggle)\.tsx?$/;
+    const MOTION_NAME = /^(motion|useMotion|ExorciseToggle)\.tsx?$/;
+    const PURE_NAME = /^(haunt-dsp|haunt-synth|haunt-check|haunt-rules|sound-pref|sound-hint)\.ts$/;
+
+    const all = walk(SRC);
+    const baseName = (file: string): string => file.slice(file.lastIndexOf('/') + 1);
+    const hauntFiles = all.filter((f) => HAUNT_NAME.test(baseName(f)));
+    const motionFiles = all.filter((f) => MOTION_NAME.test(baseName(f)));
+    const pureFiles = all.filter(
+      (f) => PURE_NAME.test(baseName(f)) && (isInside(f, LOGIC) || isInside(f, AUDIO)),
+    );
+
+    function importsOf(file: string, targets: readonly string[]): string[] {
+      const hits: string[] = [];
+      for (const spec of specifiers(stripComments(readFileSync(file, 'utf8')))) {
+        if (!spec.startsWith('.')) continue;
+        const target = resolveRelative(file, spec);
+        if (target !== null && targets.includes(target)) hits.push(`${rel(file)} imports ${rel(target)}`);
+      }
+      return hits;
+    }
+
+    it('finds the haunt, motion and pure files it is meant to guard', () => {
+      expect(hauntFiles.map(baseName)).toEqual(
+        expect.arrayContaining([
+          'haunt-dsp.ts', 'haunt-synth.ts', 'haunt-check.ts', 'haunt-rules.ts', 'haunt-player.ts',
+          'sound-pref.ts', 'sound-hint.ts', 'useHaunt.ts', 'useSoundHint.ts', 'useSoundPref.ts',
+          'SoundHint.tsx', 'SoundToggle.tsx',
+        ]),
+      );
+      expect(motionFiles.map(baseName)).toEqual(
+        expect.arrayContaining(['motion.ts', 'useMotion.ts', 'ExorciseToggle.tsx']),
+      );
+      expect(pureFiles).toHaveLength(6);
+    });
+
+    it('haunt files never import motion files, and motion files never import haunt files', () => {
+      const offenders = [
+        ...hauntFiles.flatMap((f) => importsOf(f, motionFiles)),
+        ...motionFiles.flatMap((f) => importsOf(f, hauntFiles)),
+      ];
+      expect(offenders).toEqual([]);
+    });
+
+    it('pure haunt files use no Math.random, Date, performance, document or window', () => {
+      const FORBIDDEN = /\bMath\.random\b|\bDate\b|\bperformance\b|\bdocument\b|\bwindow\b/;
+      const offenders: string[] = [];
+      for (const file of pureFiles) {
+        const m = FORBIDDEN.exec(stripComments(readFileSync(file, 'utf8')));
+        if (m !== null) offenders.push(`${rel(file)} uses "${m[0]}"`);
+      }
+      expect(offenders).toEqual([]);
+    });
+
+    it('haunt files use no `any` type', () => {
+      const ANY = /:\s*any\b|\bas\s+any\b|<any\b|\bany\s*\[\]|,\s*any\s*[,>)]/;
+      const offenders: string[] = [];
+      for (const file of hauntFiles) {
+        const m = ANY.exec(stripComments(readFileSync(file, 'utf8')));
+        if (m !== null) offenders.push(`${rel(file)} contains "${m[0]}"`);
+      }
+      expect(offenders).toEqual([]);
+    });
+
+    it('src references no .mp3, .wav, .ogg or .m4a audio file', () => {
+      const AUDIO_FILE = /\.(mp3|wav|ogg|m4a)(?=['"`?#\s])/i;
+      const offenders: string[] = [];
+      for (const file of all) {
+        const source = stripComments(readFileSync(file, 'utf8'));
+        const spec = specifiers(source).find((s) => AUDIO_FILE.test(s + ' '));
+        if (spec !== undefined) offenders.push(`${rel(file)} imports "${spec}"`);
+        else {
+          const m = /['"`][^'"`\n]*\.(mp3|wav|ogg|m4a)['"`]/i.exec(source);
+          if (m !== null) offenders.push(`${rel(file)} references ${m[0]}`);
+        }
+      }
+      expect(offenders).toEqual([]);
+    });
+  });
+
   it('package.json pins ggwave to 0.4.0 and @screech/core to workspace:*', () => {
     const pkg = JSON.parse(readFileSync(join(WEB_ROOT, 'package.json'), 'utf8')) as {
       dependencies?: Record<string, string>;

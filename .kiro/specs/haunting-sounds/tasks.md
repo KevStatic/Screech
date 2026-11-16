@@ -205,15 +205,15 @@ TypeScript in `apps/web`. Build bottom-up: pure DSP and synth in `src/logic`, te
     - Awaken call order, card flip, crackle, 40 spaced Letters give 30 scrapes and one whisper, Reveal and `OuijaBoard` show the same text, skip, Garbled and Sealed once, Listen and Screeching silent, one Sound_Toggle before Exorcise on every screen
     - _Requirements: 6.2, 7.3, 7.4, 7.5, 7.6, 8.4, 8.6, 8.7, 8.8, 9.1_
 
-- [ ] 12. Architecture and build guards
-  - [~] 12.1 Extend `tests/architecture.test.ts`
+- [x] 12. Architecture and build guards
+  - [x] 12.1 Extend `tests/architecture.test.ts`
     - Haunt files never import motion files and the reverse; pure haunt files contain no `Math.random`, `Date`, `performance`, `document`, `window`; no `any`; no audio file imports in `src`
     - _Requirements: 1.3, 10.5, 11.7, 11.9_
-  - [~] 12.2 Add `scripts/check-no-audio.mjs` and an `apps/web` script `check:no-audio`
+  - [x] 12.2 Add `scripts/check-no-audio.mjs` and an `apps/web` script `check:no-audio`
     - Fail with the file path when `dist` holds `.mp3`, `.wav`, `.ogg` or `.m4a`
     - _Requirements: 11.9_
 
-- [~] 13. Final checkpoint - tests, typecheck and build
+- [x] 13. Final checkpoint - tests, typecheck and build
   - Run `pnpm test` from the root, then the workspace typecheck, then `pnpm build`
   - Run `pnpm --filter web check:no-audio` and confirm no audio assets in `apps/web/dist`
   - Ensure all tests pass, ask the user if questions arise.
