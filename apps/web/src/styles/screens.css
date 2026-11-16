@@ -699,3 +699,70 @@ svg {
   line-height: 1.05;
   color: var(--phosphor);
 }
+/* ---- Sound toggle cluster (no motion, no transitions) ---- */
+.toggle-cluster {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+.toggle-cluster > .sound-hint,
+.toggle-cluster > .sound-notice {
+  flex: 1 1 100%;
+}
+.sound-toggle {
+  padding: 4px 10px;
+  font-family: var(--font-ui);
+  font-size: var(--fs-small);
+  color: var(--phosphor);
+  background: transparent;
+  border: 1px solid var(--phosphor);
+  border-radius: var(--radius);
+  cursor: pointer;
+  touch-action: manipulation;
+  white-space: nowrap;
+}
+.sound-toggle.is-off {
+  color: var(--green-2);
+  border-color: var(--green-2);
+  border-style: dashed;
+}
+.sound-hint {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 8px 10px;
+  color: var(--bone);
+  background: var(--panel-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+.sound-hint-text {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+.sound-hint-dismiss {
+  flex: 0 0 auto;
+  padding: 4px 10px;
+  font-family: var(--font-ui);
+  font-size: var(--fs-small);
+  color: var(--phosphor);
+  background: transparent;
+  border: 1px solid var(--phosphor);
+  border-radius: var(--radius);
+  cursor: pointer;
+  touch-action: manipulation;
+}
+/* Failure notice: render as <div class="note sound-notice is-error"> */
+.sound-notice {
+  padding: 8px 10px;
+  background: var(--panel-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+.sound-notice.is-error {
+  color: var(--blood-2);
+  border-color: var(--blood-2);
+}

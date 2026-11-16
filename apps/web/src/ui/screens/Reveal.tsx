@@ -1,11 +1,14 @@
 import { useEffect, useRef, useState, type KeyboardEvent, type ReactElement } from 'react';
 import type { Payload } from '@screech/core';
-import { spellProgress } from '../../logic/ouija';
+import { scrapePlan } from '../../logic/haunt-rules';
+import { scrapeSeed } from '../../logic/haunt-synth';
+import { spellShown } from '../../logic/ouija';
+import { useHaunt } from '../hooks/useHaunt';
 import type { FlowApi } from '../hooks/useFlow';
 import { useMotion } from '../hooks/useMotion';
 import ActionCard from '../components/ActionCard';
 import CrtFrame from '../components/CrtFrame';
-import ExorciseToggle from '../components/ExorciseToggle';
+import ToggleCluster from '../components/ToggleCluster';
 import OuijaBoard from '../components/OuijaBoard';
 export const LABEL_SKIP = 'Skip the spelling';
 export const LABEL_BACK_LISTEN = 'Back to Listen';
@@ -37,11 +40,32 @@ export default function Reveal({ flow }: RevealProps): ReactElement {
   const { reduced } = useMotion();
   const payload = state.received?.packet.payload ?? null;
   const value = payload === null ? '' : revealValue(payload);
-  const length = Array.from(value).length;
+  const chars = Array.from(value);
+  const haunt = useHaunt();
   const [elapsedMs, setElapsedMs] = useState(0);
   const [skipped, setSkipped] = useState(false);
   const startedAt = useRef<number | null>(null);
-  const finished = reduced || skipped || spellProgress(elapsedMs, length).done;
+  const spelled = spellShown(elapsedMs, chars);
+  const finished = reduced || skipped || spelled.done;
+  const shown = finished ? chars.length : spelled.shown;
+  const prevShown = useRef(0);
+  const whispered = useRef(false);
+  useEffect(() => {
+    const before = prevShown.current;
+    prevShown.current = shown;
+    if (reduced || skipped) return;
+    for (const r of scrapePlan(chars, before, shown)) {
+      haunt.play('planchette-scrape', { seed: scrapeSeed(r.letterIndex), delayMs: r.delayMs });
+    }
+    // chars is derived from value, which only changes with the payload.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [shown, reduced, skipped]);
+  useEffect(() => {
+    if (!finished || payload === null || whispered.current) return;
+    whispered.current = true;
+    haunt.play('whisper');
+  }, [finished, payload, haunt]);
+  useEffect(() => () => haunt.stopOneShots(), [haunt]);
   useEffect(() => {
     if (finished) return undefined;
     if (startedAt.current === null) startedAt.current = performance.now();
@@ -53,7 +77,10 @@ export default function Reveal({ flow }: RevealProps): ReactElement {
       window.clearInterval(id);
     };
   }, [finished]);
-  const skip = (): void => setSkipped(true);
+  const skip = (): void => {
+    haunt.stopKind('planchette-scrape');
+    setSkipped(true);
+  };
   const onSkipKey = (e: KeyboardEvent<HTMLButtonElement>): void => {
     if (e.key === ' ' || e.key === 'Enter') {
       e.preventDefault();
@@ -65,7 +92,7 @@ export default function Reveal({ flow }: RevealProps): ReactElement {
       <main className="screen" aria-labelledby="reveal-title">
         <div className="row">
           <span className="label grow">Screen: Reveal</span>
-          <ExorciseToggle />
+          <ToggleCluster />
         </div>
         <h1 id="reveal-title" className="glow" style={{ margin: 0, fontWeight: 400 }}>
           A MESSAGE CROSSED OVER

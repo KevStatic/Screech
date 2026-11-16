@@ -1,7 +1,9 @@
+import { useEffect } from 'react';
 import type { ReactElement } from 'react';
 import type { FlowApi } from '../hooks/useFlow';
 import CrtFrame from '../components/CrtFrame';
-import ExorciseToggle from '../components/ExorciseToggle';
+import ToggleCluster from '../components/ToggleCluster';
+import { useHaunt } from '../hooks/useHaunt';
 export const MSG_GARBLED = 'This message arrived damaged.';
 export const LABEL_RETURN_LISTEN = 'Back to Listen';
 export interface GarbledProps {
@@ -9,12 +11,17 @@ export interface GarbledProps {
 }
 /** Shown when a packet decodes to `invalid-body`. */
 export default function Garbled({ flow }: GarbledProps): ReactElement {
+  const haunt = useHaunt();
+  useEffect(() => {
+    haunt.play('broken-crackle');
+    return () => haunt.stopOneShots();
+  }, [haunt]);
   return (
     <CrtFrame>
       <main className="screen" aria-labelledby="garbled-title">
         <div className="row">
           <span className="label grow">Screen: Garbled</span>
-          <ExorciseToggle />
+          <ToggleCluster />
         </div>
         <h1 id="garbled-title" className="glow is-error" style={{ margin: 0, fontWeight: 400 }}>
           STATIC ON THE LINE

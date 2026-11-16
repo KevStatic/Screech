@@ -1,12 +1,14 @@
 import { useEffect, useMemo, useRef, useState, type ReactElement } from 'react';
 import { readCapabilities } from '../../audio/env';
+import { hauntPlayer } from '../../audio/haunt-player';
 import { MIC_BLOCKED_MESSAGE, openMic, stopStream } from '../../audio/mic';
 import { MAX_MIC_ATTEMPTS, micStatusForFailure } from '../../logic/flow';
 import { micSupport, missingFeatures, type Env } from '../../logic/capabilities';
 import CrtFrame from '../components/CrtFrame';
-import ExorciseToggle from '../components/ExorciseToggle';
+import ToggleCluster from '../components/ToggleCluster';
 import type { AudioSessionApi } from '../hooks/useAudioSession';
 import type { FlowApi } from '../hooks/useFlow';
+import { markAwakenTapped } from '../hooks/useSoundHint';
 
 export const MSG_UNLOCK_FAILED = 'Audio could not start. Tap to try again.';
 export const MSG_INSECURE = 'The spirits need HTTPS to hear you.';
@@ -66,6 +68,9 @@ export default function Awaken({ flow, audio, env }: AwakenProps): ReactElement 
   async function run(unlocking: ReturnType<AudioSessionApi['unlockAudio']>): Promise<void> {
     try {
       const outcome = await unlocking;
+      // Whatever the outcome, and even if unmounted: the tap happened.
+      hauntPlayer.noteAwakenTap(outcome);
+      markAwakenTapped();
       if (!mounted.current) return;
       if (!outcome.ok) {
         setUnlockFailed(true);
@@ -114,7 +119,7 @@ export default function Awaken({ flow, audio, env }: AwakenProps): ReactElement 
       <main className="screen" aria-labelledby="awaken-title">
         <div className="row">
           <span className="label grow">Screen: Awaken</span>
-          <ExorciseToggle />
+          <ToggleCluster />
         </div>
 
         <div className="col" style={{ alignItems: 'center' }}>

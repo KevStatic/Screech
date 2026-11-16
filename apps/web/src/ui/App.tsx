@@ -2,6 +2,7 @@ import { useState, type ReactElement } from 'react';
 import { useAudioSession } from './hooks/useAudioSession';
 import { useDraft } from './hooks/useDraft';
 import { useFlow } from './hooks/useFlow';
+import { useHauntBridge } from './hooks/useHaunt';
 import Awaken from './screens/Awaken';
 import Garbled from './screens/Garbled';
 import Listen from './screens/Listen';
@@ -20,6 +21,7 @@ export default function App(): ReactElement {
   const flow = useFlow();
   const audio = useAudioSession();
   const draft = useDraft();
+  useHauntBridge(flow, audio);
   const [outcome, setOutcome] = useState<TransmissionOutcome | null>(null);
 
   switch (flow.state.screen) {

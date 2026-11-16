@@ -1,0 +1,891 @@
+{
+  "pbtResults": {
+    "3.3 Property 3: Valid shape and duration": {
+      "status": "passed",
+      "lastRunTimestamp": 1794848905749
+    },
+    "3.4 Property 4: Bad sample rates are rejected": {
+      "status": "passed",
+      "lastRunTimestamp": 1794848910419
+    },
+    "3.2 Property 2: Seed sensitivity": {
+      "status": "passed",
+      "lastRunTimestamp": 1794848913775
+    },
+    "3.5 Property 5: Energy stays out of the Screech_Band": {
+      "status": "passed",
+      "lastRunTimestamp": 1794848914509
+    },
+    "3.6 Property 6: Silent edges": {
+      "status": "passed",
+      "lastRunTimestamp": 1794848961835
+    },
+    "3.9 Property 9: Smooth steps": {
+      "status": "passed",
+      "lastRunTimestamp": 1794848962578
+    },
+    "3.8 Property 8: Gentle attack": {
+      "status": "passed",
+      "lastRunTimestamp": 1794848972515
+    },
+    "3.7 Property 7: Level limit": {
+      "status": "passed",
+      "lastRunTimestamp": 1794848982062
+    },
+    "3.12 Property 12: Whisper is spread noise": {
+      "status": "passed",
+      "lastRunTimestamp": 1794849024999
+    },
+    "3.15 Property 25: No sine partial above the Partial_Limit": {
+      "status": "passed",
+      "lastRunTimestamp": 1794849037319
+    },
+    "3.14 Property 24: Most energy lies in the Phone_Band": {
+      "status": "passed",
+      "lastRunTimestamp": 1794849040771
+    },
+    "3.13 Property 13: A packet is louder than every haunting sound": {
+      "status": "passed",
+      "lastRunTimestamp": 1794849057008
+    },
+    "5.5 Property 15: Sound_Gate is the conjunction of four conditions": {
+      "status": "passed",
+      "lastRunTimestamp": 1794849852154
+    },
+    "5.4 Property 14: Quiet_State is exactly listen, capture, screeching or playback": {
+      "status": "passed",
+      "lastRunTimestamp": 1794849853924
+    },
+    "5.7 Property 18: Candle crackle limit": {
+      "status": "passed",
+      "lastRunTimestamp": 1794849857515
+    },
+    "5.8 Property 19: A full reveal gives exactly min(n, 30) scrapes": {
+      "status": "passed",
+      "lastRunTimestamp": 1794849864145
+    },
+    "5.6 Property 17: Duplicate one-shots inside 30 ms are ignored": {
+      "status": "passed",
+      "lastRunTimestamp": 1794849866962
+    },
+    "6.6 Property 29: The hint is shown if and only if all four conditions hold": {
+      "status": "passed",
+      "lastRunTimestamp": 1794850125596
+    },
+    "6.3 Property 22: Only `0` means off": {
+      "status": "passed",
+      "lastRunTimestamp": 1794850125930
+    },
+    "6.2 Property 21: Sound preference round trip": {
+      "status": "passed",
+      "lastRunTimestamp": 1794850131835
+    },
+    "6.4 Property 23: Settings are independent": {
+      "status": "passed",
+      "lastRunTimestamp": 1794850133120
+    },
+    "8.4 Property 28 (player part): the same triple creates one buffer": {
+      "status": "passed",
+      "lastRunTimestamp": 1794850539370
+    },
+    "9.2 Create `src/ui/hooks/useSoundHint.ts` and Property 31 test": {
+      "status": "passed",
+      "lastRunTimestamp": 1794850832986
+    }
+  },
+  "executionHistory": {
+    "1.1 Create `src/logic/haunt-dsp.ts` with unit tests": [
+      {
+        "executionId": "9ae8f35b-07d2-4ed4-a0df-55b421f8bb38",
+        "chatSessionId": "sess_3f7003c9-c09a-41eb-9254-0e2a6edf5bde",
+        "timestamp": 1794847167876
+      },
+      {
+        "executionId": "9ae8f35b-07d2-4ed4-a0df-55b421f8bb38",
+        "chatSessionId": "sess_3f7003c9-c09a-41eb-9254-0e2a6edf5bde",
+        "timestamp": 1794847314463
+      }
+    ],
+    "1.2 Create test-only `tests/logic/haunt-fft.ts` with a self-test": [
+      {
+        "executionId": "9ae8f35b-07d2-4ed4-a0df-55b421f8bb38",
+        "chatSessionId": "sess_3f7003c9-c09a-41eb-9254-0e2a6edf5bde",
+        "timestamp": 1794847171670
+      },
+      {
+        "executionId": "9ae8f35b-07d2-4ed4-a0df-55b421f8bb38",
+        "chatSessionId": "sess_3f7003c9-c09a-41eb-9254-0e2a6edf5bde",
+        "timestamp": 1794847315059
+      }
+    ],
+    "1. DSP foundation and test helpers": [
+      {
+        "executionId": "9ae8f35b-07d2-4ed4-a0df-55b421f8bb38",
+        "chatSessionId": "sess_3f7003c9-c09a-41eb-9254-0e2a6edf5bde",
+        "timestamp": 1794847315112
+      }
+    ],
+    "2.1 Create `src/logic/haunt-synth.ts`: constants, tables, awaken and drone": [
+      {
+        "executionId": "76341edb-49b3-4abb-9edf-4f5b2cc9d7cb",
+        "chatSessionId": "sess_d9bbccc6-b298-4d26-965e-75668ec7167f",
+        "timestamp": 1794847631209
+      },
+      {
+        "executionId": "76341edb-49b3-4abb-9edf-4f5b2cc9d7cb",
+        "chatSessionId": "sess_d9bbccc6-b298-4d26-965e-75668ec7167f",
+        "timestamp": 1794847744231
+      }
+    ],
+    "2.2 Add the other six generators to `haunt-synth.ts`": [
+      {
+        "executionId": "76341edb-49b3-4abb-9edf-4f5b2cc9d7cb",
+        "chatSessionId": "sess_d9bbccc6-b298-4d26-965e-75668ec7167f",
+        "timestamp": 1794847744455
+      },
+      {
+        "executionId": "76341edb-49b3-4abb-9edf-4f5b2cc9d7cb",
+        "chatSessionId": "sess_d9bbccc6-b298-4d26-965e-75668ec7167f",
+        "timestamp": 1794847829142
+      }
+    ],
+    "2.3 Create `src/logic/haunt-check.ts` with unit tests": [
+      {
+        "executionId": "76341edb-49b3-4abb-9edf-4f5b2cc9d7cb",
+        "chatSessionId": "sess_d9bbccc6-b298-4d26-965e-75668ec7167f",
+        "timestamp": 1794847834182
+      },
+      {
+        "executionId": "76341edb-49b3-4abb-9edf-4f5b2cc9d7cb",
+        "chatSessionId": "sess_d9bbccc6-b298-4d26-965e-75668ec7167f",
+        "timestamp": 1794847924313
+      }
+    ],
+    "2.4 Write `tests/logic/haunt-synth.test.ts` unit tests": [
+      {
+        "executionId": "76341edb-49b3-4abb-9edf-4f5b2cc9d7cb",
+        "chatSessionId": "sess_d9bbccc6-b298-4d26-965e-75668ec7167f",
+        "timestamp": 1794847834248
+      },
+      {
+        "executionId": "76341edb-49b3-4abb-9edf-4f5b2cc9d7cb",
+        "chatSessionId": "sess_d9bbccc6-b298-4d26-965e-75668ec7167f",
+        "timestamp": 1794847924831
+      }
+    ],
+    "2. Synth constants, generators and checks": [
+      {
+        "executionId": "76341edb-49b3-4abb-9edf-4f5b2cc9d7cb",
+        "chatSessionId": "sess_d9bbccc6-b298-4d26-965e-75668ec7167f",
+        "timestamp": 1794847924902
+      }
+    ],
+    "3.1 Property 1: Determinism": [
+      {
+        "executionId": "766cca7f-7986-4c2d-83de-afa7f092c943",
+        "chatSessionId": "sess_afcfc050-5f61-4f39-9a91-e2a54d6711f7",
+        "timestamp": 1794848863015
+      },
+      {
+        "executionId": "766cca7f-7986-4c2d-83de-afa7f092c943",
+        "chatSessionId": "sess_afcfc050-5f61-4f39-9a91-e2a54d6711f7",
+        "timestamp": 1794848923154
+      }
+    ],
+    "3.2 Property 2: Seed sensitivity": [
+      {
+        "executionId": "766cca7f-7986-4c2d-83de-afa7f092c943",
+        "chatSessionId": "sess_afcfc050-5f61-4f39-9a91-e2a54d6711f7",
+        "timestamp": 1794848867729
+      },
+      {
+        "executionId": "766cca7f-7986-4c2d-83de-afa7f092c943",
+        "chatSessionId": "sess_afcfc050-5f61-4f39-9a91-e2a54d6711f7",
+        "timestamp": 1794848923987
+      }
+    ],
+    "3.3 Property 3: Valid shape and duration": [
+      {
+        "executionId": "766cca7f-7986-4c2d-83de-afa7f092c943",
+        "chatSessionId": "sess_afcfc050-5f61-4f39-9a91-e2a54d6711f7",
+        "timestamp": 1794848867789
+      },
+      {
+        "executionId": "766cca7f-7986-4c2d-83de-afa7f092c943",
+        "chatSessionId": "sess_afcfc050-5f61-4f39-9a91-e2a54d6711f7",
+        "timestamp": 1794848924685
+      }
+    ],
+    "3.4 Property 4: Bad sample rates are rejected": [
+      {
+        "executionId": "766cca7f-7986-4c2d-83de-afa7f092c943",
+        "chatSessionId": "sess_afcfc050-5f61-4f39-9a91-e2a54d6711f7",
+        "timestamp": 1794848868254
+      },
+      {
+        "executionId": "766cca7f-7986-4c2d-83de-afa7f092c943",
+        "chatSessionId": "sess_afcfc050-5f61-4f39-9a91-e2a54d6711f7",
+        "timestamp": 1794848925336
+      }
+    ],
+    "3.5 Property 5: Energy stays out of the Screech_Band": [
+      {
+        "executionId": "766cca7f-7986-4c2d-83de-afa7f092c943",
+        "chatSessionId": "sess_afcfc050-5f61-4f39-9a91-e2a54d6711f7",
+        "timestamp": 1794848868517
+      },
+      {
+        "executionId": "766cca7f-7986-4c2d-83de-afa7f092c943",
+        "chatSessionId": "sess_afcfc050-5f61-4f39-9a91-e2a54d6711f7",
+        "timestamp": 1794848926185
+      }
+    ],
+    "3.6 Property 6: Silent edges": [
+      {
+        "executionId": "766cca7f-7986-4c2d-83de-afa7f092c943",
+        "chatSessionId": "sess_afcfc050-5f61-4f39-9a91-e2a54d6711f7",
+        "timestamp": 1794848926703
+      },
+      {
+        "executionId": "766cca7f-7986-4c2d-83de-afa7f092c943",
+        "chatSessionId": "sess_afcfc050-5f61-4f39-9a91-e2a54d6711f7",
+        "timestamp": 1794848992350
+      }
+    ],
+    "3.7 Property 7: Level limit": [
+      {
+        "executionId": "766cca7f-7986-4c2d-83de-afa7f092c943",
+        "chatSessionId": "sess_afcfc050-5f61-4f39-9a91-e2a54d6711f7",
+        "timestamp": 1794848927482
+      },
+      {
+        "executionId": "766cca7f-7986-4c2d-83de-afa7f092c943",
+        "chatSessionId": "sess_afcfc050-5f61-4f39-9a91-e2a54d6711f7",
+        "timestamp": 1794848993095
+      }
+    ],
+    "3.8 Property 8: Gentle attack": [
+      {
+        "executionId": "766cca7f-7986-4c2d-83de-afa7f092c943",
+        "chatSessionId": "sess_afcfc050-5f61-4f39-9a91-e2a54d6711f7",
+        "timestamp": 1794848928121
+      },
+      {
+        "executionId": "766cca7f-7986-4c2d-83de-afa7f092c943",
+        "chatSessionId": "sess_afcfc050-5f61-4f39-9a91-e2a54d6711f7",
+        "timestamp": 1794848993666
+      }
+    ],
+    "3.9 Property 9: Smooth steps": [
+      {
+        "executionId": "766cca7f-7986-4c2d-83de-afa7f092c943",
+        "chatSessionId": "sess_afcfc050-5f61-4f39-9a91-e2a54d6711f7",
+        "timestamp": 1794848929346
+      },
+      {
+        "executionId": "766cca7f-7986-4c2d-83de-afa7f092c943",
+        "chatSessionId": "sess_afcfc050-5f61-4f39-9a91-e2a54d6711f7",
+        "timestamp": 1794848994687
+      }
+    ],
+    "3.10 Property 10: Drone loop seam": [
+      {
+        "executionId": "766cca7f-7986-4c2d-83de-afa7f092c943",
+        "chatSessionId": "sess_afcfc050-5f61-4f39-9a91-e2a54d6711f7",
+        "timestamp": 1794848929405
+      },
+      {
+        "executionId": "766cca7f-7986-4c2d-83de-afa7f092c943",
+        "chatSessionId": "sess_afcfc050-5f61-4f39-9a91-e2a54d6711f7",
+        "timestamp": 1794848995080
+      }
+    ],
+    "3.11 Property 11: Awaken has three ordered parts": [
+      {
+        "executionId": "766cca7f-7986-4c2d-83de-afa7f092c943",
+        "chatSessionId": "sess_afcfc050-5f61-4f39-9a91-e2a54d6711f7",
+        "timestamp": 1794848995773
+      },
+      {
+        "executionId": "766cca7f-7986-4c2d-83de-afa7f092c943",
+        "chatSessionId": "sess_afcfc050-5f61-4f39-9a91-e2a54d6711f7",
+        "timestamp": 1794849065735
+      }
+    ],
+    "3.12 Property 12: Whisper is spread noise": [
+      {
+        "executionId": "766cca7f-7986-4c2d-83de-afa7f092c943",
+        "chatSessionId": "sess_afcfc050-5f61-4f39-9a91-e2a54d6711f7",
+        "timestamp": 1794848996439
+      },
+      {
+        "executionId": "766cca7f-7986-4c2d-83de-afa7f092c943",
+        "chatSessionId": "sess_afcfc050-5f61-4f39-9a91-e2a54d6711f7",
+        "timestamp": 1794849066704
+      }
+    ],
+    "3.13 Property 13: A packet is louder than every haunting sound": [
+      {
+        "executionId": "766cca7f-7986-4c2d-83de-afa7f092c943",
+        "chatSessionId": "sess_afcfc050-5f61-4f39-9a91-e2a54d6711f7",
+        "timestamp": 1794848997486
+      },
+      {
+        "executionId": "766cca7f-7986-4c2d-83de-afa7f092c943",
+        "chatSessionId": "sess_afcfc050-5f61-4f39-9a91-e2a54d6711f7",
+        "timestamp": 1794849067249
+      }
+    ],
+    "3.14 Property 24: Most energy lies in the Phone_Band": [
+      {
+        "executionId": "766cca7f-7986-4c2d-83de-afa7f092c943",
+        "chatSessionId": "sess_afcfc050-5f61-4f39-9a91-e2a54d6711f7",
+        "timestamp": 1794848998184
+      },
+      {
+        "executionId": "766cca7f-7986-4c2d-83de-afa7f092c943",
+        "chatSessionId": "sess_afcfc050-5f61-4f39-9a91-e2a54d6711f7",
+        "timestamp": 1794849067855
+      }
+    ],
+    "3.15 Property 25: No sine partial above the Partial_Limit": [
+      {
+        "executionId": "766cca7f-7986-4c2d-83de-afa7f092c943",
+        "chatSessionId": "sess_afcfc050-5f61-4f39-9a91-e2a54d6711f7",
+        "timestamp": 1794848998832
+      },
+      {
+        "executionId": "766cca7f-7986-4c2d-83de-afa7f092c943",
+        "chatSessionId": "sess_afcfc050-5f61-4f39-9a91-e2a54d6711f7",
+        "timestamp": 1794849068788
+      }
+    ],
+    "3.16 Property 26: Filter corners keep noise in the Phone_Band and under the ceiling": [
+      {
+        "executionId": "766cca7f-7986-4c2d-83de-afa7f092c943",
+        "chatSessionId": "sess_afcfc050-5f61-4f39-9a91-e2a54d6711f7",
+        "timestamp": 1794848999319
+      },
+      {
+        "executionId": "766cca7f-7986-4c2d-83de-afa7f092c943",
+        "chatSessionId": "sess_afcfc050-5f61-4f39-9a91-e2a54d6711f7",
+        "timestamp": 1794849069317
+      }
+    ],
+    "3. Property tests for the synth": [
+      {
+        "executionId": "766cca7f-7986-4c2d-83de-afa7f092c943",
+        "chatSessionId": "sess_afcfc050-5f61-4f39-9a91-e2a54d6711f7",
+        "timestamp": 1794849069365
+      }
+    ],
+    "4. Checkpoint - synth": [
+      {
+        "executionId": "02a487f1-9770-4125-a84b-9c8230a6c64e",
+        "chatSessionId": "sess_693c1921-804b-4eb1-81ac-7227975a8923",
+        "timestamp": 1794849237429
+      },
+      {
+        "executionId": "02a487f1-9770-4125-a84b-9c8230a6c64e",
+        "chatSessionId": "sess_693c1921-804b-4eb1-81ac-7227975a8923",
+        "timestamp": 1794849296664
+      }
+    ],
+    "5.1 Add `isLetter`, `SpelledText` and `spellShown` to `src/logic/ouija.ts`, extend `tests/logic/ouija.test.ts`": [
+      {
+        "executionId": "e0f99404-8679-46d0-b76e-5758ce38c404",
+        "chatSessionId": "sess_79265084-f05b-42b4-8699-df143906b66a",
+        "timestamp": 1794849332351
+      },
+      {
+        "executionId": "e0f99404-8679-46d0-b76e-5758ce38c404",
+        "chatSessionId": "sess_79265084-f05b-42b4-8699-df143906b66a",
+        "timestamp": 1794849452211
+      }
+    ],
+    "6.1 Create `src/logic/sound-pref.ts` with `tests/logic/sound-pref.test.ts`": [
+      {
+        "executionId": "e0f99404-8679-46d0-b76e-5758ce38c404",
+        "chatSessionId": "sess_79265084-f05b-42b4-8699-df143906b66a",
+        "timestamp": 1794849464727
+      },
+      {
+        "executionId": "e0f99404-8679-46d0-b76e-5758ce38c404",
+        "chatSessionId": "sess_79265084-f05b-42b4-8699-df143906b66a",
+        "timestamp": 1794849622376
+      }
+    ],
+    "6.5 Create `src/logic/sound-hint.ts` with `tests/logic/sound-hint.test.ts`": [
+      {
+        "executionId": "e0f99404-8679-46d0-b76e-5758ce38c404",
+        "chatSessionId": "sess_79265084-f05b-42b4-8699-df143906b66a",
+        "timestamp": 1794849464912
+      },
+      {
+        "executionId": "e0f99404-8679-46d0-b76e-5758ce38c404",
+        "chatSessionId": "sess_79265084-f05b-42b4-8699-df143906b66a",
+        "timestamp": 1794849622476
+      }
+    ],
+    "5.3 Create `src/logic/haunt-rules.ts` with `tests/logic/haunt-rules.test.ts`": [
+      {
+        "executionId": "e0f99404-8679-46d0-b76e-5758ce38c404",
+        "chatSessionId": "sess_79265084-f05b-42b4-8699-df143906b66a",
+        "timestamp": 1794849628056
+      },
+      {
+        "executionId": "e0f99404-8679-46d0-b76e-5758ce38c404",
+        "chatSessionId": "sess_79265084-f05b-42b4-8699-df143906b66a",
+        "timestamp": 1794849723479
+      }
+    ],
+    "5.2 Property 27: Stepping counts Letters and matches the scrape plan": [
+      {
+        "executionId": "e0f99404-8679-46d0-b76e-5758ce38c404",
+        "chatSessionId": "sess_79265084-f05b-42b4-8699-df143906b66a",
+        "timestamp": 1794849730254
+      },
+      {
+        "executionId": "e0f99404-8679-46d0-b76e-5758ce38c404",
+        "chatSessionId": "sess_79265084-f05b-42b4-8699-df143906b66a",
+        "timestamp": 1794849809637
+      }
+    ],
+    "5.4 Property 14: Quiet_State is exactly listen, capture, screeching or playback": [
+      {
+        "executionId": "e0f99404-8679-46d0-b76e-5758ce38c404",
+        "chatSessionId": "sess_79265084-f05b-42b4-8699-df143906b66a",
+        "timestamp": 1794849816461
+      },
+      {
+        "executionId": "e0f99404-8679-46d0-b76e-5758ce38c404",
+        "chatSessionId": "sess_79265084-f05b-42b4-8699-df143906b66a",
+        "timestamp": 1794849876036
+      }
+    ],
+    "5.5 Property 15: Sound_Gate is the conjunction of four conditions": [
+      {
+        "executionId": "e0f99404-8679-46d0-b76e-5758ce38c404",
+        "chatSessionId": "sess_79265084-f05b-42b4-8699-df143906b66a",
+        "timestamp": 1794849821775
+      },
+      {
+        "executionId": "e0f99404-8679-46d0-b76e-5758ce38c404",
+        "chatSessionId": "sess_79265084-f05b-42b4-8699-df143906b66a",
+        "timestamp": 1794849876761
+      }
+    ],
+    "5.6 Property 17: Duplicate one-shots inside 30 ms are ignored": [
+      {
+        "executionId": "e0f99404-8679-46d0-b76e-5758ce38c404",
+        "chatSessionId": "sess_79265084-f05b-42b4-8699-df143906b66a",
+        "timestamp": 1794849821830
+      },
+      {
+        "executionId": "e0f99404-8679-46d0-b76e-5758ce38c404",
+        "chatSessionId": "sess_79265084-f05b-42b4-8699-df143906b66a",
+        "timestamp": 1794849877790
+      }
+    ],
+    "5.7 Property 18: Candle crackle limit": [
+      {
+        "executionId": "e0f99404-8679-46d0-b76e-5758ce38c404",
+        "chatSessionId": "sess_79265084-f05b-42b4-8699-df143906b66a",
+        "timestamp": 1794849822217
+      },
+      {
+        "executionId": "e0f99404-8679-46d0-b76e-5758ce38c404",
+        "chatSessionId": "sess_79265084-f05b-42b4-8699-df143906b66a",
+        "timestamp": 1794849878392
+      }
+    ],
+    "5.8 Property 19: A full reveal gives exactly min(n, 30) scrapes": [
+      {
+        "executionId": "e0f99404-8679-46d0-b76e-5758ce38c404",
+        "chatSessionId": "sess_79265084-f05b-42b4-8699-df143906b66a",
+        "timestamp": 1794849822566
+      },
+      {
+        "executionId": "e0f99404-8679-46d0-b76e-5758ce38c404",
+        "chatSessionId": "sess_79265084-f05b-42b4-8699-df143906b66a",
+        "timestamp": 1794849879048
+      }
+    ],
+    "5.9 Property 20: Scrape seed depends only on the letter index": [
+      {
+        "executionId": "e0f99404-8679-46d0-b76e-5758ce38c404",
+        "chatSessionId": "sess_79265084-f05b-42b4-8699-df143906b66a",
+        "timestamp": 1794849880043
+      },
+      {
+        "executionId": "e0f99404-8679-46d0-b76e-5758ce38c404",
+        "chatSessionId": "sess_79265084-f05b-42b4-8699-df143906b66a",
+        "timestamp": 1794849936087
+      }
+    ],
+    "5.10 Property 28 (key part): Buffer cache keys are unique per sound, rate and seed": [
+      {
+        "executionId": "e0f99404-8679-46d0-b76e-5758ce38c404",
+        "chatSessionId": "sess_79265084-f05b-42b4-8699-df143906b66a",
+        "timestamp": 1794849880555
+      },
+      {
+        "executionId": "e0f99404-8679-46d0-b76e-5758ce38c404",
+        "chatSessionId": "sess_79265084-f05b-42b4-8699-df143906b66a",
+        "timestamp": 1794849936309
+      }
+    ],
+    "5. Ouija change and haunt-rules decision logic": [
+      {
+        "executionId": "e0f99404-8679-46d0-b76e-5758ce38c404",
+        "chatSessionId": "sess_79265084-f05b-42b4-8699-df143906b66a",
+        "timestamp": 1794849936395
+      }
+    ],
+    "6.2 Property 21: Sound preference round trip": [
+      {
+        "executionId": "033b3d80-652c-42da-b9f7-7cc524a69031",
+        "chatSessionId": "sess_257c4a12-a93c-4741-82db-0971fe411de1",
+        "timestamp": 1794850097262
+      },
+      {
+        "executionId": "033b3d80-652c-42da-b9f7-7cc524a69031",
+        "chatSessionId": "sess_257c4a12-a93c-4741-82db-0971fe411de1",
+        "timestamp": 1794850144833
+      }
+    ],
+    "6.3 Property 22: Only `0` means off": [
+      {
+        "executionId": "033b3d80-652c-42da-b9f7-7cc524a69031",
+        "chatSessionId": "sess_257c4a12-a93c-4741-82db-0971fe411de1",
+        "timestamp": 1794850097445
+      },
+      {
+        "executionId": "033b3d80-652c-42da-b9f7-7cc524a69031",
+        "chatSessionId": "sess_257c4a12-a93c-4741-82db-0971fe411de1",
+        "timestamp": 1794850145817
+      }
+    ],
+    "6.4 Property 23: Settings are independent": [
+      {
+        "executionId": "033b3d80-652c-42da-b9f7-7cc524a69031",
+        "chatSessionId": "sess_257c4a12-a93c-4741-82db-0971fe411de1",
+        "timestamp": 1794850098130
+      },
+      {
+        "executionId": "033b3d80-652c-42da-b9f7-7cc524a69031",
+        "chatSessionId": "sess_257c4a12-a93c-4741-82db-0971fe411de1",
+        "timestamp": 1794850146464
+      }
+    ],
+    "6.6 Property 29: The hint is shown if and only if all four conditions hold": [
+      {
+        "executionId": "033b3d80-652c-42da-b9f7-7cc524a69031",
+        "chatSessionId": "sess_257c4a12-a93c-4741-82db-0971fe411de1",
+        "timestamp": 1794850098789
+      },
+      {
+        "executionId": "033b3d80-652c-42da-b9f7-7cc524a69031",
+        "chatSessionId": "sess_257c4a12-a93c-4741-82db-0971fe411de1",
+        "timestamp": 1794850147242
+      }
+    ],
+    "6.7 Property 30: iOS detection": [
+      {
+        "executionId": "033b3d80-652c-42da-b9f7-7cc524a69031",
+        "chatSessionId": "sess_257c4a12-a93c-4741-82db-0971fe411de1",
+        "timestamp": 1794850099262
+      },
+      {
+        "executionId": "033b3d80-652c-42da-b9f7-7cc524a69031",
+        "chatSessionId": "sess_257c4a12-a93c-4741-82db-0971fe411de1",
+        "timestamp": 1794850147524
+      }
+    ],
+    "6. Sound preference and Sound_Hint pure modules": [
+      {
+        "executionId": "033b3d80-652c-42da-b9f7-7cc524a69031",
+        "chatSessionId": "sess_257c4a12-a93c-4741-82db-0971fe411de1",
+        "timestamp": 1794850147577
+      }
+    ],
+    "7. Checkpoint - pure logic": [
+      {
+        "executionId": "973941c2-faa7-4d24-8a06-4d8bbce0b121",
+        "chatSessionId": "sess_a78b37f5-af1d-472c-aefd-5643b276e08b",
+        "timestamp": 1794850199830
+      },
+      {
+        "executionId": "973941c2-faa7-4d24-8a06-4d8bbce0b121",
+        "chatSessionId": "sess_a78b37f5-af1d-472c-aefd-5643b276e08b",
+        "timestamp": 1794850306534
+      }
+    ],
+    "8.1 Create `src/audio/haunt-player.ts`": [
+      {
+        "executionId": "ba8959b8-c881-4b4e-bc73-5738144dd0b2",
+        "chatSessionId": "sess_1fdbe3d4-40ac-4d8d-ae2c-d8e910c9cf03",
+        "timestamp": 1794850344267
+      },
+      {
+        "executionId": "ba8959b8-c881-4b4e-bc73-5738144dd0b2",
+        "chatSessionId": "sess_1fdbe3d4-40ac-4d8d-ae2c-d8e910c9cf03",
+        "timestamp": 1794850476258
+      }
+    ],
+    "8.2 Write `tests/audio/haunt-player.test.ts` unit tests with a fake context": [
+      {
+        "executionId": "ba8959b8-c881-4b4e-bc73-5738144dd0b2",
+        "chatSessionId": "sess_1fdbe3d4-40ac-4d8d-ae2c-d8e910c9cf03",
+        "timestamp": 1794850476830
+      },
+      {
+        "executionId": "ba8959b8-c881-4b4e-bc73-5738144dd0b2",
+        "chatSessionId": "sess_1fdbe3d4-40ac-4d8d-ae2c-d8e910c9cf03",
+        "timestamp": 1794850655861
+      }
+    ],
+    "8.3 Property 16: The player never plays while the gate is closed and always ends silent": [
+      {
+        "executionId": "ba8959b8-c881-4b4e-bc73-5738144dd0b2",
+        "chatSessionId": "sess_1fdbe3d4-40ac-4d8d-ae2c-d8e910c9cf03",
+        "timestamp": 1794850477723
+      },
+      {
+        "executionId": "ba8959b8-c881-4b4e-bc73-5738144dd0b2",
+        "chatSessionId": "sess_1fdbe3d4-40ac-4d8d-ae2c-d8e910c9cf03",
+        "timestamp": 1794850584076
+      }
+    ],
+    "8.4 Property 28 (player part): the same triple creates one buffer": [
+      {
+        "executionId": "ba8959b8-c881-4b4e-bc73-5738144dd0b2",
+        "chatSessionId": "sess_1fdbe3d4-40ac-4d8d-ae2c-d8e910c9cf03",
+        "timestamp": 1794850477882
+      },
+      {
+        "executionId": "ba8959b8-c881-4b4e-bc73-5738144dd0b2",
+        "chatSessionId": "sess_1fdbe3d4-40ac-4d8d-ae2c-d8e910c9cf03",
+        "timestamp": 1794850584537
+      }
+    ],
+    "8. Haunt player": [
+      {
+        "executionId": "ba8959b8-c881-4b4e-bc73-5738144dd0b2",
+        "chatSessionId": "sess_1fdbe3d4-40ac-4d8d-ae2c-d8e910c9cf03",
+        "timestamp": 1794850656000
+      }
+    ],
+    "9.1 Create `src/ui/hooks/useSoundPref.ts`": [
+      {
+        "executionId": "f6af88f3-8c1f-4712-a41e-91a98a782d7b",
+        "chatSessionId": "sess_b2934e80-3bd2-4b76-a326-4876e06036b0",
+        "timestamp": 1794850729475
+      },
+      {
+        "executionId": "f6af88f3-8c1f-4712-a41e-91a98a782d7b",
+        "chatSessionId": "sess_b2934e80-3bd2-4b76-a326-4876e06036b0",
+        "timestamp": 1794850766620
+      }
+    ],
+    "9.2 Create `src/ui/hooks/useSoundHint.ts` and Property 31 test": [
+      {
+        "executionId": "f6af88f3-8c1f-4712-a41e-91a98a782d7b",
+        "chatSessionId": "sess_b2934e80-3bd2-4b76-a326-4876e06036b0",
+        "timestamp": 1794850771363
+      },
+      {
+        "executionId": "f6af88f3-8c1f-4712-a41e-91a98a782d7b",
+        "chatSessionId": "sess_b2934e80-3bd2-4b76-a326-4876e06036b0",
+        "timestamp": 1794850844078
+      }
+    ],
+    "9.3 Create `src/ui/hooks/useHaunt.ts` and the failure-notice store": [
+      {
+        "executionId": "f6af88f3-8c1f-4712-a41e-91a98a782d7b",
+        "chatSessionId": "sess_b2934e80-3bd2-4b76-a326-4876e06036b0",
+        "timestamp": 1794850847962
+      },
+      {
+        "executionId": "f6af88f3-8c1f-4712-a41e-91a98a782d7b",
+        "chatSessionId": "sess_b2934e80-3bd2-4b76-a326-4876e06036b0",
+        "timestamp": 1794850901190
+      }
+    ],
+    "9. Hooks": [
+      {
+        "executionId": "f6af88f3-8c1f-4712-a41e-91a98a782d7b",
+        "chatSessionId": "sess_b2934e80-3bd2-4b76-a326-4876e06036b0",
+        "timestamp": 1794850901256
+      }
+    ],
+    "10.1 Create `src/ui/components/SoundToggle.tsx` with `tests/ui/sound-toggle.test.tsx`": [
+      {
+        "executionId": "684926ff-2efd-4dc2-a1cb-94498a39f85c",
+        "chatSessionId": "sess_75b8b642-eda8-47f3-9193-6e769ccadc5a",
+        "timestamp": 1794850927400
+      },
+      {
+        "executionId": "684926ff-2efd-4dc2-a1cb-94498a39f85c",
+        "chatSessionId": "sess_75b8b642-eda8-47f3-9193-6e769ccadc5a",
+        "timestamp": 1794850974196
+      }
+    ],
+    "10.2 Create `src/ui/components/SoundHint.tsx` with `tests/ui/sound-hint.test.tsx`": [
+      {
+        "executionId": "684926ff-2efd-4dc2-a1cb-94498a39f85c",
+        "chatSessionId": "sess_75b8b642-eda8-47f3-9193-6e769ccadc5a",
+        "timestamp": 1794850977480
+      },
+      {
+        "executionId": "684926ff-2efd-4dc2-a1cb-94498a39f85c",
+        "chatSessionId": "sess_75b8b642-eda8-47f3-9193-6e769ccadc5a",
+        "timestamp": 1794851034214
+      }
+    ],
+    "10.4 Add theme styles to `src/styles/screens.css`": [
+      {
+        "executionId": "684926ff-2efd-4dc2-a1cb-94498a39f85c",
+        "chatSessionId": "sess_75b8b642-eda8-47f3-9193-6e769ccadc5a",
+        "timestamp": 1794851038663
+      },
+      {
+        "executionId": "684926ff-2efd-4dc2-a1cb-94498a39f85c",
+        "chatSessionId": "sess_75b8b642-eda8-47f3-9193-6e769ccadc5a",
+        "timestamp": 1794851107246
+      }
+    ],
+    "10.3 Create `src/ui/components/ToggleCluster.tsx` and replace `<ExorciseToggle />` on all seven screens": [
+      {
+        "executionId": "684926ff-2efd-4dc2-a1cb-94498a39f85c",
+        "chatSessionId": "sess_75b8b642-eda8-47f3-9193-6e769ccadc5a",
+        "timestamp": 1794851110412
+      },
+      {
+        "executionId": "684926ff-2efd-4dc2-a1cb-94498a39f85c",
+        "chatSessionId": "sess_75b8b642-eda8-47f3-9193-6e769ccadc5a",
+        "timestamp": 1794851197982
+      }
+    ],
+    "10. Sound UI components and theme": [
+      {
+        "executionId": "684926ff-2efd-4dc2-a1cb-94498a39f85c",
+        "chatSessionId": "sess_75b8b642-eda8-47f3-9193-6e769ccadc5a",
+        "timestamp": 1794851198071
+      }
+    ],
+    "11.1 Wire `App.tsx` and `Awaken.tsx`": [
+      {
+        "executionId": "6eef7247-9727-4b9a-af3f-43b1b5899bf8",
+        "chatSessionId": "sess_e540de37-ecb0-43dc-9e15-539106cbd923",
+        "timestamp": 1794851656500
+      },
+      {
+        "executionId": "6eef7247-9727-4b9a-af3f-43b1b5899bf8",
+        "chatSessionId": "sess_e540de37-ecb0-43dc-9e15-539106cbd923",
+        "timestamp": 1794851664446
+      },
+      {
+        "executionId": "6eef7247-9727-4b9a-af3f-43b1b5899bf8",
+        "chatSessionId": "sess_e540de37-ecb0-43dc-9e15-539106cbd923",
+        "timestamp": 1794851757969
+      }
+    ],
+    "11.2 Wire `Speak.tsx`": [
+      {
+        "executionId": "6eef7247-9727-4b9a-af3f-43b1b5899bf8",
+        "chatSessionId": "sess_e540de37-ecb0-43dc-9e15-539106cbd923",
+        "timestamp": 1794851656623
+      },
+      {
+        "executionId": "6eef7247-9727-4b9a-af3f-43b1b5899bf8",
+        "chatSessionId": "sess_e540de37-ecb0-43dc-9e15-539106cbd923",
+        "timestamp": 1794851665446
+      },
+      {
+        "executionId": "6eef7247-9727-4b9a-af3f-43b1b5899bf8",
+        "chatSessionId": "sess_e540de37-ecb0-43dc-9e15-539106cbd923",
+        "timestamp": 1794851758609
+      }
+    ],
+    "11.3 Wire `Reveal.tsx` and `OuijaBoard.tsx`": [
+      {
+        "executionId": "6eef7247-9727-4b9a-af3f-43b1b5899bf8",
+        "chatSessionId": "sess_e540de37-ecb0-43dc-9e15-539106cbd923",
+        "timestamp": 1794851656721
+      },
+      {
+        "executionId": "6eef7247-9727-4b9a-af3f-43b1b5899bf8",
+        "chatSessionId": "sess_e540de37-ecb0-43dc-9e15-539106cbd923",
+        "timestamp": 1794851665814
+      },
+      {
+        "executionId": "6eef7247-9727-4b9a-af3f-43b1b5899bf8",
+        "chatSessionId": "sess_e540de37-ecb0-43dc-9e15-539106cbd923",
+        "timestamp": 1794851759647
+      }
+    ],
+    "11.4 Wire `Garbled.tsx` and `Sealed.tsx`": [
+      {
+        "executionId": "6eef7247-9727-4b9a-af3f-43b1b5899bf8",
+        "chatSessionId": "sess_e540de37-ecb0-43dc-9e15-539106cbd923",
+        "timestamp": 1794851656812
+      },
+      {
+        "executionId": "6eef7247-9727-4b9a-af3f-43b1b5899bf8",
+        "chatSessionId": "sess_e540de37-ecb0-43dc-9e15-539106cbd923",
+        "timestamp": 1794851666444
+      },
+      {
+        "executionId": "6eef7247-9727-4b9a-af3f-43b1b5899bf8",
+        "chatSessionId": "sess_e540de37-ecb0-43dc-9e15-539106cbd923",
+        "timestamp": 1794851760105
+      }
+    ],
+    "11.5 Write `tests/ui/haunt-wiring.test.tsx` with a stubbed `hauntPlayer`": [
+      {
+        "executionId": "6eef7247-9727-4b9a-af3f-43b1b5899bf8",
+        "chatSessionId": "sess_e540de37-ecb0-43dc-9e15-539106cbd923",
+        "timestamp": 1794851656907
+      },
+      {
+        "executionId": "6eef7247-9727-4b9a-af3f-43b1b5899bf8",
+        "chatSessionId": "sess_e540de37-ecb0-43dc-9e15-539106cbd923",
+        "timestamp": 1794851763342
+      },
+      {
+        "executionId": "6eef7247-9727-4b9a-af3f-43b1b5899bf8",
+        "chatSessionId": "sess_e540de37-ecb0-43dc-9e15-539106cbd923",
+        "timestamp": 1794851932901
+      }
+    ],
+    "12.1 Extend `tests/architecture.test.ts`": [
+      {
+        "executionId": "6eef7247-9727-4b9a-af3f-43b1b5899bf8",
+        "chatSessionId": "sess_e540de37-ecb0-43dc-9e15-539106cbd923",
+        "timestamp": 1794851657012
+      }
+    ],
+    "12.2 Add `scripts/check-no-audio.mjs` and an `apps/web` script `check:no-audio`": [
+      {
+        "executionId": "6eef7247-9727-4b9a-af3f-43b1b5899bf8",
+        "chatSessionId": "sess_e540de37-ecb0-43dc-9e15-539106cbd923",
+        "timestamp": 1794851657103
+      }
+    ],
+    "13. Final checkpoint - tests, typecheck and build": [
+      {
+        "executionId": "6eef7247-9727-4b9a-af3f-43b1b5899bf8",
+        "chatSessionId": "sess_e540de37-ecb0-43dc-9e15-539106cbd923",
+        "timestamp": 1794851657195
+      }
+    ],
+    "11. Per-screen wiring": [
+      {
+        "executionId": "6eef7247-9727-4b9a-af3f-43b1b5899bf8",
+        "chatSessionId": "sess_e540de37-ecb0-43dc-9e15-539106cbd923",
+        "timestamp": 1794851932990
+      }
+    ]
+  }
+}

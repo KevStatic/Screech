@@ -6,7 +6,7 @@ import { dedupeStep, type DedupeState } from '../../logic/dedupe';
 import { NOTICE_SEND_BLOCKED } from '../../logic/flow';
 import { screenState } from '../../logic/screen-state';
 import CrtFrame from '../components/CrtFrame';
-import ExorciseToggle from '../components/ExorciseToggle';
+import ToggleCluster from '../components/ToggleCluster';
 import ModeSwitch from '../components/ModeSwitch';
 import KIIMeter from '../components/KIIMeter';
 import Spectrogram from '../components/Spectrogram';
@@ -150,7 +150,7 @@ export default function Listen({ flow, audio, now = () => Date.now() }: ListenPr
         <ModeSwitch current="listen" onSpeak={back} />
         <div className="row">
           <span className="label grow">Screen: Listen</span>
-          <ExorciseToggle />
+          <ToggleCluster />
         </div>
         <h1 id="listen-title" className="glow" style={{ margin: 0, fontWeight: 400 }}>
           {retryMessage !== null ? 'THE BOX WENT QUIET' : LABEL_LISTENING}

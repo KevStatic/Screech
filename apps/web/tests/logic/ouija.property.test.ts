@@ -5,7 +5,9 @@ import {
   SPELL_MAX_MS,
   SPELL_RATE_CPS,
   spellProgress,
+  spellShown,
 } from '../../src/logic/ouija';
+import { scrapePlan, SCRAPE_STAGGER_MS } from '../../src/logic/haunt-rules';
 
 const NUM_RUNS = 200;
 
@@ -80,6 +82,86 @@ describe('Feature: spirit-box-app, Property 22: Ouija spelling schedule', () => 
         const r = spellProgress(elapsed, length);
         if (r.done) expect(r.count).toBe(length);
         else expect(r.count).toBeLessThanOrEqual(SPELL_MAX_CHARS);
+      }),
+      { numRuns: NUM_RUNS },
+    );
+  });
+});
+
+const codePointArb = fc.oneof(
+  fc.constantFrom(' ', '\t', '\n', '\r', '\u00a0', '\u3000', '\u2003'),
+  fc.constantFrom('0', '9', '.', '-', '/', 'é', '漢', '👻', '\u{10FFFF}'),
+  fc.integer({ min: 0x21, max: 0x2fff }).map((n) => String.fromCodePoint(n)),
+);
+const charsArb = fc
+  .array(codePointArb, { maxLength: 100 })
+  .map((parts) => Array.from(parts.join('')));
+
+const isWs = (ch: string): boolean => /^\s+$/u.test(ch);
+const countLetters = (chars: readonly string[]): number => chars.filter((c) => !isWs(c)).length;
+
+describe('Feature: haunting-sounds, Property 27: Stepping counts Letters and matches the scrape plan', () => {
+  /** **Validates: Requirements 8.1, 8.3, 8.6** */
+  it('stepping is monotonic, finishes with all shown, and scrapes match the Letters', () => {
+    fc.assert(
+      fc.property(
+        charsArb,
+        fc.array(fc.integer({ min: 1, max: 400 }), { maxLength: 30 }),
+        (chars, jitter) => {
+          const n = countLetters(chars);
+          const times: number[] = [];
+          for (let t = 0; t <= 2600; t += 10) times.push(t);
+          for (const j of jitter) times.push(j * 6.5);
+          times.sort((a, b) => a - b);
+
+          let shown = 0;
+          let done = false;
+          const indexes: number[] = [];
+          for (const t of times) {
+            const r = spellShown(t, chars);
+            // (a)
+            expect(r.shown).toBeGreaterThanOrEqual(shown);
+            expect(r.shown).toBeLessThanOrEqual(chars.length);
+            // (d)
+            if (!r.done) expect(r.letters).toBeLessThanOrEqual(SPELL_MAX_CHARS);
+            expect(r.letters).toBe(countLetters(chars.slice(0, r.shown)));
+            const plan = scrapePlan(chars, shown, r.shown);
+            plan.forEach((s, j) => {
+              expect(s.delayMs).toBe(j * SCRAPE_STAGGER_MS);
+              indexes.push(s.letterIndex);
+            });
+            // (e)
+            const stepped = chars.slice(shown, r.shown).filter((c) => !isWs(c)).length;
+            expect(plan.length).toBeLessThanOrEqual(stepped);
+            shown = r.shown;
+            done = r.done;
+          }
+          // (b)
+          expect(done).toBe(true);
+          expect(shown).toBe(chars.length);
+          // (c)
+          const count = Math.min(n, SPELL_MAX_CHARS);
+          expect(indexes).toEqual(Array.from({ length: count }, (_, i) => i));
+        },
+      ),
+      { numRuns: NUM_RUNS },
+    );
+  });
+
+  /** **Validates: Requirements 8.1, 8.3, 8.6** */
+  it('a stalled timer (one jump from 0 to the end) still plans min(n, 30) scrapes at j*30 ms', () => {
+    fc.assert(
+      fc.property(charsArb, fc.double({ min: SPELL_MAX_MS, max: 1e7, noNaN: true }), (chars, end) => {
+        const r = spellShown(end, chars);
+        expect(r.done).toBe(true);
+        expect(r.shown).toBe(chars.length);
+        const plan = scrapePlan(chars, 0, r.shown);
+        const count = Math.min(countLetters(chars), SPELL_MAX_CHARS);
+        expect(plan).toHaveLength(count);
+        plan.forEach((s, j) => {
+          expect(s.letterIndex).toBe(j);
+          expect(s.delayMs).toBe(j * 30);
+        });
       }),
       { numRuns: NUM_RUNS },
     );

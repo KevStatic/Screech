@@ -1,4 +1,4 @@
-import { spellProgress } from '../../logic/ouija';
+import { spellShown } from '../../logic/ouija';
 import { useMotion } from '../hooks/useMotion';
 
 export interface OuijaBoardProps {
@@ -52,7 +52,7 @@ const pct = (n: number, total: number): string => `${(n / total) * 100}%`;
 export default function OuijaBoard({ value, elapsedMs }: OuijaBoardProps) {
   const { reduced } = useMotion();
   const chars = Array.from(value);
-  const { count } = reduced ? { count: chars.length } : spellProgress(elapsedMs, chars.length);
+  const count = reduced ? chars.length : spellShown(elapsedMs, chars).shown;
   const shown = chars.slice(0, count);
 
   let current: Spot = REST;

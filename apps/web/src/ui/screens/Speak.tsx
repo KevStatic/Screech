@@ -1,4 +1,4 @@
-import { useMemo, useRef, useState, type ChangeEvent, type ReactElement, type ReactNode } from 'react';
+import { useEffect, useMemo, useRef, useState, type ChangeEvent, type ReactElement, type ReactNode } from 'react';
 import { encode, type WifiSecurity } from '@screech/core';
 import { loadEngine } from '../../audio/engine';
 import { playWaveform, type PlaybackHandle } from '../../audio/transmit';
@@ -12,17 +12,19 @@ import {
   type LabSettings,
   type LabVolume,
 } from '../../logic/lab';
+import { candleChanged } from '../../logic/haunt-rules';
 import { canListen, canTransmit, listenUnavailableReason } from '../../logic/flow';
 import { buildPayload, hasContent, type Draft, type TypeKey } from '../../logic/payload-draft';
 import ByteCandle from '../components/ByteCandle';
 import CrtFrame from '../components/CrtFrame';
-import ExorciseToggle from '../components/ExorciseToggle';
+import ToggleCluster from '../components/ToggleCluster';
 import ModeSwitch from '../components/ModeSwitch';
 import ScreechKey from '../components/ScreechKey';
 import TarotCard from '../components/TarotCard';
 import type { AudioSessionApi } from '../hooks/useAudioSession';
 import type { DraftApi } from '../hooks/useDraft';
 import type { FlowApi } from '../hooks/useFlow';
+import { useHaunt } from '../hooks/useHaunt';
 import { useHold } from '../hooks/useHold';
 export const MSG_NOTHING_WRITTEN = 'Nothing written yet. Write something to send.';
 export const MSG_WAKE_SLEEPING = 'The box fell asleep. Tap to wake it.';
@@ -194,6 +196,19 @@ export default function Speak({
   draftRef.current = draft;
   const reading = useMemo(() => read(draft), [draft]);
   const canSend = reading.sendable && canTransmit(state);
+  const haunt = useHaunt();
+  // Room drone while this screen is open. The player fades it out on unmount.
+  useEffect(() => {
+    haunt.setDroneWanted(true);
+    return () => haunt.setDroneWanted(false);
+  }, [haunt]);
+  // One candle crackle when the byte count changes. The first reading is a baseline.
+  const candleSize = reading.budget.size;
+  const prevCandleSize = useRef<number | null>(candleSize);
+  useEffect(() => {
+    if (candleChanged(prevCandleSize.current, candleSize)) haunt.play('candle-crackle');
+    prevCandleSize.current = candleSize;
+  }, [candleSize, haunt]);
   /** Keep-alive for every gesture handler. First call, synchronous, never awaited. */
   const keepAlive = (): void => {
     void audio.ensureRunning();
@@ -291,6 +306,7 @@ export default function Speak({
   }
   function select(key: TypeKey): void {
     keepAlive();
+    if (draftRef.current.selected !== key) haunt.play('card-flip');
     update((d) => ({ ...d, selected: key }));
     dispatch({ type: 'cardSelected' });
   }
@@ -340,7 +356,7 @@ export default function Speak({
           <h1 id="speak-title" className="note grow" style={{ margin: 0 }}>
             Draw a card. Choose what crosses over.
           </h1>
-          <ExorciseToggle />
+          <ToggleCluster />
         </div>
         <div
           role="group"

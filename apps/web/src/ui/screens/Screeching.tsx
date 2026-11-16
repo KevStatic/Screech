@@ -2,7 +2,7 @@ import { useCallback, useEffect, useRef, useState, type ReactElement, type React
 import type { PlaybackHandle } from '../../audio/transmit';
 import { formatDuration, percent, progress, remainingSeconds } from '../../logic/progress';
 import CrtFrame from '../components/CrtFrame';
-import ExorciseToggle from '../components/ExorciseToggle';
+import ToggleCluster from '../components/ToggleCluster';
 import Oscilloscope from '../components/Oscilloscope';
 import SpeakerGrille from '../components/SpeakerGrille';
 import SwallowedText from '../components/SwallowedText';
@@ -42,7 +42,7 @@ function Shell({ title, children }: ShellProps): ReactElement {
       <main className="screen" aria-labelledby="screeching-title">
         <div className="row">
           <span className="label grow">Screen: Screeching</span>
-          <ExorciseToggle />
+          <ToggleCluster />
         </div>
         <h1 id="screeching-title" className="glow" style={{ margin: 0, fontWeight: 400 }}>
           {title}

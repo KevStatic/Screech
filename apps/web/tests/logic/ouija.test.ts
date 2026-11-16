@@ -1,5 +1,12 @@
 import { describe, expect, it } from 'vitest';
-import { SPELL_MAX_CHARS, SPELL_MAX_MS, SPELL_RATE_CPS, spellProgress } from '../../src/logic/ouija';
+import {
+  SPELL_MAX_CHARS,
+  SPELL_MAX_MS,
+  SPELL_RATE_CPS,
+  isLetter,
+  spellProgress,
+  spellShown,
+} from '../../src/logic/ouija';
 
 const cpLength = (s: string): number => [...s].length;
 
@@ -57,5 +64,51 @@ describe('spellProgress', () => {
   it('bad lengths are treated as empty', () => {
     expect(spellProgress(0, Number.NaN)).toEqual({ count: 0, done: true });
     expect(spellProgress(0, -4)).toEqual({ count: 0, done: true });
+  });
+});
+
+describe('isLetter', () => {
+  it('treats whitespace as not a Letter and everything else as a Letter', () => {
+    expect(isLetter(' ')).toBe(false);
+    expect(isLetter('\n')).toBe(false);
+    expect(isLetter('\t')).toBe(false);
+    expect(isLetter('a')).toBe(true);
+    expect(isLetter('7')).toBe(true);
+    expect(isLetter('.')).toBe(true);
+    expect(isLetter('👻')).toBe(true);
+  });
+});
+
+describe('spellShown', () => {
+  const chars = (s: string): string[] => [...s];
+
+  it('spaces do not consume steps', () => {
+    // 250 ms -> 3 Letters of "a b c d"; shown ends right after "c"
+    expect(spellShown(250, chars('a b c d'))).toEqual({ shown: 5, letters: 3, done: false });
+  });
+
+  it('count 0 shows nothing, even with leading whitespace', () => {
+    expect(spellShown(0, chars('  ab'))).toEqual({ shown: 0, letters: 0, done: false });
+  });
+
+  it('done shows trailing whitespace', () => {
+    expect(spellShown(2500, chars('ab  '))).toEqual({ shown: 4, letters: 2, done: true });
+    expect(spellShown(1000, chars('ab  '))).toEqual({ shown: 4, letters: 2, done: true });
+  });
+
+  it('text without whitespace equals spellProgress', () => {
+    const text = chars('hello👻world');
+    for (const ms of [0, 100, 250, 500, 800, 2500]) {
+      const p = spellProgress(ms, text.length);
+      expect(spellShown(ms, text)).toEqual({ shown: p.count, letters: p.count, done: p.done });
+    }
+  });
+
+  it('empty chars are done at once', () => {
+    expect(spellShown(0, [])).toEqual({ shown: 0, letters: 0, done: true });
+  });
+
+  it('whitespace-only text is done at once', () => {
+    expect(spellShown(0, chars('   '))).toEqual({ shown: 3, letters: 0, done: true });
   });
 });
