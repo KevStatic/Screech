@@ -6,6 +6,7 @@ import { spellShown } from '../../logic/ouija';
 import { useHaunt } from '../hooks/useHaunt';
 import type { FlowApi } from '../hooks/useFlow';
 import { useMotion } from '../hooks/useMotion';
+import { useHaptic } from '../hooks/useHaptic';
 import ActionCard from '../components/ActionCard';
 import CrtFrame from '../components/CrtFrame';
 import ToggleCluster from '../components/ToggleCluster';
@@ -42,6 +43,7 @@ export default function Reveal({ flow }: RevealProps): ReactElement {
   const value = payload === null ? '' : revealValue(payload);
   const chars = Array.from(value);
   const haunt = useHaunt();
+  useHaptic('reveal');
   const [elapsedMs, setElapsedMs] = useState(0);
   const [skipped, setSkipped] = useState(false);
   const startedAt = useRef<number | null>(null);

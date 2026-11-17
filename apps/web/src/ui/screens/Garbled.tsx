@@ -4,6 +4,7 @@ import type { FlowApi } from '../hooks/useFlow';
 import CrtFrame from '../components/CrtFrame';
 import ToggleCluster from '../components/ToggleCluster';
 import { useHaunt } from '../hooks/useHaunt';
+import { useHaptic } from '../hooks/useHaptic';
 export const MSG_GARBLED = 'This message arrived damaged.';
 export const LABEL_RETURN_LISTEN = 'Back to Listen';
 export interface GarbledProps {
@@ -12,6 +13,7 @@ export interface GarbledProps {
 /** Shown when a packet decodes to `invalid-body`. */
 export default function Garbled({ flow }: GarbledProps): ReactElement {
   const haunt = useHaunt();
+  useHaptic('garbled');
   useEffect(() => {
     haunt.play('broken-crackle');
     return () => haunt.stopOneShots();

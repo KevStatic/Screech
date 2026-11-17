@@ -4,6 +4,7 @@ import type { FlowApi } from '../hooks/useFlow';
 import CrtFrame from '../components/CrtFrame';
 import ToggleCluster from '../components/ToggleCluster';
 import { useHaunt } from '../hooks/useHaunt';
+import { useHaptic } from '../hooks/useHaptic';
 export const MSG_SEALED = 'A sealed message. Join the pact to read it.';
 export const LABEL_RETURN_LISTEN = 'Back to Listen';
 export interface SealedProps {
@@ -12,6 +13,7 @@ export interface SealedProps {
 /** Shown when a packet decodes to `key-required`. */
 export default function Sealed({ flow }: SealedProps): ReactElement {
   const haunt = useHaunt();
+  useHaptic('sealed');
   useEffect(() => {
     haunt.play('sealed-thud');
     return () => haunt.stopOneShots();
