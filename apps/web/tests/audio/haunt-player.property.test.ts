@@ -325,19 +325,23 @@ function runScenario(actions: readonly Action[]): number {
 
 describe('haunt player gate', () => {
   it('Property 16: never plays while the gate is closed and always ends silent', () => {
-    let totalStarts = 0;
     fc.assert(
       fc.property(fc.array(actionArb, { minLength: 1, maxLength: 40 }), fc.boolean(), (actions, openFirst) => {
-        // Half of the runs begin with an open gate so playback is really exercised.
+        // Half of the runs begin with an open gate and one immediate play, so playback is really exercised.
         const opening: Action[] = openFirst
-          ? [{ kind: 'tap', ok: true }, { kind: 'running', running: true }]
+          ? [
+              { kind: 'update', quiet: false, soundOn: true },
+              { kind: 'tap', ok: true },
+              { kind: 'running', running: true },
+              { kind: 'play', name: 'whisper', delayMs: undefined, seedIdx: 0 },
+            ]
           : [];
-        totalStarts += runScenario([...opening, ...actions]);
+        const starts = runScenario([...opening, ...actions]);
+        // Coverage, per scenario: an open-gate play must have started a sound, or the gate checks prove nothing.
+        if (openFirst) expect(starts, 'no sound started although the gate was open').toBeGreaterThanOrEqual(1);
       }),
       { numRuns: 150 },
     );
-    // The scenarios must actually exercise playback, or the gate checks prove nothing.
-    expect(totalStarts).toBeGreaterThan(50);
   });
 
   it('a delayed request made while open never plays after the gate closes and reopens', () => {

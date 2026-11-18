@@ -132,3 +132,8 @@
 - Kiro features used: spec (task execution), steering (the architecture checks enforce rules from `tech.md`).
 - 11:38 PM - Task 13 of the `haunting-sounds` spec, the final checkpoint, is ticked off in `tasks.md`, but the checks I ran afterwards do not all pass. `pnpm test` from the root had one failure in `apps/web`: 721 of 722 tests passed (101 files, one failed), and `packages/core` passed all 275 tests. The typecheck, `pnpm build` and `check:no-audio` all pass. The failing test is flaky, not a sound bug. In `tests/audio/haunt-player.property.test.ts`, Property 16 ends with a sanity check that the random scenarios started more than 50 sounds. That count varies from run to run. It passed on 3 reruns and then failed on the next batch with "expected 45 to be greater than 50". The gate and silence checks themselves did not fail. The fix is to loosen or stabilise that count, and I haven't changed it.
 - Kiro features used: spec (task execution), property tests.
+
+## November 17, 2026
+
+- 10:36 PM - Added haptic feedback when a message arrives, outside any spec task. `apps/web/src/logic/haptics.ts` picks a vibration pattern for the screen: a short buzz-pause-buzz for Reveal, a quick double buzz for Garbled, and one long 200 ms buzz for Sealed. It returns nothing (no vibration) when the browser has no `navigator.vibrate`, which is the case on iOS, or when the Exorcise toggle or the system reduced-motion setting is on. The `useHaptic` hook plays it, and `Reveal.tsx`, `Garbled.tsx` and `Sealed.tsx` each call it once. Added `tests/logic/haptics.test.ts`. I ran it: 4 tests pass. I didn't run the full suite.
+- Kiro features used: chat, steering (`ui-theme`: motion off under reduced motion or Exorcise).
