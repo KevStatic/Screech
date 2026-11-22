@@ -137,3 +137,18 @@
 
 - 10:36 PM - Added haptic feedback when a message arrives, outside any spec task. `apps/web/src/logic/haptics.ts` picks a vibration pattern for the screen: a short buzz-pause-buzz for Reveal, a quick double buzz for Garbled, and one long 200 ms buzz for Sealed. It returns nothing (no vibration) when the browser has no `navigator.vibrate`, which is the case on iOS, or when the Exorcise toggle or the system reduced-motion setting is on. The `useHaptic` hook plays it, and `Reveal.tsx`, `Garbled.tsx` and `Sealed.tsx` each call it once. Added `tests/logic/haptics.test.ts`. I ran it: 4 tests pass. I didn't run the full suite.
 - Kiro features used: chat, steering (`ui-theme`: motion off under reduced motion or Exorcise).
+
+## November 18, 2026
+
+- 9:52 PM - Fixed the flaky test noted on November 16. Property 16 in `apps/web/tests/audio/haunt-player.property.test.ts` ended by requiring more than 50 sound starts across all random scenarios, and that total varied from run to run. Now half of the scenarios open the gate and play one sound straight away, and the test checks each of those scenarios on its own: if the gate was open, at least one sound must have started. This still proves the gate checks are exercised, without a fragile total. The gate and silence checks are unchanged. I re-ran the file 10 times: it passed all 10.
+- Kiro features used: chat, property tests.
+
+## November 21, 2026
+
+- 6:30 PM - Started a fourth spec, `.kiro/specs/ghost-hunt` (requirements, design and 10 tasks, none ticked off yet). Ghost Hunt is a party game mode: a host sets up 3 to 7 Spirits, each with a name and a riddle clue, and prints or shows one setup QR for each. A guest scans one with a phone and hides the phone, which then repeatedly screeches its clue as a `hunt-clue` packet. Players walk around with the Listen screen open, and each clue they hear is spelled out on the Ouija board and raises a Spirit counter. Finding every Spirit ends the hunt on a "Hunt complete" screen. It adds no new packet type. It reuses the existing `hunt-clue` type, with only a pure build and parse pair for the clue text added to `packages/core`.
+- Kiro features used: spec.
+
+## November 23, 2026
+
+- 12:54 AM - Reworked the `ghost-hunt` spec in `.kiro/specs/ghost-hunt`. The requirements (466 lines), design (924 lines) and task list were all edited again, and the task list was regrouped from 10 tasks into 12: core clue builder and parser, standalone web logic, a checkpoint, dependent web logic, flow and quiet-state changes, a checkpoint, audio and hooks, styles and components, screens, app wiring, static and theme checks, and a final checkpoint. The design now includes measured QR sizes: with the installed `qrcode` library, the longest possible setup link (up to about 540 characters) fits a version 16 code at error-correction level M, which is 89 modules across with the quiet zone, so it needs at least 3 pixels per module and fits a 390 px phone. It also lays out the packet budget (a clue packet is 12 bytes plus name and clue, with name and clue together at most 128 bytes), and keeps the host-only "hide at" and opening riddle out of the packet and the setup link by construction. No task is ticked off yet, so no code has been written for this spec.
+- Kiro features used: spec.
