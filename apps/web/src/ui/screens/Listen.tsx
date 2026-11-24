@@ -1,10 +1,15 @@
-import { useEffect, useRef, useState, type ReactElement } from 'react';
+import { useEffect, useReducer, useRef, useState, type ReactElement } from 'react';
 import { decode } from '@screech/core';
 import type { CaptureHandle } from '../../audio/capture';
 import { openMic } from '../../audio/mic';
 import { dedupeStep, type DedupeState } from '../../logic/dedupe';
 import { NOTICE_SEND_BLOCKED } from '../../logic/flow';
-import { screenState } from '../../logic/screen-state';
+import { EMPTY_NOTE, noteReducer } from '../../logic/hunt-note';
+import { huntIntake, huntRoute } from '../../logic/hunt-route';
+import { screenState, type ScreenState } from '../../logic/screen-state';
+import AlreadyNote from '../components/AlreadyNote';
+import { takeListenStart } from '../hooks/listen-handoff';
+import { getProgressStore } from '../hooks/progress-store';
 import CrtFrame from '../components/CrtFrame';
 import ToggleCluster from '../components/ToggleCluster';
 import ModeSwitch from '../components/ModeSwitch';
@@ -62,14 +67,36 @@ export default function Listen({ flow, audio, now = () => Date.now() }: ListenPr
   const { dispatch, state } = flow;
   const { reduced } = useMotion();
   const [phase, setPhase] = useState<Phase>({ kind: 'ready' });
+  const [note, noteDispatch] = useReducer(noteReducer, EMPTY_NOTE);
   const mounted = useRef(true);
-  const latest = useRef({ dispatch, audio, now });
-  latest.current = { dispatch, audio, now };
+  const latest = useRef({ dispatch, audio, now, noteDispatch });
+  latest.current = { dispatch, audio, now, noteDispatch };
 
   function onPacketBytes(bytes: Uint8Array): void {
-    const { dispatch: send, audio: a, now: clock } = latest.current;
+    const { dispatch: send, audio: a, now: clock, noteDispatch: setNote } = latest.current;
     const result = decode(bytes);
-    const screen = screenState(result);
+    const route = huntRoute(result);
+    if (route.kind === 'clue') {
+      const step = dedupeStep(shown, `hunt:${toHex(bytes)}`, clock());
+      if (!step.show) return;
+      shown = step.state;
+      const intake = huntIntake(getProgressStore(), route.fields, clock());
+      if (intake.kind === 'already') {
+        setNote({ type: 'already', fields: intake.fields, storedName: intake.storedName });
+        return;
+      }
+      setNote({ type: 'clear' });
+      a.stopListening();
+      send({ type: 'huntReceived', intake });
+      return;
+    }
+    let screen: ScreenState;
+    if (route.kind === 'garbled') {
+      setNote({ type: 'clear' });
+      screen = { kind: 'garbled' };
+    } else {
+      screen = screenState(result);
+    }
     // ignore: nothing visible, no state change, no log.
     if (screen.kind === 'ignore') return;
     const key = screen.kind === 'reveal' ? toHex(bytes) : screen.kind;
@@ -119,12 +146,22 @@ export default function Listen({ flow, audio, now = () => Date.now() }: ListenPr
   // The mic opens only from a tap on this screen (start or retry), never on mount.
   useEffect(() => {
     mounted.current = true;
+    // Back to Listen / Start over queued an unlock inside their tap: resume without another tap.
+    const queued = takeListenStart();
+    if (queued !== null) void begin(queued);
     return () => {
       mounted.current = false;
+      latest.current.noteDispatch({ type: 'clear' });
       latest.current.audio.stopListening();
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  // The note lives only while capture is running.
+  const listeningNow = phase.kind === 'listening';
+  useEffect(() => {
+    if (!listeningNow) noteDispatch({ type: 'clear' });
+  }, [listeningNow]);
 
   function retry(): void {
     // First statement, nothing awaited before it: this is the user activation.
@@ -176,6 +213,7 @@ export default function Listen({ flow, audio, now = () => Date.now() }: ListenPr
         {live !== null ? (
           <>
             <Spectrogram analyser={live.handle.analyser} sampleRate={live.sampleRate} reducedMotion={reduced} />
+            <AlreadyNote state={note} onReadAgain={() => noteDispatch({ type: 'readAgain' })} />
             <KIIMeter analyser={live.handle.analyser} sampleRate={live.sampleRate} reducedMotion={reduced} />
           </>
         ) : null}

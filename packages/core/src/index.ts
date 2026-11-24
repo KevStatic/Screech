@@ -4,6 +4,20 @@ export { seal, open, deriveNonce } from './seal.js';
 export { nextSenderState } from './sender-state.js';
 export type { RandomFill } from './sender-state.js';
 export { buildFrame, parseFrame } from './frame.js';
+export {
+  HUNT_ALPHABET,
+  HUNT_ID_LENGTH,
+  SPIRIT_TOTAL_MIN,
+  SPIRIT_TOTAL_MAX,
+  SPIRIT_NAME_MAX_BYTES,
+  CLUE_SEPARATOR,
+  sanitizeClueText,
+  validateClueFields,
+  buildClue,
+  buildClueText,
+  parseClueText,
+} from './hunt-clue.js';
+export type { ClueFields, ClueFieldsInput } from './hunt-clue.js';
 export { PREFIX_TABLE } from './prefix-table.js';
 export {
   VERSION,

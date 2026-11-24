@@ -29,6 +29,12 @@ describe('quietState', () => {
     expect(quietState({ ...base, captureActive: true })).toBe(true);
     expect(quietState({ ...base, playbackRunning: true })).toBe(true);
     expect(quietState({ ...base, screen: 'reveal' })).toBe(false);
+    for (const screen of ['hunt-setup', 'hunt-reveal', 'hunt-complete'] as const) {
+      expect(quietState({ ...base, screen })).toBe(false);
+      expect(quietState({ ...base, screen, beaconActive: false })).toBe(false);
+      expect(quietState({ ...base, screen, beaconActive: true })).toBe(true);
+    }
+    expect(quietState({ ...base, beaconActive: true })).toBe(true);
   });
 });
 

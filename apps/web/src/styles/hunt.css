@@ -1,0 +1,378 @@
+/* Ghost Hunt: setup screen, QR cards, byte counters, Spirit counter, Beacon, print.
+   Colours come from tokens.css. Blood red is used only by .is-error.
+   Motion is off under prefers-reduced-motion and the Exorcise toggle (motion.css
+   switches off every animation and transition; the rules below add none that escape it). */
+
+/* ---- Wide container: single column at 390 px, wider on a laptop ---- */
+
+.screen-wide {
+  max-width: var(--screen-max);
+}
+
+@media (min-width: 900px) {
+  .screen-wide {
+    max-width: 1280px;
+    padding: 24px 32px;
+  }
+}
+
+.hunt-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--gap);
+}
+
+@media (min-width: 900px) {
+  .hunt-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+  }
+}
+
+/* ---- Opening riddle: 24 px or more on screen and in print ---- */
+
+.hunt-opening {
+  margin: 0;
+  font-family: var(--font-note);
+  font-size: 24px;
+  line-height: 1.4;
+  color: var(--bone);
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+}
+
+/* ---- QR card: dark modules on a light square so the code scans ---- */
+
+.qr-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: var(--pad);
+  background: var(--bone);
+  color: #000;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+
+.qr-card svg {
+  display: block;
+  width: 100%;
+  max-width: 320px;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  background: #fff;
+  shape-rendering: crispEdges;
+}
+
+.qr-card svg path {
+  fill: #000;
+}
+
+.qr-card .qr-link {
+  font-size: var(--fs-small);
+  user-select: text;
+  -webkit-user-select: text;
+  word-break: break-all;
+}
+
+.qr-card .qr-card-title,
+.qr-card .qr-card-name,
+.qr-card .qr-card-id,
+.qr-card .qr-card-hide {
+  margin: 0;
+  user-select: text;
+  -webkit-user-select: text;
+}
+
+.qr-card .qr-card-title {
+  font-size: var(--fs-body, 1.25rem);
+  font-weight: normal;
+}
+
+.qr-card .qr-card-id {
+  font-size: var(--fs-small);
+}
+
+/* ---- Byte counters (states: ok, full, error) ---- */
+
+.byte-counter {
+  min-height: var(--hit);
+  display: flex;
+  align-items: center;
+  font-size: var(--fs-small);
+  color: var(--green-2);
+}
+
+/* 140/140 stays bone white and is not an error */
+.byte-counter.is-full {
+  color: var(--bone);
+}
+
+.byte-counter.is-error {
+  color: var(--blood-2);
+  border-color: var(--blood);
+}
+
+.byte-counter .counter-label {
+  margin-left: 8px;
+}
+
+.long-clue-note {
+  color: var(--bone);
+  font-size: var(--fs-small);
+}
+
+/* Plain message; blood red only when it reports an error */
+.hunt-message {
+  margin: 0;
+  color: var(--bone);
+  font-size: var(--fs-small);
+}
+
+.hunt-message.is-error {
+  color: var(--blood-2);
+}
+
+/* ---- Already_Note: inline on the Listen screen ---- */
+
+.already-note {
+  margin: 0;
+  padding: 8px 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--panel);
+  color: var(--bone);
+  font-family: var(--font-note);
+  font-size: var(--fs-body);
+  overflow-wrap: anywhere;
+}
+
+.already-note-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 8px;
+  min-width: 0;
+}
+
+.already-note:empty {
+  display: none;
+}
+
+.already-note-again {
+  min-height: var(--hit);
+  min-width: var(--hit);
+}
+
+.already-note-clue {
+  margin: 0;
+  font-family: var(--font-note);
+  font-size: var(--fs-body);
+  line-height: 1.4;
+  color: var(--bone);
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+}
+
+/* ---- Spirit_Counter: one mark per Spirit ---- */
+
+.spirit-counter {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  color: var(--bone);
+  font-size: var(--fs-body);
+}
+
+.spirit-counter-heading {
+  flex: 1 0 100%;
+  margin: 0;
+}
+
+.spirit-counter-list {
+  flex: 1 0 100%;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.spirit-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  min-width: 0;
+  padding: 2px 0;
+}
+
+.spirit-name {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.spirit-mark {
+  flex: none;
+  margin-top: 4px;
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border: 2px solid var(--green-2);
+  border-radius: 50%;
+  background: transparent;
+}
+
+.spirit-mark.is-found {
+  border-color: var(--phosphor);
+  background: var(--phosphor);
+}
+
+/* ---- Beacon screen text ---- */
+
+.beacon-clue {
+  margin: 0;
+  font-family: var(--font-note);
+  font-size: 24px;
+  line-height: 1.4;
+  color: var(--bone);
+  overflow-wrap: anywhere;
+}
+
+.beacon-status {
+  color: var(--phosphor);
+  font-size: var(--fs-body);
+}
+
+.beacon-hint {
+  color: var(--green-2);
+  font-size: var(--fs-small);
+}
+
+.beacon-error {
+  color: var(--blood-2);
+  font-size: var(--fs-body);
+}
+
+/* ---- Controls: every control is at least 44 px ---- */
+
+.hunt-controls .hit,
+.hunt-controls button,
+.hunt-controls input,
+.hunt-controls select,
+.hunt-controls textarea {
+  min-width: var(--hit);
+  min-height: var(--hit);
+}
+
+/* ---- Motion off under Reduced_Motion and the Exorcise toggle ---- */
+
+[data-reduced-motion="true"] .spirit-mark,
+[data-reduced-motion="true"] .qr-card,
+[data-reduced-motion="true"] .beacon-status {
+  animation: none !important;
+  transition: none !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .spirit-mark,
+  .qr-card,
+  .beacon-status {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* ---- Print: white page, black on white, no controls ---- */
+
+@media print {
+  @page {
+    margin: 12mm;
+  }
+
+  html,
+  body,
+  #root,
+  .screen,
+  .screen-wide,
+  .crt {
+    background: #fff !important;
+    color: #000 !important;
+    min-height: 0 !important;
+    max-width: none !important;
+    width: auto !important;
+    padding: 0 !important;
+    overflow: visible !important;
+    border: 0 !important;
+    box-shadow: none !important;
+    animation: none !important;
+  }
+
+  .crt::before,
+  .crt::after,
+  .screen::before,
+  .screen::after {
+    display: none !important;
+    content: none !important;
+  }
+
+  /* Every control, input and message */
+  button,
+  input,
+  textarea,
+  select,
+  label,
+  a.btn,
+  .btn,
+  .hit,
+  .field,
+  .hunt-controls,
+  .byte-counter,
+  .long-clue-note,
+  .hunt-message,
+  .toggle-cluster,
+  [role="status"],
+  [role="alert"],
+  [aria-live],
+  .no-print {
+    display: none !important;
+  }
+
+  .hunt-grid {
+    display: block;
+  }
+
+  .hunt-opening {
+    color: #000 !important;
+    font-size: 24px;
+    break-after: avoid;
+    page-break-after: avoid;
+    margin: 0 0 8mm;
+  }
+
+  .qr-card {
+    break-inside: avoid;
+    page-break-inside: avoid;
+    background: #fff !important;
+    color: #000 !important;
+    border: 1px solid #000 !important;
+    margin: 0 0 8mm;
+  }
+
+  .qr-card * {
+    color: #000 !important;
+  }
+
+  .qr-card svg {
+    width: 60mm;
+    height: 60mm;
+    max-width: none;
+    background: #fff !important;
+  }
+
+  .qr-card svg path {
+    fill: #000 !important;
+  }
+}

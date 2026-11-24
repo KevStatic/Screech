@@ -18,11 +18,23 @@ export interface QuietInputs {
   readonly screen: Screen;
   readonly captureActive: boolean;
   readonly playbackRunning: boolean;
+  /** True while a Ghost Hunt beacon is playing. Defaults to false. */
+  readonly beaconActive?: boolean;
 }
 
-/** Quiet while listening, sending, capturing or playing a transmission. */
+/**
+ * Quiet while listening, sending, capturing or playing a transmission, or
+ * while a hunt beacon plays. The hunt-setup, hunt-reveal and hunt-complete
+ * screens are not quiet on their own.
+ */
 export function quietState(i: QuietInputs): boolean {
-  return i.screen === 'listen' || i.screen === 'screeching' || i.captureActive || i.playbackRunning;
+  return (
+    i.screen === 'listen' ||
+    i.screen === 'screeching' ||
+    i.captureActive ||
+    i.playbackRunning ||
+    (i.beaconActive ?? false)
+  );
 }
 
 export const DEDUPE_WINDOW_MS = 30;

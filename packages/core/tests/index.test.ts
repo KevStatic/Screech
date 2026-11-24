@@ -16,6 +16,17 @@ describe('@screech/core public API', () => {
       'PREFIX_TABLE',
       'SIZE_CAP',
       'VERSION',
+      'HUNT_ALPHABET',
+      'HUNT_ID_LENGTH',
+      'SPIRIT_TOTAL_MIN',
+      'SPIRIT_TOTAL_MAX',
+      'SPIRIT_NAME_MAX_BYTES',
+      'CLUE_SEPARATOR',
+      'sanitizeClueText',
+      'validateClueFields',
+      'buildClue',
+      'buildClueText',
+      'parseClueText',
     ] as const;
     for (const name of names) expect(core[name]).toBeDefined();
   });

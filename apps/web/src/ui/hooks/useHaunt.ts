@@ -14,12 +14,14 @@ import { useSoundPref } from './useSoundPref';
 export function useHauntBridge(
   flow: Pick<FlowApi, 'state'>,
   audio: Pick<AudioSessionApi, 'listenStatus'>,
+  beaconActive = false,
 ): void {
   const { on } = useSoundPref();
   const quiet = quietState({
     screen: flow.state.screen,
     captureActive: audio.listenStatus.kind === 'listening',
     playbackRunning: flow.state.transmitting,
+    beaconActive,
   });
   useLayoutEffect(() => {
     hauntPlayer.update({ quiet, soundOn: on });

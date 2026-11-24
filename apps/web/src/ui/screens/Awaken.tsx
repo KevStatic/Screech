@@ -222,6 +222,17 @@ export default function Awaken({ flow, audio, env }: AwakenProps): ReactElement 
             </button>
           ) : null}
 
+          <button
+            type="button"
+            className="btn secondary hit"
+            style={{ minHeight: 48 }}
+            data-testid="hunt-entry"
+            disabled={busy}
+            onClick={() => dispatch({ type: 'openHuntSetup' })}
+          >
+            Ghost Hunt: set up a game
+          </button>
+
           <p className="note" style={{ textAlign: 'center' }}>
             The spirits need to hear you. Awakening asks for your microphone.
           </p>

@@ -1,7 +1,18 @@
 import { MIC_BLOCKED_MESSAGE, type MicFailureReason } from './mic-messages';
+import type { HuntNavIntake } from './hunt-route';
 import type { ScreenState } from './screen-state';
 
-export type Screen = 'awaken' | 'speak' | 'screeching' | 'listen' | 'reveal' | 'garbled' | 'sealed';
+export type Screen =
+  | 'awaken'
+  | 'speak'
+  | 'screeching'
+  | 'listen'
+  | 'reveal'
+  | 'garbled'
+  | 'sealed'
+  | 'hunt-setup'
+  | 'hunt-reveal'
+  | 'hunt-complete';
 export type MicStatus =
   | 'unprobed'
   | 'granted'
@@ -23,6 +34,10 @@ export interface FlowState {
   /** Hold fired while the context was not running; the wake control is shown. */
   readonly wakePending: boolean;
   readonly received: Extract<ScreenState, { kind: 'reveal' }> | null;
+  /** Screen the Ghost Hunt setup returns to. */
+  readonly huntReturn: 'awaken' | 'speak';
+  /** The clue shown on hunt-reveal or hunt-complete. An `already` clue never lands here. */
+  readonly hunt: HuntNavIntake | null;
 }
 
 export type FlowEvent =
@@ -39,7 +54,13 @@ export type FlowEvent =
   | { readonly type: 'received'; readonly state: ScreenState }
   | { readonly type: 'back'; readonly target: 'speak' | 'listen' }
   | { readonly type: 'inputEdited' }
-  | { readonly type: 'cardSelected' };
+  | { readonly type: 'cardSelected' }
+  | { readonly type: 'openHuntSetup' }
+  | { readonly type: 'closeHuntSetup' }
+  | { readonly type: 'huntReceived'; readonly intake: HuntNavIntake }
+  | { readonly type: 'huntRevealDone' }
+  | { readonly type: 'huntBack'; readonly target: 'speak' | 'listen' }
+  | { readonly type: 'huntRestart' };
 
 export const MAX_MIC_ATTEMPTS = 3;
 export const NOTICE_LISTEN_BLOCKED = 'Listening is unavailable until the transmission ends.';
@@ -54,6 +75,8 @@ export const INITIAL_FLOW_STATE: FlowState = {
   micAttempts: 0,
   wakePending: false,
   received: null,
+  huntReturn: 'awaken',
+  hunt: null,
 };
 
 export function canTransmit(state: FlowState): boolean {
@@ -93,7 +116,13 @@ function openListen(state: FlowState): FlowState {
 }
 
 function leaveToSpeak(state: FlowState): FlowState {
-  return { ...state, screen: 'speak', listening: false, received: null, notice: null };
+  return { ...state, screen: 'speak', listening: false, received: null, hunt: null, notice: null };
+}
+
+/** Back to Listen with capture wanted again, or to Speak when Listen is unavailable. */
+function huntToListen(state: FlowState): FlowState {
+  if (!canListen(state)) return leaveToSpeak(state);
+  return { ...state, screen: 'listen', listening: true, received: null, hunt: null, notice: null };
 }
 
 export function flowReducer(state: FlowState, event: FlowEvent): FlowState {
@@ -168,5 +197,32 @@ export function flowReducer(state: FlowState, event: FlowEvent): FlowState {
     case 'inputEdited':
     case 'cardSelected':
       return state.wakePending ? { ...state, wakePending: false } : state;
+
+    case 'openHuntSetup':
+      if (state.screen !== 'awaken' && state.screen !== 'speak') return state;
+      if (state.transmitting || state.listening) return state;
+      return { ...state, screen: 'hunt-setup', huntReturn: state.screen, wakePending: false, notice: null };
+
+    case 'closeHuntSetup':
+      if (state.screen !== 'hunt-setup') return state;
+      return { ...state, screen: state.huntReturn, notice: null };
+
+    case 'huntReceived': {
+      const base = { ...state, listening: false, received: null, hunt: event.intake, notice: null };
+      return { ...base, screen: event.intake.kind === 'new' ? 'hunt-reveal' : 'hunt-complete' };
+    }
+
+    case 'huntRevealDone':
+      if (state.screen !== 'hunt-reveal' || state.hunt === null) return state;
+      if (state.hunt.state.completedAt === null) return state;
+      return { ...state, screen: 'hunt-complete' };
+
+    case 'huntBack':
+      if (state.screen !== 'hunt-reveal' && state.screen !== 'hunt-complete') return state;
+      return event.target === 'speak' ? leaveToSpeak(state) : huntToListen(state);
+
+    case 'huntRestart':
+      if (state.screen !== 'hunt-complete') return state;
+      return huntToListen(state);
   }
 }

@@ -11,6 +11,7 @@ import {
   type FlowEvent,
   type FlowState,
 } from '../../src/logic/flow';
+import type { HuntNavIntake } from '../../src/logic/hunt-route';
 import { MIC_BLOCKED_MESSAGE } from '../../src/audio/mic';
 
 describe('blocked mic status', () => {
@@ -103,4 +104,69 @@ describe('wake flow', () => {
       expect(s.wakePending).toBe(false);
     },
   );
+});
+
+describe('ghost hunt flow', () => {
+  const fields = { huntId: 'ABCDEF', total: 3, index: 1, name: 'Ghost', clue: 'Look up' };
+  const open = { huntId: 'ABCDEF', total: 3, found: [{ index: 1, name: 'Ghost' }], firstFoundAt: 1, completedAt: null };
+  const done = { ...open, found: [1, 2, 3].map((index) => ({ index, name: 'Ghost' })), completedAt: 9 };
+  const newIntake = (state: typeof open): HuntNavIntake => ({
+    kind: 'new',
+    fields,
+    before: { ...open, found: [], firstFoundAt: null },
+    state,
+    persisted: true,
+  });
+
+  it('openHuntSetup works from awaken without a granted mic', () => {
+    const s = run(INITIAL_FLOW_STATE, { type: 'openHuntSetup' });
+    expect(s.screen).toBe('hunt-setup');
+    expect(s.huntReturn).toBe('awaken');
+    expect(s.mic).toBe('unprobed');
+  });
+
+  it('openHuntSetup works from speak without a granted mic and closeHuntSetup returns', () => {
+    const noMic: FlowState = { ...INITIAL_FLOW_STATE, screen: 'speak', mic: 'skipped' };
+    const s = run(noMic, { type: 'openHuntSetup' });
+    expect(s.screen).toBe('hunt-setup');
+    expect(s.huntReturn).toBe('speak');
+    expect(run(s, { type: 'closeHuntSetup' }).screen).toBe('speak');
+  });
+
+  it('openHuntSetup is ignored while transmitting', () => {
+    const t = run(speak, { type: 'startTransmit' });
+    expect(flowReducer(t, { type: 'openHuntSetup' })).toBe(t);
+  });
+
+  it('openHuntSetup is ignored while listening', () => {
+    const l = run(speak, { type: 'openListen' });
+    expect(flowReducer(l, { type: 'openHuntSetup' })).toBe(l);
+  });
+
+  it('huntReceived routes new to hunt-reveal and stops listening', () => {
+    const l = run(speak, { type: 'openListen' });
+    const s = run(l, { type: 'huntReceived', intake: newIntake(open) });
+    expect(s.screen).toBe('hunt-reveal');
+    expect(s.listening).toBe(false);
+    expect(s.hunt?.kind).toBe('new');
+  });
+
+  it('huntReceived routes complete to hunt-complete', () => {
+    const s = run(speak, { type: 'huntReceived', intake: { kind: 'complete', fields, state: done } });
+    expect(s.screen).toBe('hunt-complete');
+  });
+
+  it('huntRevealDone stays on hunt-reveal until the last Spirit', () => {
+    const mid = run(speak, { type: 'huntReceived', intake: newIntake(open) });
+    expect(run(mid, { type: 'huntRevealDone' }).screen).toBe('hunt-reveal');
+    const last = run(speak, { type: 'huntReceived', intake: newIntake(done) });
+    expect(run(last, { type: 'huntRevealDone' }).screen).toBe('hunt-complete');
+  });
+
+  it('huntBack and huntRestart leave the hunt screens', () => {
+    const s = run(speak, { type: 'huntReceived', intake: { kind: 'complete', fields, state: done } });
+    expect(run(s, { type: 'huntBack', target: 'speak' })).toMatchObject({ screen: 'speak', hunt: null });
+    expect(run(s, { type: 'huntBack', target: 'listen' })).toMatchObject({ screen: 'listen', listening: true });
+    expect(run(s, { type: 'huntRestart' })).toMatchObject({ screen: 'listen', hunt: null });
+  });
 });

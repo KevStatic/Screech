@@ -11,6 +11,7 @@ import {
   type FlowEvent,
   type MicStatus,
 } from '../../src/logic/flow';
+import type { HuntNavIntake } from '../../src/logic/hunt-route';
 
 const micStatus: fc.Arbitrary<MicStatus> = fc.constantFrom(
   'unprobed',
@@ -21,6 +22,21 @@ const micStatus: fc.Arbitrary<MicStatus> = fc.constantFrom(
   'no-getusermedia',
   'skipped',
 );
+
+const huntIntake: fc.Arbitrary<HuntNavIntake> = fc
+  .record({ total: fc.integer({ min: 3, max: 7 }), index: fc.integer({ min: 1, max: 7 }), done: fc.boolean(), kind: fc.constantFrom('new', 'complete') })
+  .map(({ total, index, done, kind }): HuntNavIntake => {
+    const fields = { huntId: 'ABCDEF', total, index: Math.min(index, total), name: 'Ghost', clue: 'Look up' };
+    const state = {
+      huntId: 'ABCDEF',
+      total,
+      found: [{ index: fields.index, name: 'Ghost' }],
+      firstFoundAt: 1000,
+      completedAt: done || kind === 'complete' ? 2000 : null,
+    };
+    if (kind === 'complete') return { kind: 'complete', fields, state };
+    return { kind: 'new', fields, before: { ...state, found: [], firstFoundAt: null, completedAt: null }, state, persisted: true };
+  });
 
 const flowEvent: fc.Arbitrary<FlowEvent> = fc.oneof(
   // Weight toward the events that move between screens.
@@ -39,6 +55,12 @@ const flowEvent: fc.Arbitrary<FlowEvent> = fc.oneof(
   { weight: 1, arbitrary: fc.constant<FlowEvent>({ type: 'cardSelected' }) },
   { weight: 1, arbitrary: fc.constant<FlowEvent>({ type: 'received', state: { kind: 'ignore' } }) },
   { weight: 1, arbitrary: fc.constant<FlowEvent>({ type: 'received', state: { kind: 'garbled' } as never }) },
+  { weight: 2, arbitrary: fc.constant<FlowEvent>({ type: 'openHuntSetup' }) },
+  { weight: 1, arbitrary: fc.constant<FlowEvent>({ type: 'closeHuntSetup' }) },
+  { weight: 2, arbitrary: huntIntake.map((intake): FlowEvent => ({ type: 'huntReceived', intake })) },
+  { weight: 1, arbitrary: fc.constant<FlowEvent>({ type: 'huntRevealDone' }) },
+  { weight: 1, arbitrary: fc.constantFrom<'speak' | 'listen'>('speak', 'listen').map((target): FlowEvent => ({ type: 'huntBack', target })) },
+  { weight: 1, arbitrary: fc.constant<FlowEvent>({ type: 'huntRestart' }) },
 );
 
 describe('flow reducer properties', () => {
@@ -62,6 +84,13 @@ describe('flow reducer properties', () => {
             expect(state.transmitting).toBe(prev.transmitting);
             expect(state.listening).toBe(prev.listening);
             expect(state.notice).toBe(NOTICE_LISTEN_BLOCKED);
+          }
+          if (event.type === 'openHuntSetup' && (prev.transmitting || prev.listening)) {
+            expect(state).toBe(prev);
+          }
+          if (event.type === 'huntReceived') expect(state.listening).toBe(false);
+          if (state.screen === 'hunt-reveal' || state.screen === 'hunt-complete') {
+            expect(state.hunt).not.toBeNull();
           }
           if (event.type === 'startTransmit' && prev.listening) {
             expect(state.transmitting).toBe(prev.transmitting);

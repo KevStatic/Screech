@@ -592,6 +592,16 @@ export default function Speak({
           </p>
         ) : null}
         <div className="col" style={{ marginTop: 'auto' }}>
+          <button
+            type="button"
+            className="btn secondary hit"
+            style={{ minHeight: 48 }}
+            data-testid="hunt-entry"
+            disabled={state.transmitting}
+            onClick={() => dispatch({ type: 'openHuntSetup' })}
+          >
+            Ghost Hunt: set up a game
+          </button>
           <ScreechKey hold={hold} disabled={!canSend} />
         </div>
       </main>
