@@ -279,7 +279,7 @@ describe('App full Ghost Hunt pass', () => {
     await tapId('hunt-reveal-skip');
     await advance(0);
     expect(screenLabel('Hunt complete')).toBeTruthy();
-    expect(screen.getByTestId('hunt-complete-count').textContent).toContain('Spirits found: 3 of 3');
+    expect(screen.getByTestId('spirit-counter').getAttribute('aria-label')).toContain('Spirits found: 3 of 3');
     expect(playWaveformMock).not.toHaveBeenCalled();
   });
 });

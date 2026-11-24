@@ -140,8 +140,8 @@ export default function HuntSetup({ onBack }: HuntSetupProps): ReactElement {
         </div>
         <h1
           id="hunt-setup-title"
-          className="glow no-print"
-          style={{ margin: 0, fontWeight: 400 }}
+          className="title fx-boot-title no-print"
+          style={{ fontSize: 56 }}
         >
           GHOST HUNT
         </h1>
@@ -222,8 +222,8 @@ export default function HuntSetup({ onBack }: HuntSetupProps): ReactElement {
             const status = view.statuses[i];
             const card = model?.cards[i];
             return (
-              <section key={n} className="col" aria-label={`Spirit ${n}`} data-testid={`hunt-row-${n}`}>
-                <div className="panel col hunt-controls no-print">
+              <section key={n} className="col hunt-row" aria-label={`Spirit ${n}`} data-testid={`hunt-row-${n}`}>
+                <div className="panel col hunt-controls hunt-row-fields no-print">
                   <h2 className="label" style={{ margin: 0 }}>{`Spirit ${n} of ${draft.total}`}</h2>
                   <label htmlFor={`hunt-name-${n}`} className="label">{`Spirit ${n} name`}</label>
                   <input
@@ -253,6 +253,7 @@ export default function HuntSetup({ onBack }: HuntSetupProps): ReactElement {
                 </div>
                 {card !== undefined ? (
                   <>
+                    <div className="hunt-row-qr col">
                     <QrCard model={card} />
                     <div className="hunt-controls no-print">
                       <button
@@ -282,6 +283,7 @@ export default function HuntSetup({ onBack }: HuntSetupProps): ReactElement {
                           </p>
                         </div>
                       ) : null}
+                    </div>
                     </div>
                   </>
                 ) : null}

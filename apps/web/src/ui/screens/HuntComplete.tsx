@@ -25,7 +25,7 @@ export function startOverText(huntId: string, found: number): string {
   return `Start Hunt ${huntId} over? ${spirits} will be forgotten.`;
 }
 
-/** Finish screen of a Ghost Hunt. Plays no sound and has no animation. */
+/** Finish screen of a Ghost Hunt. Plays no sound. The arrival flicker stops under reduced motion and Exorcise. */
 export default function HuntComplete({ flow, audio }: HuntCompleteProps): ReactElement | null {
   const { state, dispatch } = flow;
   const [confirming, setConfirming] = useState(false);
@@ -48,23 +48,28 @@ export default function HuntComplete({ flow, audio }: HuntCompleteProps): ReactE
           <span className="label grow">Screen: Hunt complete</span>
           <ToggleCluster />
         </div>
-        <h1
-          id="hunt-complete-title"
-          className="glow"
-          data-testid="hunt-complete-title"
-          style={{ margin: 0, fontWeight: 400 }}
-        >
-          {LABEL_HUNT_COMPLETE}
-        </h1>
-        <p className="hunt-message" data-testid="hunt-complete-time">
-          Time taken: {formatTimeTaken(timeTakenSeconds(found))}
-        </p>
+        <div className="col hunt-complete-hero fx-boot">
+          <h1
+            id="hunt-complete-title"
+            className="title fx-boot-title"
+            data-testid="hunt-complete-title"
+            style={{ fontSize: 56, textAlign: 'center' }}
+          >
+            {LABEL_HUNT_COMPLETE}
+          </h1>
+          <p className="note" style={{ margin: 0 }}>
+            The spirits are at rest.
+          </p>
+          <div className="hunt-stopwatch">
+            <p className="hunt-stopwatch-digits" data-testid="hunt-complete-time">
+              {formatTimeTaken(timeTakenSeconds(found))}
+            </p>
+            <p className="hunt-stopwatch-label">Time taken</p>
+          </div>
+        </div>
         <SpiritCounter state={found} />
         <p className="hunt-message" data-testid="hunt-complete-id">
           Hunt ID: {found.huntId}
-        </p>
-        <p className="hunt-message" data-testid="hunt-complete-count">
-          Spirits found: {found.total} of {found.total}
         </p>
         {confirming ? (
           <div role="group" aria-label="Start the Hunt over" className="note hunt-controls">

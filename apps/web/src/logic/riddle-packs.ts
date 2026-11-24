@@ -34,37 +34,37 @@ const FINALE = 'The hunt is over. Return to the circle where you began.';
 
 const office: RiddlePack = {
   opening:
-    'The first spirit sleeps where paper is born warm. Find the printer that hums at night.',
+    'Blank sheets go in and words come out warm. The first spirit sleeps where the machine hums at night.',
   entries: [
     {
       name: 'The Cold Copier',
       hideAt: 'On top of the printer',
-      clue: 'Cold and clear, I gurgle. Find the water cooler.',
+      clue: 'Cold and clear, I gurgle when thirsty hands press me.',
     },
     {
       name: 'The Thirsty One',
       hideAt: 'Beside the water cooler',
-      clue: 'Bitter and hot, I wake the dead. Seek the coffee machine.',
+      clue: 'Bitter and hot, I wake the dead. Beans go in, I pour out.',
     },
     {
       name: 'Bean Wraith',
       hideAt: 'Behind the coffee machine',
-      clue: 'Wipe me clean and I forget. Look at the whiteboard.',
+      clue: 'Wipe me clean and I forget. Squeaky pens write my plans.',
     },
     {
       name: 'Marker Ghost',
       hideAt: 'Under the whiteboard',
-      clue: 'Climb away from the lift. Try the stairwell door.',
+      clue: 'Skip the lift. Spirits take the long way up, step by step.',
     },
     {
       name: 'Stair Banshee',
       hideAt: 'At the stairwell door',
-      clue: 'Guests sign in with me. Go to the reception desk.',
+      clue: 'Guests sign in with me. I greet them before anyone else.',
     },
     {
       name: 'Lobby Phantom',
       hideAt: 'Inside the reception desk',
-      clue: 'Long talks go to die here. Open the meeting room.',
+      clue: 'Long talks go to die here. Chairs circle a slab of oak.',
     },
     {
       name: 'Boardroom Shade',
@@ -77,37 +77,37 @@ const office: RiddlePack = {
 
 const home: RiddlePack = {
   opening:
-    'The first spirit shivers where the milk is kept. Open the door that hums and glows.',
+    'The first spirit shivers where the milk is kept. A cold box hums and glows when you peek inside.',
   entries: [
     {
       name: 'Frost Ghoul',
       hideAt: 'Inside the fridge door',
-      clue: 'Sit and sink into me. Find the sofa.',
+      clue: 'Sit and sink into me. Lost coins hide in my folds.',
     },
     {
       name: 'Cushion Wraith',
       hideAt: 'Under the sofa cushion',
-      clue: 'Stories sleep in rows. Visit the bookshelf.',
+      clue: 'Stories sleep in rows. Their spines stand like tombstones.',
     },
     {
       name: 'Dusty Page',
       hideAt: 'Behind the books on the shelf',
-      clue: 'I show your face but never smile. Seek the mirror.',
+      clue: 'I show your face but never smile. Steam hides me after a bath.',
     },
     {
       name: 'Mirror Spectre',
       hideAt: 'Behind the bathroom mirror',
-      clue: 'Muddy feet pass me daily. Look by the front door.',
+      clue: 'Muddy feet pass me daily. Boots wait in line here.',
     },
     {
       name: 'Doorway Haunt',
       hideAt: 'By the shoes at the front door',
-      clue: 'Green and thirsty, I sit in clay. Find the plant pot.',
+      clue: 'Green and thirsty, I sit in clay. I drink from a can.',
     },
     {
       name: 'Pot Poltergeist',
       hideAt: 'Beside the big plant pot',
-      clue: 'Where the family eats and argues. Try the kitchen table.',
+      clue: 'Where the family eats and argues. Crumbs fall by my legs.',
     },
     {
       name: 'Supper Shade',
@@ -120,37 +120,37 @@ const home: RiddlePack = {
 
 const classroom: RiddlePack = {
   opening:
-    'The first spirit guards the marks and the chalk. Look to the teacher desk at the front.',
+    'The first spirit guards the marks. Where the teacher sits, a red pen counts every sin.',
   entries: [
     {
       name: 'Gradebook Ghoul',
       hideAt: 'In the teacher desk drawer',
-      clue: 'I spin but never travel. Find the globe.',
+      clue: 'I spin but never travel. The whole world fits on me.',
     },
     {
       name: 'Globe Wraith',
       hideAt: 'Behind the globe',
-      clue: 'Words and numbers get wiped from me. Go to the board.',
+      clue: 'Words and numbers get wiped from me. Chalk dust is my ash.',
     },
     {
       name: 'Chalk Banshee',
       hideAt: 'On the board ledge',
-      clue: 'Dust yourself off and climb to the window sill.',
+      clue: 'Dust yourself off. Light pours through me. Rain taps me.',
     },
     {
       name: 'Windowsill Imp',
       hideAt: 'On the window sill',
-      clue: 'Coats hang and bags sag. Check the coat hooks.',
+      clue: 'Coats hang and bags sag. Wet jackets drip on me.',
     },
     {
       name: 'Hook Phantom',
       hideAt: 'Under the coat hooks',
-      clue: 'Paint and glue sleep here. Open the art cupboard.',
+      clue: 'Paint and glue sleep here. Glitter clings to my shelves.',
     },
     {
       name: 'Glue Spirit',
       hideAt: 'Inside the art cupboard',
-      clue: 'Silent shelves of stories. Find the reading corner.',
+      clue: 'Silent shelves of stories. Cushions wait for curious eyes.',
     },
     {
       name: 'Reading Shade',

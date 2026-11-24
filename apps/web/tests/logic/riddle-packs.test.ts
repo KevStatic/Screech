@@ -27,11 +27,22 @@ describe('RIDDLE_PACKS', () => {
     },
   );
 
-  it('office chain: opening leads to the printer, the first clue to the water cooler', () => {
+  it('office chain: the first hide spot is the printer and the second is the water cooler', () => {
     const pack = RIDDLE_PACKS.office;
-    expect(pack.opening.toLowerCase()).toContain('printer');
     expect(pack.entries[0]!.hideAt).toBe('On top of the printer');
-    expect(pack.entries[0]!.clue.toLowerCase()).toContain('water cooler');
     expect(pack.entries[1]!.hideAt.toLowerCase()).toContain('water cooler');
   });
+  it.each(['office', 'home', 'classroom'] as const)(
+    '%s riddles do not name the place they lead to',
+    (id) => {
+      const pack = RIDDLE_PACKS[id];
+      const answer = (hideAt: string): string => hideAt.trim().split(/\s+/).pop()!.toLowerCase();
+      const names = (text: string, word: string): boolean =>
+        new RegExp(`\\b${word}\\b`).test(text.toLowerCase());
+      expect(names(pack.opening, answer(pack.entries[0]!.hideAt))).toBe(false);
+      for (let k = 0; k < 6; k += 1) {
+        expect(names(pack.entries[k]!.clue, answer(pack.entries[k + 1]!.hideAt))).toBe(false);
+      }
+    },
+  );
 });

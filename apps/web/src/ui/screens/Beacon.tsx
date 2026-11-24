@@ -111,14 +111,24 @@ export default function Beacon({ fields, deps }: BeaconProps): ReactElement {
                 </button>
               </div>
             ) : (
-              <p
+              <div
                 className="beacon-status"
                 role="status"
                 data-testid="beacon-status"
                 style={statusStyle}
               >
-                {status}
-              </p>
+                <span className="sr-only">{status}</span>
+                {beacon.screeching ? (
+                  <span className="beacon-screeching fx-pulse" aria-hidden="true">
+                    SCREECHING
+                  </span>
+                ) : (
+                  <span className="beacon-countdown" aria-hidden="true">
+                    <span className="beacon-count">{beacon.countdownSeconds}</span>
+                    <span className="beacon-count-label">next screech</span>
+                  </span>
+                )}
+              </div>
             )}
             {wake !== null ? (
               <p className="beacon-hint" role="status" data-testid="beacon-wake">

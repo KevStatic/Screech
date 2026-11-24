@@ -80,9 +80,9 @@ describe('HuntComplete content', () => {
   it('shows the title, M:SS time, Hunt_ID, count and every Spirit name', () => {
     setup();
     expect(screen.getByTestId('hunt-complete-title').textContent).toBe('Hunt complete');
-    expect(screen.getByTestId('hunt-complete-time').textContent).toBe('Time taken: 3:05');
+    expect(screen.getByTestId('hunt-complete-time').textContent).toBe('3:05');
     expect(screen.getByTestId('hunt-complete-id').textContent).toBe('Hunt ID: ABCDEF');
-    expect(screen.getByTestId('hunt-complete-count').textContent).toBe('Spirits found: 3 of 3');
+    expect(screen.getAllByText('Spirits found: 3 of 3')).toHaveLength(1);
     const items = Array.from(document.querySelectorAll('li')).map((li) => li.textContent ?? '');
     expect(items).toHaveLength(3);
     for (const name of ['Otto', 'Lena', 'Mara']) {
@@ -96,7 +96,7 @@ describe('HuntComplete content', () => {
       fields: FIELDS,
       state: { ...DONE, firstFoundAt: 0, completedAt: 3_605_000 },
     });
-    expect(screen.getByTestId('hunt-complete-time').textContent).toBe('Time taken: 60:05');
+    expect(screen.getByTestId('hunt-complete-time').textContent).toBe('60:05');
   });
 
   it('plays no Haunting Sound', () => {
