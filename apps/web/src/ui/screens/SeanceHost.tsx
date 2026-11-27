@@ -101,7 +101,7 @@ function RoomDisplay({ host, onLeave }: { host: SeanceHostView; onLeave: () => v
   return (
     <main className="screen screen-wide seance-room" aria-labelledby="seance-room-title">
       <div className="row">
-        <button type="button" className="btn hit" data-testid="seance-leave" onClick={onLeave}>
+        <button type="button" className="btn outline hit" data-testid="seance-leave" onClick={onLeave}>
           Leave
         </button>
         <span className="label grow">Screen: Séance</span>

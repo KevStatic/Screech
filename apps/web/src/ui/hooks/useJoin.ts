@@ -141,6 +141,7 @@ export function useJoin(
   const [title, setTitle] = useState<string | null>(null);
 
   const [name, setNameState] = useState<string>(() => loadLastName(deps.local) ?? '');
+  const [nameTouched, setNameTouched] = useState(false);
   const nameRef = useRef(name);
 
   const [joinPhase, setJoinPhase] = useState<JoinPhase>('idle');
@@ -191,6 +192,7 @@ export function useJoin(
 
   const setName = useCallback((next: string): void => {
     nameRef.current = next;
+    setNameTouched(true);
     setNameState(next);
   }, []);
 
@@ -267,7 +269,7 @@ export function useJoin(
     setName,
     remaining: ATTENDEE_NAME_MAX - trimmedCount,
     nameValid,
-    nameMessage: nameValid ? null : NAME_LENGTH_HINT,
+    nameMessage: nameValid || !nameTouched ? null : NAME_LENGTH_HINT,
     joinPhase,
     joinLabel: pending ? JOINING_TEXT : 'Join',
     showJoin,

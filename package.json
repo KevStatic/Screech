@@ -6,6 +6,7 @@
   "scripts": {
     "build": "pnpm -r run build",
     "test": "pnpm -r run test",
+    "dev": "netlify dev --filter @screech/web",
     "dev:spike": "pnpm --filter @screech/spike dev"
   },
   "engines": {

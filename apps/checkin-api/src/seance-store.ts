@@ -102,7 +102,7 @@ export function createMemoryStore(deps: StoreDeps): SeanceStore {
 
 export interface BlobsStoreDeps extends StoreDeps {
   /** Replaceable for tests; defaults to Netlify's `getStore`. */
-  readonly getStore?: (name: string) => Store;
+  readonly getStore?: (options: { name: string; consistency: 'strong' }) => Store;
 }
 
 async function wrap<T>(run: () => Promise<T>): Promise<T> {
@@ -114,9 +114,9 @@ async function wrap<T>(run: () => Promise<T>): Promise<T> {
 }
 
 export function createBlobsStore(deps: BlobsStoreDeps): SeanceStore {
-  const open = deps.getStore ?? ((name: string): Store => netlifyGetStore(name));
-  const sessions = open(SEANCE_STORE_NAME);
-  const checkins = open(CHECKIN_STORE_NAME);
+  const open = deps.getStore ?? ((options): Store => netlifyGetStore(options));
+  const sessions = open({ name: SEANCE_STORE_NAME, consistency: 'strong' });
+  const checkins = open({ name: CHECKIN_STORE_NAME, consistency: 'strong' });
 
   async function readSeance(sessionId: string): Promise<StoredSeance | null> {
     const value = (await sessions.get(seanceKey(sessionId), { type: 'json' })) as StoredSeance | null;

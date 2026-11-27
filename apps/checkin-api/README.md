@@ -116,7 +116,7 @@ Handler tests use the in-memory store and an injected clock. They make no networ
 
 The web app and the functions must share one origin, so the browser uses relative `/api/...` URLs and no CORS setup is needed. Phones also need HTTPS for the microphone. A tunnel gives both.
 
-1. From the repository root, run `netlify dev`. It starts the web dev server (port 5173) and the functions behind one address, `http://localhost:8888`.
+1. From the repository root, run `pnpm dev` (it runs `netlify dev --filter @screech/web`, so Netlify does not ask which project to use). It starts the web dev server (port 5173) and the functions behind one address, `http://localhost:8888`.
 2. In a second terminal, run `cloudflared tunnel --url http://localhost:8888`. It prints an HTTPS URL on `trycloudflare.com`.
 3. Open that HTTPS URL on the laptop. This is the Host_Screen.
 4. Open the same HTTPS URL on each phone. This is the Listen_Screen.

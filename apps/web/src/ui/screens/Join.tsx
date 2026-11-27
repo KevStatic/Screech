@@ -80,7 +80,7 @@ export default function Join({ initial, latest, onLeave, onListenAgain, deps }: 
               autoCapitalize="words"
               spellCheck={false}
               value={view.name}
-              aria-invalid={!view.nameValid}
+              aria-invalid={view.nameMessage !== null}
               aria-describedby="join-name-count"
               onChange={(e: ChangeEvent<HTMLInputElement>) => view.setName(e.target.value)}
             />

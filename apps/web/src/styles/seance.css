@@ -39,12 +39,19 @@
 
 .seance-circle {
   position: relative;
-  width: 100%;
-  max-width: 640px;
+  /* Fits the viewport height: the circle never grows taller than the space left over for the other room controls. */
+  width: min(100%, 640px, calc(100vh - 470px));
+  min-width: 200px;
   aspect-ratio: 1 / 1;
   margin: 0 auto;
   container-type: inline-size;
   box-sizing: border-box;
+}
+
+@supports (height: 100dvh) {
+  .seance-circle {
+    width: min(100%, 640px, calc(100dvh - 470px));
+  }
 }
 
 .seance-ring {

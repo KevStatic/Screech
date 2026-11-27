@@ -185,6 +185,12 @@ svg {
   border-color: var(--border);
 }
 
+.btn.outline {
+  color: var(--phosphor);
+  background: transparent;
+  border-color: var(--phosphor);
+}
+
 .btn:disabled,
 .btn[aria-disabled="true"] {
   color: var(--green-2);

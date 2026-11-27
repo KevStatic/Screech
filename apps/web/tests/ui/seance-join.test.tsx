@@ -193,7 +193,16 @@ describe('Join: name field (14.1 to 14.3)', () => {
     expect((screen.getByTestId('join-name') as HTMLInputElement).value).toBe('');
     expect(screen.getByTestId('join-remaining').textContent).toBe('32 left');
     expect((screen.getByTestId('join-button') as HTMLButtonElement).disabled).toBe(true);
+    expect(screen.queryByTestId('join-name-message')).toBeNull();
+  });
+  it('shows the name error only after the attendee has typed in the field', async () => {
+    await openJoin();
+    expect(screen.queryByTestId('join-name-message')).toBeNull();
+    fireEvent.change(screen.getByTestId('join-name'), { target: { value: 'Ada' } });
+    expect(screen.queryByTestId('join-name-message')).toBeNull();
+    fireEvent.change(screen.getByTestId('join-name'), { target: { value: '' } });
     expect(screen.getByTestId('join-name-message').textContent).toBe('The name must be 1 to 32 characters.');
+    expect((screen.getByTestId('join-button') as HTMLButtonElement).disabled).toBe(true);
   });
 
   it('counts remaining by trimmed code points and enforces the 1 to 32 bounds', async () => {
