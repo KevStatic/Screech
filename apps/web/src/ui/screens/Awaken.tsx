@@ -5,6 +5,7 @@ import { MIC_BLOCKED_MESSAGE, openMic, stopStream } from '../../audio/mic';
 import { MAX_MIC_ATTEMPTS, micStatusForFailure } from '../../logic/flow';
 import { micSupport, missingFeatures, type Env } from '../../logic/capabilities';
 import CrtFrame from '../components/CrtFrame';
+import SeanceControl from '../components/SeanceControl';
 import ToggleCluster from '../components/ToggleCluster';
 import type { AudioSessionApi } from '../hooks/useAudioSession';
 import type { FlowApi } from '../hooks/useFlow';
@@ -232,6 +233,8 @@ export default function Awaken({ flow, audio, env }: AwakenProps): ReactElement 
           >
             Ghost Hunt: set up a game
           </button>
+
+          <SeanceControl disabled={busy} onClick={() => dispatch({ type: 'openSeanceHost' })} />
 
           <p className="note" style={{ textAlign: 'center' }}>
             The spirits need to hear you. Awakening asks for your microphone.

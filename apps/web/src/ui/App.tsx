@@ -16,6 +16,7 @@ import Listen from './screens/Listen';
 import Reveal from './screens/Reveal';
 import Screeching from './screens/Screeching';
 import Sealed from './screens/Sealed';
+import SeanceHost from './screens/SeanceHost';
 import Speak, { type TransmissionOutcome } from './screens/Speak';
 
 const MSG_NO_TRANSMISSION = 'The sound did not leave the speaker.';
@@ -98,5 +99,7 @@ export default function App(): ReactElement {
       return <HuntReveal flow={flow} />;
     case 'hunt-complete':
       return <HuntComplete flow={flow} audio={audio} />;
+    case 'seance-host':
+      return <SeanceHost onLeave={() => flow.dispatch({ type: 'closeSeanceHost' })} />;
   }
 }

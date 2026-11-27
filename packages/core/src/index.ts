@@ -18,6 +18,26 @@ export {
   parseClueText,
 } from './hunt-clue.js';
 export type { ClueFields, ClueFieldsInput } from './hunt-clue.js';
+export {
+  CHECKIN_PREFIX,
+  SESSION_ID_LENGTH,
+  ROLLING_CODE_LENGTH,
+  validateCheckinFields,
+  buildCheckin,
+  buildCheckinText,
+  parseCheckinText,
+} from './checkin-body.js';
+export type { CheckinFields, CheckinFieldsInput } from './checkin-body.js';
+export { WINDOW_SECONDS, windowNumber, rollingCode, verifyCode } from './rolling-code.js';
+export { EMPTY_CHECKIN_LOG, addCheckIn, listCheckIns, soulCount } from './checkin-log.js';
+export type { CheckIn, CheckinLog, AddResult } from './checkin-log.js';
+export { exportCsv } from './csv.js';
+export {
+  ATTENDEE_NAME_MAX,
+  TITLE_MAX,
+  validateAttendeeName,
+  validateTitle,
+} from './attendee-name.js';
 export { PREFIX_TABLE } from './prefix-table.js';
 export {
   VERSION,

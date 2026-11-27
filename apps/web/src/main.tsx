@@ -5,6 +5,7 @@ import './styles/tokens.css';
 import './styles/motion.css';
 import './styles/screens.css';
 import './styles/hunt.css';
+import './styles/seance.css';
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import App from './ui/App';

@@ -19,6 +19,7 @@ import ByteCandle from '../components/ByteCandle';
 import CrtFrame from '../components/CrtFrame';
 import ToggleCluster from '../components/ToggleCluster';
 import ModeSwitch from '../components/ModeSwitch';
+import SeanceControl from '../components/SeanceControl';
 import ScreechKey from '../components/ScreechKey';
 import TarotCard from '../components/TarotCard';
 import type { AudioSessionApi } from '../hooks/useAudioSession';
@@ -602,6 +603,10 @@ export default function Speak({
           >
             Ghost Hunt: set up a game
           </button>
+          <SeanceControl
+            disabled={state.transmitting}
+            onClick={() => dispatch({ type: 'openSeanceHost' })}
+          />
           <ScreechKey hold={hold} disabled={!canSend} />
         </div>
       </main>

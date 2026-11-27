@@ -1,0 +1,18 @@
+[build]
+  command = "pnpm --filter @screech/core build && pnpm --filter @screech/web build"
+  publish = "apps/web/dist"
+  functions = "apps/checkin-api/netlify/functions"
+
+[build.environment]
+  NODE_VERSION = "22"
+
+[functions]
+  node_bundler = "esbuild"
+
+# No [[redirects]] for /api/*: each function routes itself via its own config.path.
+
+[dev]
+  framework = "#custom"
+  command = "pnpm --filter @screech/web dev"
+  targetPort = 5173
+  port = 8888

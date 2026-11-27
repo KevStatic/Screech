@@ -1,0 +1,264 @@
+/* Séance screens: candle circle, host room, join and lit screens.
+   Phosphor green and bone white only. Blood red is never used here: the Lit_Screen
+   must stay free of it, and errors reuse .is-error from screens.css outside it.
+   Import from main.tsx after hunt.css. */
+
+.seance-control {
+  width: 100%;
+}
+
+/* ---- Title: Creepster is for the title only ---- */
+
+.seance-title {
+  margin: 0;
+  font-family: var(--font-title);
+  font-weight: 400;
+  font-size: var(--fs-title);
+  letter-spacing: 2px;
+  line-height: 1.1;
+  color: var(--phosphor);
+  overflow-wrap: anywhere;
+  text-shadow: 0 0 6px rgba(57, 255, 122, 0.6);
+}
+
+.seance-name,
+.seance-note {
+  font-family: var(--font-note);
+  color: var(--bone);
+  overflow-wrap: anywhere;
+}
+
+.seance-room,
+.seance-lit {
+  max-width: 100%;
+  min-width: 0;
+  overflow-x: clip;
+}
+
+/* ---- Candle circle ---- */
+
+.seance-circle {
+  position: relative;
+  width: 100%;
+  max-width: 640px;
+  aspect-ratio: 1 / 1;
+  margin: 0 auto;
+  container-type: inline-size;
+  box-sizing: border-box;
+}
+
+.seance-ring {
+  position: absolute;
+  inset: 9%;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.seance-ring.is-inner {
+  inset: 16%;
+  border-style: dashed;
+  border-color: var(--border-dim);
+}
+
+.seance-circle-center {
+  position: absolute;
+  inset: 22%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: var(--phosphor);
+  font-family: var(--font-ui);
+}
+
+.seance-candles {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  inset: 0;
+}
+
+.seance-candle {
+  position: absolute;
+  transform: translate(-50%, -62%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: var(--candle-label-w);
+  pointer-events: none;
+}
+
+.seance-flame,
+.seance-flame-gap {
+  display: block;
+  width: calc(var(--candle-w) * 0.9);
+  aspect-ratio: 26 / 36;
+  height: auto;
+}
+
+.seance-flame {
+  transform-origin: 50% 100%;
+  filter: drop-shadow(0 0 0.6cqw rgba(255, 179, 71, 0.9));
+}
+
+/* Slow flicker: 1.5 s per cycle, under 1 Hz, and it never goes below 70% opacity. */
+.seance-flame.is-flickering {
+  animation:
+    seance-arrive 0.7s ease-out 1 backwards,
+    seance-flicker 1.5s ease-in-out 0.7s infinite alternate;
+}
+
+.seance-flame.is-still {
+  animation: none;
+}
+
+.seance-wick {
+  display: block;
+  width: 2px;
+  height: 0.8cqw;
+  background: var(--border-dim);
+}
+
+.seance-wax {
+  display: block;
+  width: var(--candle-w);
+  height: calc(var(--candle-w) * 1.8);
+  border-radius: 2px 2px 0 0;
+  background: var(--border-dim);
+}
+
+.seance-candle.is-lit .seance-wax {
+  background: var(--bone);
+}
+
+.seance-candle-name {
+  margin-top: 0.4cqw;
+  max-width: 100%;
+  font-family: var(--font-ui);
+  font-size: var(--candle-label-fs);
+  line-height: 1.1;
+  color: var(--bone);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.seance-candle.is-unlit .seance-candle-name {
+  color: var(--green-2);
+}
+
+@keyframes seance-flicker {
+  from { transform: scale(1, 1) rotate(-3deg); opacity: 1; }
+  to { transform: scale(0.92, 1.08) rotate(2deg); opacity: 0.85; }
+}
+
+@keyframes seance-arrive {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: none; }
+}
+
+/* ---- Room display ---- */
+
+.seance-souls {
+  font-family: var(--font-ui);
+  color: var(--phosphor);
+  font-size: 64px;
+  line-height: 0.9;
+  text-shadow: 0 0 6px rgba(57, 255, 122, 0.6);
+}
+
+.seance-overflow {
+  list-style: none;
+  margin: var(--gap) 0 0;
+  padding: 0;
+  max-height: 240px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.seance-overflow li {
+  min-height: var(--hit);
+  display: flex;
+  align-items: center;
+  padding: 0 var(--pad);
+  font-family: var(--font-ui);
+  font-size: var(--fs-body);
+  color: var(--bone);
+  overflow-wrap: anywhere;
+  border-bottom: 1px solid var(--border-dim);
+}
+
+/* ---- Lit screen: one candle, big. Never red. ---- */
+
+.seance-lit-candle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: var(--pad) auto;
+}
+
+.seance-lit-candle .seance-flame {
+  width: 48px;
+  height: auto;
+}
+
+.seance-lit-candle .seance-flame.is-lighting {
+  /* One time, at most 3 s, smooth glow only: no strobe. */
+  animation: seance-light-up 2.4s ease-out 1 both;
+}
+
+.seance-lit-candle .seance-wick {
+  height: 6px;
+}
+
+.seance-lit-candle .seance-wax {
+  width: 28px;
+  height: 64px;
+  background: var(--bone);
+}
+
+@keyframes seance-light-up {
+  0% { opacity: 0; transform: scale(0.4); }
+  40% { opacity: 1; transform: scale(1.15); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+.seance-lit-candle .seance-flame.is-still {
+  animation: none;
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .seance-flame,
+  .seance-flame.is-flickering,
+  .seance-lit-candle .seance-flame.is-lighting {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}
+
+[data-reduced-motion="true"] .seance-flame,
+[data-reduced-motion="true"] .seance-lit-candle .seance-flame.is-lighting {
+  animation: none;
+  opacity: 1;
+  transform: none;
+}
+
+/* ---- Width: no horizontal scroll from 390 px to 1440 px ---- */
+
+@media (min-width: 900px) {
+  .seance-title {
+    font-size: 56px;
+  }
+
+  .seance-souls {
+    font-size: 112px;
+  }
+}

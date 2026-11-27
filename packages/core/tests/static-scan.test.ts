@@ -66,11 +66,12 @@ describe('static scan of packages/core/src', () => {
     expect(offenders).toEqual([]);
   });
 
-  it('crypto.subtle appears only in seal.ts', () => {
+  it('crypto.subtle appears only in seal.ts and rolling-code.ts', () => {
+    const allowed = ['seal.ts', 'rolling-code.ts'];
     const offenders = files
-      .filter((f) => /crypto\s*\.\s*subtle/.test(f.code))
+      .filter((f) => /crypto\s*\??\.\s*subtle/.test(f.code))
       .map((f) => f.name)
-      .filter((name) => name !== 'seal.ts');
+      .filter((name) => !allowed.includes(name));
     expect(offenders).toEqual([]);
   });
 

@@ -1,7 +1,8 @@
 import { useEffect, useReducer, useRef, useState, type ReactElement } from 'react';
-import { decode } from '@screech/core';
+import { decode, type CheckinFields } from '@screech/core';
 import type { CaptureHandle } from '../../audio/capture';
 import { openMic } from '../../audio/mic';
+import { checkinRoute } from '../../logic/checkin-route';
 import { dedupeStep, type DedupeState } from '../../logic/dedupe';
 import { NOTICE_SEND_BLOCKED } from '../../logic/flow';
 import { EMPTY_NOTE, noteReducer } from '../../logic/hunt-note';
@@ -15,6 +16,7 @@ import ToggleCluster from '../components/ToggleCluster';
 import ModeSwitch from '../components/ModeSwitch';
 import KIIMeter from '../components/KIIMeter';
 import Spectrogram from '../components/Spectrogram';
+import Join from './Join';
 import type { AudioSessionApi } from '../hooks/useAudioSession';
 import type { FlowApi } from '../hooks/useFlow';
 import { useMotion } from '../hooks/useMotion';
@@ -68,6 +70,9 @@ export default function Listen({ flow, audio, now = () => Date.now() }: ListenPr
   const { reduced } = useMotion();
   const [phase, setPhase] = useState<Phase>({ kind: 'ready' });
   const [note, noteDispatch] = useReducer(noteReducer, EMPTY_NOTE);
+  const [join, setJoin] = useState<{ initial: CheckinFields; latest: CheckinFields | null } | null>(null);
+  const joinRef = useRef(join);
+  joinRef.current = join;
   const mounted = useRef(true);
   const latest = useRef({ dispatch, audio, now, noteDispatch });
   latest.current = { dispatch, audio, now, noteDispatch };
@@ -75,6 +80,21 @@ export default function Listen({ flow, audio, now = () => Date.now() }: ListenPr
   function onPacketBytes(bytes: Uint8Array): void {
     const { dispatch: send, audio: a, now: clock, noteDispatch: setNote } = latest.current;
     const result = decode(bytes);
+    const checkin = checkinRoute(result);
+    if (checkin.kind === 'checkin') {
+      const open = joinRef.current;
+      // A repeat packet only replaces the code. Another séance is ignored while Join is open.
+      if (open !== null) {
+        if (open.initial.sessionId === checkin.fields.sessionId) {
+          setJoin({ initial: open.initial, latest: checkin.fields });
+        }
+        return;
+      }
+      a.stopListening();
+      setNote({ type: 'clear' });
+      setJoin({ initial: checkin.fields, latest: null });
+      return;
+    }
     const route = huntRoute(result);
     if (route.kind === 'clue') {
       const step = dedupeStep(shown, `hunt:${toHex(bytes)}`, clock());
@@ -169,6 +189,17 @@ export default function Listen({ flow, audio, now = () => Date.now() }: ListenPr
     void begin(unlocking);
   }
 
+  function leaveJoin(): void {
+    setJoin(null);
+    setPhase({ kind: 'ready' });
+  }
+
+  /** Runs inside the tap on Join or Lit, so the unlock keeps its user activation. */
+  function listenAgain(): void {
+    setJoin(null);
+    retry();
+  }
+
   function back(): void {
     audio.stopListening();
     dispatch({ type: 'leaveListen' });
@@ -180,6 +211,17 @@ export default function Listen({ flow, audio, now = () => Date.now() }: ListenPr
     phase.kind === 'silent' ? phase.message : phase.kind === 'listening' ? hookRetry : null;
   const live = phase.kind === 'listening' && retryMessage === null ? phase : null;
   const sendNotice = state.notice ?? NOTICE_SEND_BLOCKED;
+
+  if (join !== null) {
+    return (
+      <Join
+        initial={join.initial}
+        latest={join.latest}
+        onLeave={leaveJoin}
+        onListenAgain={listenAgain}
+      />
+    );
+  }
 
   return (
     <CrtFrame>

@@ -12,7 +12,8 @@ export type Screen =
   | 'sealed'
   | 'hunt-setup'
   | 'hunt-reveal'
-  | 'hunt-complete';
+  | 'hunt-complete'
+  | 'seance-host';
 export type MicStatus =
   | 'unprobed'
   | 'granted'
@@ -57,6 +58,8 @@ export type FlowEvent =
   | { readonly type: 'cardSelected' }
   | { readonly type: 'openHuntSetup' }
   | { readonly type: 'closeHuntSetup' }
+  | { readonly type: 'openSeanceHost' }
+  | { readonly type: 'closeSeanceHost' }
   | { readonly type: 'huntReceived'; readonly intake: HuntNavIntake }
   | { readonly type: 'huntRevealDone' }
   | { readonly type: 'huntBack'; readonly target: 'speak' | 'listen' }
@@ -205,6 +208,15 @@ export function flowReducer(state: FlowState, event: FlowEvent): FlowState {
 
     case 'closeHuntSetup':
       if (state.screen !== 'hunt-setup') return state;
+      return { ...state, screen: state.huntReturn, notice: null };
+
+    case 'openSeanceHost':
+      if (state.screen !== 'awaken' && state.screen !== 'speak') return state;
+      if (state.transmitting || state.listening) return state;
+      return { ...state, screen: 'seance-host', huntReturn: state.screen, wakePending: false, notice: null };
+
+    case 'closeSeanceHost':
+      if (state.screen !== 'seance-host') return state;
       return { ...state, screen: state.huntReturn, notice: null };
 
     case 'huntReceived': {
