@@ -31,6 +31,8 @@ export const MSG_NOTHING_WRITTEN = 'Nothing written yet. Write something to send
 export const MSG_WAKE_SLEEPING = 'The box fell asleep. Tap to wake it.';
 export const MSG_WAKE_FAILED = 'Audio could not start. Tap to try again.';
 export const MSG_SEAL_LATER = 'Sealed messages arrive in a later release.';
+/** Sealed messages are built in @screech/core but not wired into the app yet, so the toggle is not rendered. */
+export const SHOW_SEAL_TOGGLE = false;
 export const MSG_LISTEN_NO_MIC = 'Listening is off. The microphone is not available.';
 export const MSG_CONTACT_TOO_HEAVY_HINT = 'Try removing the phone number or shortening the name.';
 export const WAKE_LABEL = 'Tap to wake the box';
@@ -504,19 +506,23 @@ export default function Speak({
           ) : null}
         </div>
         <ByteCandle budget={reading.budget}>
-          <button
-            type="button"
-            className="seal-toggle hit is-seal"
-            aria-disabled="true"
-            aria-pressed="false"
-            aria-describedby="speak-seal-note"
-            {...gesture}
-          >
-            Seal this message
-          </button>
-          <span id="speak-seal-note" className="muted">
-            {MSG_SEAL_LATER}
-          </span>
+          {SHOW_SEAL_TOGGLE ? (
+            <>
+              <button
+                type="button"
+                className="seal-toggle hit is-seal"
+                aria-disabled="true"
+                aria-pressed="false"
+                aria-describedby="speak-seal-note"
+                {...gesture}
+              >
+                Seal this message
+              </button>
+              <span id="speak-seal-note" className="muted">
+                {MSG_SEAL_LATER}
+              </span>
+            </>
+          ) : null}
         </ByteCandle>
         {draft.selected === 'contact' && reading.budget.status === 'too-large' ? (
           <p className="note" data-testid="contact-heavy-hint">

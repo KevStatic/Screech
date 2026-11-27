@@ -77,7 +77,6 @@ function mount(granted = true): void {
 const card = (name: RegExp): HTMLElement => screen.getByRole('button', { name });
 const screechKey = (): HTMLElement => screen.getByRole('button', { name: /screech/i });
 const listenButton = (): HTMLElement => screen.getByRole('button', { name: /^listen$/i });
-const sealToggle = (): HTMLElement => screen.getByRole('button', { name: /seal this message/i });
 const field = (label: RegExp): HTMLInputElement => screen.getByLabelText(label) as HTMLInputElement;
 
 function write(label: RegExp, value: string): void {
@@ -336,13 +335,10 @@ describe('Speak: hold gesture', () => {
 });
 
 describe('Speak: seal toggle', () => {
-  it('is disabled for assistive tech, stays unpressed, and explains why', () => {
+  it('is not rendered, because sealed messages are not in the app yet', () => {
     mount();
-    expect(sealToggle().getAttribute('aria-disabled')).toBe('true');
-    expect(sealToggle().getAttribute('aria-pressed')).toBe('false');
-    expect(screen.getByText(MSG_SEAL_LATER)).toBeTruthy();
-    fireEvent.click(sealToggle());
-    expect(sealToggle().getAttribute('aria-pressed')).toBe('false');
+    expect(screen.queryByRole('button', { name: /seal this message/i })).toBeNull();
+    expect(screen.queryByText(MSG_SEAL_LATER)).toBeNull();
   });
 });
 
@@ -391,14 +387,6 @@ describe('Speak: gestures keep the audio context alive first', () => {
       fireEvent.keyDown(field(label), { key: 'a' });
       expect(ensureRunning).toHaveBeenCalledTimes(2);
     }
-  });
-
-  it('the seal toggle calls ensureRunning() on click and keydown', () => {
-    mount();
-    log = [];
-    fireEvent.click(sealToggle());
-    fireEvent.keyDown(sealToggle(), { key: 'Enter' });
-    expect(log).toEqual(['ensure', 'ensure']);
   });
 
   it('Listen calls ensureRunning() first, then unlocks, then opens the listen screen', async () => {

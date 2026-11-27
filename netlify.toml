@@ -13,6 +13,6 @@
 
 [dev]
   framework = "#custom"
-  command = "pnpm --filter @screech/web dev"
+  command = "pnpm --filter @screech/core build && pnpm --filter @screech/web dev"
   targetPort = 5173
   port = 8888

@@ -57,7 +57,7 @@ describe("netlify.toml", () => {
   it("configures the [dev] block", () => {
     const dev = sections.get("dev");
     expect(dev?.["framework"]).toBe("#custom");
-    expect(dev?.["command"]).toBe("pnpm --filter @screech/web dev");
+    expect(dev?.["command"]).toBe("pnpm --filter @screech/core build && pnpm --filter @screech/web dev");
     expect(dev?.["targetPort"]).toBe("5173");
     expect(dev?.["port"]).toBe("8888");
   });
